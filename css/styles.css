@@ -1,0 +1,23 @@
+body {
+    background-color: #212121;
+}
+
+nav ul li:hover {
+    background-color: #006064;
+}
+
+.card-content {
+    /*background-color: #641b00;*/
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+.film {
+    height: 600px;
+    margin-top: -200px;
+}
+
+.gras {
+    font-weight: bold;
+}
