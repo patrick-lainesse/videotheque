@@ -1,28 +1,35 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-});
-
-// Or with jQuery
-
-$(document).ready(function () {
-    $('.sidenav').sidenav();
-});
-
-
-$(".dropdown-trigger").dropdown({hover: false});
-
-$(document).ready(function(){
-    $('.carousel').carousel({
-        padding: 200
-    });
-});
-
-$(document).ready(function(){
-    $('.modal').modal();
-});
+// utilisé pour debugging, enlever lorsque le projet sera terminé
+function test() {
+    console.log("test");
+}
 
 function lister(){
     document.getElementById('formLister').submit();
 }
 
+
+/*************************************************************************************
+ *               FONCTIONS RELIÉES AUX ÉLÉMENTS GRAPHIQUES DES PAGES
+ *************************************************************************************/
+
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+});
+
+
+$(document).ready(function () {
+    $('.sidenav').sidenav();
+
+    $('.carousel').carousel({
+        padding: 200
+    });
+});
+
+
+$(".dropdown-trigger").dropdown({hover: false});
+
+
+function chargerModal() {
+    $('#modal1').modal();
+}
