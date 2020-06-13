@@ -28,7 +28,7 @@ try {
     $reponse .= "<div id=\"modal1\" class=\"modal center\">";
     $reponse .= "<div class=\"modal-content\">";
     $reponse .= "<h4 id='test2'>Modal Header</h4>";
-    $reponse .= "<iframe src=\"https://www.youtube.com/embed/nTfqKG--JwQ\" width=\"560\" height=\"315\" frameborder=\"0\" allowfullscreen></iframe>";
+    $reponse .= "<iframe src=\"https://www.youtube.com/embed/nTfqKG--JwQ\" class='iframeYT' allowfullscreen></iframe>";
     $reponse .= "</div>";
     $reponse .= "<div class=\"modal-footer\">";
     $reponse .= "<a href=\"#\" class=\"modal-close waves-effect waves-green btn-flat\">Agree</a>";
@@ -38,14 +38,10 @@ try {
 }
 mysqli_close($connexion);
 
+include 'footer.html';
+
 /*          <div class="card-action">
                 <a href="#">This is a link</a>
             </div>
         </div>
     </div>*/
-?>
-<script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="../js/materialize.min.js"></script>
-<script type="text/javascript" src="../js/scripts.js"></script>
-</body>
-</html>
