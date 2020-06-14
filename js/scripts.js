@@ -21,6 +21,45 @@ const chargerModal = function () {
     $('#modal1').modal();
 }
 
+/*************************************************************************************
+ *               FONCTIONS DE VALIDATION DES FORMULAIRES
+ *               (source: exemples sur Studium)
+ *************************************************************************************/
+
+function validerNum(elem){
+    var num=document.getElementById(elem).value;
+    var numRegExp=new RegExp("^[0-9]{1,4}$");
+    if(num!="" && numRegExp.test(num))
+        return true;
+    return false;
+}
+
+function valider(){
+    var num=document.getElementById('num').value;
+    var titre=document.getElementById('titre').value;
+    var duree=document.getElementById('duree').value;
+    var res=document.getElementById('res').value;
+    var numRegExp=new RegExp("^[0-9]{1,4}$");
+    if(num!="" && titre!="" && duree!="" && res!="")
+        if(numRegExp.test(num))
+            return true;
+    return false;
+}
+//Cas d'un button
+/*
+function valider(){
+	var formEnreg=document.getElementById('formEnreg');
+	var num=document.getElementById('num').value;
+	var titre=document.getElementById('titre').value;
+	var duree=document.getElementById('duree').value;
+	var res=document.getElementById('res').value;
+	var numRegExp=new RegExp("^[0-9]{1,4}$");
+	if(num!="" && titre!="" && duree!="" && res!="")
+		if(numRegExp.test(num))
+			formEnreg.submit();
+}
+*/
+
 
 /*************************************************************************************
  *               FONCTIONS RELIÉES AUX ÉLÉMENTS GRAPHIQUES DES PAGES
