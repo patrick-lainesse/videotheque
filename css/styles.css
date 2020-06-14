@@ -27,3 +27,37 @@ nav ul li:hover {
     width: 560px;
     height: 315px;
 }
+
+.modalContent {
+    background-color: #212121;
+    color: white;
+    text-align: center;
+}
+
+.margin50 {
+    margin-top: 50px;
+}
+
+ul.dropdown-content.select-dropdown li span {
+    background-color: #000000;
+    color: #006064; /* no need for !important :) */
+}
+
+/* invalid color */
+ul.dropdown-content.select-dropdown li.disabled span {
+    background-color: grey;
+    color: white;
+}
+
+ul.dropdown-content.select-dropdown li.selected {
+;
+    color: white;
+}
+
+.input-field input {
+    color: white;
+}
+
+.select-dropdown{
+    color: #FFFFFF;
+}

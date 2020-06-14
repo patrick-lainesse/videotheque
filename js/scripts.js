@@ -7,6 +7,9 @@ function lister() {
     document.getElementById('formLister').submit();
 }
 
+function enregistrer() {
+    document.getElementById('formEnregistrer').submit();
+}
 
 const chargerModal = function () {
 
@@ -29,14 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Sidenav.init(elems);
 });
 
-
+// initialisation des styles éléments importés par MaterializeCSS
 $(document).ready(function () {
     $('.sidenav').sidenav();
 
     $('.carousel').carousel({
         padding: 200
     });
-});
 
+    $('select').formSelect();
+});
 
 $(".dropdown-trigger").dropdown({hover: false});

@@ -24,9 +24,9 @@ echo '<script type="text/javascript">remplirModal' . ($ligne->titre) . ';</scrip
 https://www.youtube.com/embed/nTfqKG--JwQ
 
 */?>
-<div id="modal1" class="modal center">
+<div id="modal1" class="modal modalContent">
     <div class="modal-content">
-        <h4 id='modalHeader' hashYT='hash'>Modal Header</h4>
+        <h4 id='modalHeader'>Modal Header</h4>
         <iframe src="#" class='iframeYT' id="iframeYT" allowfullscreen></iframe>
     </div>
     <div class="modal-footer">
