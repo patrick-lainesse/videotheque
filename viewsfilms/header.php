@@ -7,27 +7,27 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="../css/styles.css"/>
+    <link type="text/css" rel="stylesheet" href="/videotheque/css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/videotheque/css/styles.css"/>
     <link rel="icon"
           type="images/svg"
-          href="../images/videocam-24px.svg">
+          href="/videotheque/images/videocam-24px.svg">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/videotheque/js/jquery-3.5.1.min.js"></script>
     <!--remettre le min.js lorsque le développement sera terminé, et remettre les scripts à la fin du body ???-->
     <!--<script type="text/javascript" src="js/materialize.min.js"></script>-->
-    <script type="text/javascript" src="../js/materialize.js"></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
+    <script type="text/javascript" src="/videotheque/js/materialize.js"></script>
+    <script type="text/javascript" src="/videotheque/js/scripts.js"></script>
 </head>
 <body>
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content black">
     <li><a href="#">Action</a></li>
     <li><a href="#">Drame</a></li>
-    <li><a href="#">Horreur</a></li>
+    <li><a href="#">Horreur</a></li>        <!--ajouter les autres styles ???-->
     <!--<li class="divider"></li>-->
 </ul>
 
@@ -37,11 +37,11 @@
         <ul class="left hide-on-med-and-down black">
             <li><a type="submit" onclick="lister();">ACCUEIL</a></li>
             <li><a type="submit" onclick="enregistrer();">+ Film</a></li>
-            <li><a href="#">Nos films</a></li>
+            <li><a href="/videotheque/">Nos films</a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
         <ul class="right black">
-            <li><a href="../test.html"><!--???-->
+            <li><a href="/videotheque/test.html"><!--???-->
                 <i class="material-icons left">person_add</i>
                 Devenir membre
             </a></li>
@@ -54,13 +54,13 @@
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="../test.html">Sass</a></li>
-    <li><a href="../test.html">Components</a></li>
-    <li><a href="../test.html">Javascript</a></li>
-    <li><a href="../test.html">Mobile</a></li>
+    <li><a href="/videotheque/test.html">Sass</a></li>
+    <li><a href="/videotheque/test.html">Components</a></li>
+    <li><a href="/videotheque/test.html">Javascript</a></li>
+    <li><a href="/videotheque/test.html">Mobile</a></li>
 </ul>
 
-<form id="formLister" action="lister.php" method="POST">
+<form id="formLister" action="/videotheque/viewsfilms/lister.php" method="POST">
 </form>
-<form id="formEnregistrer" action="form_film.php" method="GET">
+<form id="formEnregistrer" action="/videotheque/viewsfilms/formAjoutFilm.php" method="GET">
 </form>

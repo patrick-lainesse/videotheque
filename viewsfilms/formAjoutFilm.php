@@ -1,10 +1,13 @@
 <?php
-include "header.html";
+include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
+$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
+require_once $chemin;
 ?>
-<h2 class="white-text center">Ajouter un film à la base de données</h2>
+<h3 class="white-text center">Ajouter un film à la base de données</h3>
 <div class="row margin50">
     <form class="col s6 offset-s3" id="formEnreg" enctype="multipart/form-data" action="enregistrer.php" method="POST">
         <!--onsubmit="return valider();"???-->
+        <input type="hidden" id="typeForm" name="typeForm" value="enregistrer">
         <div class="row">
             <div class="input-field col s12">
                 <input id="titre" name="titre" type="text" class="validate">
@@ -48,7 +51,7 @@ include "header.html";
         <div class="row">
             <!--<form action="#" class="col s6">???-->
             <div class="file-field input-field col s6">
-                <div class="btn">
+                <div class="btn waves-effect red darken-4">
                     <span>Image</span>
                     <input type="file" id="pochette" name="pochette">
                 </div>
@@ -64,7 +67,7 @@ include "header.html";
             <!--</form>-->
         </div>
         <div class="row">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Enregistrer
+            <button class="btn waves-effect red darken-4" type="submit" name="action">Enregistrer
                 <i class="material-icons right">send</i>
             </button>
         </div>
