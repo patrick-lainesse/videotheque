@@ -13,11 +13,15 @@ function afficherForm($ligne)
     // arranger responsive ???
     $affiche .= '<img src="../images/' . ($ligne->image) . '" class="floatLeft">';
     $affiche .= '<div class="row margin50">';
-    $affiche .= '<form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data" action="test.php" method="POST">';
+    $affiche .= '<form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data" action="enregistrer.php" method="POST">';
     $affiche .= '<input type="hidden" id="typeForm" name="typeForm" value="update">';
     $affiche .= '<!--onsubmit="return valider();"???-->';
     $affiche .= '<div class="row">';
-    $affiche .= '<div class="input-field col s12">';
+    $affiche .= '<div class="input-field col s4">';
+    $affiche .= '<input id="idFilm" name="idFilm" type="number" value="' . $num . '" readonly>';
+    $affiche .= '<label for="idFilm">Identifiant du film</label>';
+    $affiche .= '</div>';
+    $affiche .= '<div class="input-field col s8">';
     $affiche .= '<input id="titre" name="titre" type="text" class="validate" value="' . ($ligne->titre) . '">';
     $affiche .= '<label for="titre">Titre du film</label>';
     $affiche .= '</div>';
