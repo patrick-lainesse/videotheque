@@ -36,8 +36,10 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down black">
             <li><a type="submit" onclick="lister();">ACCUEIL</a></li>
+            <li><a type="submit" onclick="lister();">Nos films</a></li>
             <li><a type="submit" onclick="enregistrer();">+ Film</a></li>
-            <li><a href="/videotheque/">Nos films</a></li>
+            <li><a href="/videotheque/">Modifier film</a></li>
+            <!--<li><a type="submit" onclick="update();">Modifier film</a></li>-->
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
         <ul class="right black">
@@ -62,5 +64,7 @@
 
 <form id="formLister" action="/videotheque/viewsfilms/lister.php" method="POST">
 </form>
-<form id="formEnregistrer" action="/videotheque/viewsfilms/formAjoutFilm.php" method="GET">
+<form id="formEnregistrer" action="/videotheque/viewsfilms/formAjoutFilm.php" method="POST">
+</form>
+<form id="formUpdate" action="/videotheque/viewsfilms/formUpdate.php" method="POST">
 </form>

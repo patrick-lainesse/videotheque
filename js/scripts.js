@@ -11,6 +11,10 @@ function enregistrer() {
     document.getElementById('formEnregistrer').submit();
 }
 
+function update() { // ??? à corriger avec header
+    document.getElementById('formEnregistrer').submit();
+}
+
 const chargerModal = function () {
 
     const modal = $("#modalHeader");
