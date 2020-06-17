@@ -5,16 +5,28 @@ require_once $chemin;   /*à ajouter au readme???*/
 
 $num = $_POST['idFilm'];
 
+$typeForm = $_POST['typeForm'];
+
 function afficherForm($ligne)
 {
     global $num;
+    global $typeForm;
 
-    $affiche = '<h3 class="white-text center">Modifier les informations pour le film ' . $num . '</h3>';
+    if ($typeForm == 'update') {
+        $affiche = '<h3 class="white-text center">Modifier les informations pour le film ' . $num . '</h3>';
+    } elseif ($typeForm == 'effacer') {
+        $affiche = '<h3 class="white-text center">Voulez-vous bien effacer le film ' . $num . ' de la base de données?</h3>';
+    }
     // arranger responsive ???
     $affiche .= '<img src="../images/' . ($ligne->image) . '" class="floatLeft">';
     $affiche .= '<div class="row margin50">';
     $affiche .= '<form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data" action="enregistrer.php" method="POST">';
-    $affiche .= '<input type="hidden" id="typeForm" name="typeForm" value="update">';
+
+    if ($typeForm == 'update') {
+        $affiche .= '<input type="hidden" id="typeForm" name="typeForm" value="update">';
+    } elseif ($typeForm == 'effacer') {
+        $affiche .= '<input type="hidden" id="typeForm" name="typeForm" value="effacer">';
+    }
     $affiche .= '<!--onsubmit="return valider();"???-->';
     $affiche .= '<div class="row">';
     $affiche .= '<div class="input-field col s4">';
@@ -86,7 +98,9 @@ function afficherForm($ligne)
     return $affiche;
 }
 
+
 $requete = "SELECT * FROM films WHERE id=?";
+
 $stmt = $connexion->prepare($requete);
 $stmt->bind_param("i", $num);
 $stmt->execute();

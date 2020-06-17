@@ -21,7 +21,7 @@ $dossier = "../images/";        // s'assurer que le dossier qui recevra les imag
 
 if ($typeForm == "enregistrer") {
     $pochette = "avatar.jpg";
-} elseif ($typeForm == "update") {
+} elseif ($typeForm == "update" || $typeForm == 'effacer') {
     $requete = "SELECT image FROM films WHERE id=?";
     $stmt = $connexion->prepare($requete);
     $stmt->bind_param("i", $idFilm);
@@ -34,7 +34,7 @@ if ($typeForm == "enregistrer") {
 if ($_FILES['pochette']['tmp_name'] !== "") {
 
 
-    if ($typeForm == "update") {
+    if ($typeForm == "update" || $typeForm == "effacer") {
         // Enlever l'ancienne image si elle a été changée
         if ($pochette != "avatar.jpg" && $pochette != $_POST['image']) {    //quand il y avait pas d'image avant???: Notice: Undefined index: image in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 39
             $rmPoc = '../images/' . $pochette;
@@ -66,13 +66,18 @@ if ($_FILES['pochette']['tmp_name'] !== "") {
 // tester valeurs par défaut, popularité diff et messages d'erreur pour le chmod != 777     ???
 
 if ($typeForm == 'enregistrer') {
-    $requete = "INSERT INTO films (id, titre, realisateur, categorie, duree, prix, popularite, image, youtube) VALUES (0,?,?,?,?,?,?,?,?)";
+    $requete = 'INSERT INTO films (id, titre, realisateur, categorie, duree, prix, popularite, image, youtube) VALUES (0,?,?,?,?,?,?,?,?)';
     $stmt = $connexion->prepare($requete);
     $stmt->bind_param("sssidiss", $titre, $realisateur, $categorie, $duree, $prix, $popularite, $pochette, $hashYT);
 } elseif ($typeForm == 'update') {
-    $requete = "UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=? WHERE id=?";
+    $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=? WHERE id=?';
     $stmt = $connexion->prepare($requete);
     $stmt->bind_param("sssidssi", $titre, $realisateur, $categorie, $duree, $prix, $pochette, $hashYT, $idFilm);
+} elseif ($typeForm == 'effacer') {
+    $requete = 'DELETE from films where id=?';
+    $stmt = $connexion->prepare($requete);
+    $stmt->bind_param("i", $idFilm);
+    // Notice: Undefined variable: nomPochette in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 85
 }
 
 //$stmt = $connexion->prepare($requete);
