@@ -3,12 +3,16 @@ function test() {
     console.log("test");
 }
 
-function lister() {
-    document.getElementById('formLister').submit();
+function connecter() {
+    document.getElementById('formConnecter').submit();
 }
 
 function enregistrer() {
     document.getElementById('formEnregistrer').submit();
+}
+
+function lister() {
+    document.getElementById('formLister').submit();
 }
 
 function update() { // ??? à corriger avec header

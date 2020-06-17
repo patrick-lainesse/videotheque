@@ -5,12 +5,15 @@
 <!--À la fin du projet, tester avec scripts à la fin ???-->
 
 
+<form id="formLister" action="/videotheque/viewsfilms/lister.php" method="POST">
+</form>
+
 <!-- Modal pour connexion -->
 <div id="modalConnexion" class="modal bottom-sheet black">
     <div class="modal-content">
         <h4>Connexion</h4>
         <div class="row">
-            <form class="col s12">
+            <form class="col s12" id="formConnecter" action="/videotheque/viewsfilms/connexion.php" method="POST">
                 <div class="row">
                     <div class="input-field col s6">
                         <input id="courriel" name="courriel" type="email" class="validate">
@@ -19,11 +22,11 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="password" name="password" type="password" class="validate">
-                        <label for="password">Mot de passe</label>
+                        <input id="mdp" name="mdp" type="password" class="validate">
+                        <label for="mdp">Mot de passe</label>
                     </div>
                     <div class="input-field col s5 offset-s1">
-                        <a href="#!" class="modal-close waves-effect btn-flat green">Se connecter</a>
+                        <a class="modal-close waves-effect btn-flat green" type="submit" onclick="connecter();">Se connecter</a>
                         <a href="" class="modal-close waves-effect btn-flat red">Annuler</a>
                     </div>
                 </div>
