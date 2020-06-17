@@ -3,10 +3,6 @@ body {
     color: white;
 }
 
-nav ul li:hover {
-    background-color: #006064;
-}
-
 img {
     max-width: 200px !important;
 }

@@ -35,10 +35,10 @@
     <div class="nav-wrapper black">
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down black">
-            <li><a type="submit" onclick="lister();">ACCUEIL</a></li>
-            <li><a type="submit" onclick="lister();">Nos films</a></li>
-            <li><a type="submit" onclick="enregistrer();">+ Film</a></li>
-            <li><a href="/videotheque/">Modifier film</a></li>
+            <li><a class="waves-effect waves-light" type="submit" onclick="lister();">ACCUEIL</a></li>
+            <li><a class="waves-effect waves-light" type="submit" onclick="lister();">Nos films</a></li>
+            <li><a class="waves-effect waves-light" type="submit" onclick="enregistrer();">+ Film</a></li>
+            <li><a class="waves-effect waves-light" href="/videotheque/">Modifier film</a></li>
             <!--<li><a type="submit" onclick="update();">Modifier film</a></li>-->
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
@@ -47,7 +47,9 @@
                 <i class="material-icons left">person_add</i>
                 Devenir membre
             </a></li>
-            <li><a href="#">
+            <li>
+                <!-- Trigger modal de connexion -->
+                <a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
                 <i class="material-icons left">vpn_key</i>
                 Connexion
             </a></li>

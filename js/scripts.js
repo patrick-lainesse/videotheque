@@ -84,6 +84,8 @@ $(document).ready(function () {
     });
 
     $('select').formSelect();
+
+    $('#modalConnexion').modal();
 });
 
 $(".dropdown-trigger").dropdown({hover: false});

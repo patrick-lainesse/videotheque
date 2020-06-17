@@ -2,6 +2,8 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
 require_once $chemin;
+
+// format sql membre: INSERT INTO `membres` (`idMembre`, `courriel`, `nom`, `age`) VALUES ('0', 'patrick.lainesse@umontreal.ca', 'Patrick Lainesse', '1984-06-10');
 ?>
 <div class="row margin50" id="divUpdate">
     <!--onSubmit="return validerNum('numF');" ??? à faire-->
@@ -45,3 +47,6 @@ require_once $chemin;
         </div>
     </form>
 </div>
+
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/footer.html";
