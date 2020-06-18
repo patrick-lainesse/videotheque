@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,12 +26,15 @@
     <script type="text/javascript" src="/videotheque/js/scripts.js"></script>
 </head>
 <body>
-<!-- Dropdown Structure -->
+
+<!-- Options du menu de choix par catégorie -->
 <ul id="dropdown1" class="dropdown-content black">
     <li><a href="#">Action</a></li>
+    <li><a href="#">Animation</a></li>
+    <li><a href="#">Comédie</a></li>
     <li><a href="#">Drame</a></li>
-    <li><a href="#">Horreur</a></li>        <!--ajouter les autres styles ???-->
-    <!--<li class="divider"></li>-->
+    <li><a href="#">Horreur</a></li>
+    <li><a href="#">Romance</a></li>
 </ul>
 
 <nav>
@@ -37,22 +43,41 @@
         <ul class="left hide-on-med-and-down black">
             <li><a class="waves-effect waves-light" type="submit" onclick="lister();">ACCUEIL</a></li>
             <li><a class="waves-effect waves-light" type="submit" onclick="lister();">Nos films</a></li>
-            <li><a class="waves-effect waves-light" type="submit" onclick="enregistrer();">+ Film</a></li>
-            <li><a class="waves-effect waves-light" href="/videotheque/">Modifier film</a></li>
-            <!--<li><a type="submit" onclick="update();">Modifier film</a></li>-->
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>
+            </li>
         </ul>
         <ul class="right black">
-            <li><a href="/videotheque/test.html"><!--???-->
-                <i class="material-icons left">person_add</i>
-                Devenir membre
-            </a></li>
-            <li>
-                <!-- Trigger modal de connexion -->
-                <a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
-                <i class="material-icons left">vpn_key</i>
-                Connexion
-            </a></li>
+            <?php
+            // Si connecté, afficher l'adresse couriel
+            if (isset($_SESSION['usager'])) {
+
+                if ($_SESSION['role'] == 'admin') {
+                    echo '<li><a class="waves-effect waves-light red-text" type="submit" onclick="enregistrer();">+ Film</a></li>';
+                    echo '<li><a class="waves-effect waves-light red-text" href="/videotheque/viewsfilms/admin.php">Modifier film</a></li>';
+                    //<li><a type="submit" onclick="update();">Modifier film</a></li>   ???
+                } else {
+                    echo '<li><a class="waves-effect waves-light" type="submit">Panier</a></li>';
+                }
+
+                echo '<a href="/videotheque/viewsfilms/deconnexion.php" a class="waves-effect waves-light red">Se déconnecter</a>';
+
+
+                echo '<li>';
+                echo '<a class="waves-effect waves-light">';
+                echo $_SESSION['usager'];
+                echo '</a>';
+                echo '</li>';
+            } else {            // Si non connecté, afficher l'option pour se connecter
+                echo '<li>';
+                // Trigger modal de connexion
+                echo '<a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">';
+                echo '<i class="material-icons left">vpn_key</i>';
+                echo 'Connexion';
+                echo '</a>';
+                echo '</li>';
+                echo '<li><a href="/videotheque/test.html"><i class="material-icons left">person_add</i>Devenir membre</a></li>';   // changer lien???
+            }
+            ?>
         </ul>
     </div>
 </nav>

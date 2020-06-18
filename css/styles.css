@@ -14,6 +14,10 @@ img {
     color: white;
 }
 
+.dropdown-content {
+    top: 100% !important;
+}
+
 .film {
     height: 600px;
     margin-top: -200px;

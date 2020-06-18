@@ -19,9 +19,10 @@ function seConnecter()
         echo 'Mot de passe ou courriel erroné.<br>';
     } else {
         $_SESSION['usager'] = $courriel;
+        $_SESSION['role'] = $ligne->role;
 
         if ($ligne->role == 'admin') {
-            echo 'Admin';
+            Header("location:admin.php?membre=.$courriel");
         } else {
             echo 'Membre';
         }

@@ -7,7 +7,7 @@ require_once $chemin;
 ?>
 <div class="row margin50" id="divUpdate">
     <!--onSubmit="return validerNum('numF');" ??? à faire-->
-    <form class="col s6 offset-s3" id="formUpdate" action="viewsfilms/formUpdate.php" method="POST">
+    <form class="col s6 offset-s3" id="formUpdate" action="formUpdate.php" method="POST">
         <input type="hidden" id="typeForm" name="typeForm" value="update">
         <h5>Entrez l'identifiant du film à mettre à jour</h5><br><br>
         <span onClick="rendreInvisible('divUpdate')">X</span><br><!--à faire ???-->
@@ -28,7 +28,7 @@ require_once $chemin;
 </div>
 <div class="row margin50" id="divEffacer">
     <!--onSubmit="return validerNum('numF');" ??? à faire-->
-    <form class="col s6 offset-s3" id="formEffacer" action="viewsfilms/formUpdate.php" method="POST">
+    <form class="col s6 offset-s3" id="formEffacer" action="formUpdate.php" method="POST">
         <input type="hidden" id="typeForm" name="typeForm" value="effacer">
         <h5>Entrez l'identifiant du film à effacer de la base de données</h5><br><br>
         <span onClick="rendreInvisible('divUpdate')">X</span><br><!--à faire ???-->
