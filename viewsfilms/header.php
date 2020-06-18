@@ -1,4 +1,5 @@
 <?php
+ob_start();     // fouiller davantage ???
 session_start();
 ?>
 <!DOCTYPE html>
@@ -38,14 +39,17 @@ session_start();
 </ul>
 
 <nav>
+    <!--menu général pour visionner le catalogue de films-->
     <div class="nav-wrapper black">
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down black">
-            <li><a class="waves-effect waves-light" type="submit" onclick="lister();">ACCUEIL</a></li>
+            <li><a href="/videotheque/index.php" class="waves-effect waves-light" type="submit">ACCUEIL</a></li>
             <li><a class="waves-effect waves-light" type="submit" onclick="lister();">Nos films</a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>
             </li>
         </ul>
+
+        <!--menu dépendant de la connexion-->
         <ul class="right black">
             <?php
             // Si connecté, afficher l'adresse couriel
@@ -60,22 +64,18 @@ session_start();
                 }
 
                 echo '<a href="/videotheque/viewsfilms/deconnexion.php" a class="waves-effect waves-light red">Se déconnecter</a>';
-
-
-                echo '<li>';
-                echo '<a class="waves-effect waves-light">';
+                echo '<li><a class="waves-effect waves-light">';
                 echo $_SESSION['usager'];
-                echo '</a>';
-                echo '</li>';
+                echo '</a></li>';
             } else {            // Si non connecté, afficher l'option pour se connecter
                 echo '<li>';
                 // Trigger modal de connexion
+                echo '<li><a href="/videotheque/test.html"><i class="material-icons left">person_add</i>Devenir membre</a></li>';   // changer lien???
                 echo '<a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">';
                 echo '<i class="material-icons left">vpn_key</i>';
                 echo 'Connexion';
-                echo '</a>';
-                echo '</li>';
-                echo '<li><a href="/videotheque/test.html"><i class="material-icons left">person_add</i>Devenir membre</a></li>';   // changer lien???
+                echo '</a></li>';
+                include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formConnexion.html";
             }
             ?>
         </ul>

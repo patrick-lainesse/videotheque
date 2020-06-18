@@ -2,6 +2,7 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
 require_once $chemin;
+// il faut rendre inaccessible lorsque non connecté comme admin???
 
 // format sql membre: INSERT INTO `membres` (`idMembre`, `courriel`, `nom`, `age`) VALUES ('0', 'patrick.lainesse@umontreal.ca', 'Patrick Lainesse', '1984-06-10');
 ?>
