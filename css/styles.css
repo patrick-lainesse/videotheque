@@ -7,6 +7,10 @@ img {
     max-width: 200px !important;
 }
 
+.imgTable {
+    max-height: 100px;
+}
+
 .card-content {
     /*background-color: #641b00;*/
     background-color: black;
@@ -78,6 +82,14 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+.marginTop5 {
+    margin-top: 30px;
+}
+
 .select-dropdown{
     color: #FFFFFF;
+}
+
+tr {
+    border-bottom: 1px solid white !important;
 }

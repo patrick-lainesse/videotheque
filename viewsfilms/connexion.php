@@ -24,7 +24,7 @@ function seConnecter()
         if ($ligne->role == 'admin') {
             Header("location:admin.php?membre=.$courriel");
         } else {
-            echo 'Membre';
+            Header("location:panier.php?membre=.$courriel");
         }
     }
 }
