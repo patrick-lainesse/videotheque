@@ -25,8 +25,10 @@ try {
             $reponse .= '<form id="' . ($ligne->id) . '" action="panierAjout.php" method="POST">';
             $reponse .= '<div class="row">';
             $reponse .= '<div class="input-field col offset-s4 s4">';
+            $reponse .= '<input type="hidden" name="idFilm" value="' . ($ligne->id) . '">';
             // Le id est concatené deux fois pour le différencier du formID
             $reponse .= '<input id="' . ($ligne->id) . ($ligne->id) . '" name="quantite" type="number" min="0" max="500" class="validate center-align">';
+            // ??? valider le max 500 par jscript et empêcher la requête si c'est le cas
             $reponse .= '<label for="' . ($ligne->id) . ($ligne->id) . '">Qté</label>';
             $reponse .= '</div>';
             $reponse .= '</div>';
