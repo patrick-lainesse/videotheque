@@ -9,7 +9,7 @@ function seConnecter()
     $courriel = $_POST['courriel'];
     $mdp = $_POST['mdp'];
 
-    $requete = 'SELECT membres.courriel, connexion.mdp, connexion.role FROM membres INNER JOIN connexion ON membres.idMembre = connexion.idMembre WHERE membres.courriel=? AND connexion.mdp=?';
+    $requete = 'SELECT membres.idMembre, membres.courriel, connexion.mdp, connexion.role FROM membres INNER JOIN connexion ON membres.idMembre = connexion.idMembre WHERE membres.courriel=? AND connexion.mdp=?';
     $stmt = $connexion->prepare($requete);
     $stmt->bind_param("ss", $courriel, $mdp);
     $stmt->execute();
@@ -18,8 +18,12 @@ function seConnecter()
     if (!$ligne = $reponse->fetch_object()) {
         echo 'Mot de passe ou courriel erroné.<br>';
     } else {
+        // s'affichera dans le header
         $_SESSION['usager'] = $courriel;
+        // définiera les actions que pourra effectuer l'usager
         $_SESSION['role'] = $ligne->role;
+        // pour faire des ajouts/suppresions dans le panier
+        $_SESSION['idMembre'] = $ligne->idMembre;
 
         if ($ligne->role == 'admin') {
             Header("location:admin.php?membre=.$courriel");

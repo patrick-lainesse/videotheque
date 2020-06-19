@@ -26,8 +26,8 @@ try {
             $reponse .= '<div class="row">';
             $reponse .= '<div class="input-field col offset-s4 s4">';
             // Le id est concatené deux fois pour le différencier du formID
-            $reponse .= '<input id=" . ($ligne->id) . ($ligne->id) . " name="quantite" type="number" min="0" max="500" class="validate center-align">';
-            $reponse .= '<label for=" . ($ligne->id) . ($ligne->id) . ">Qté</label>';
+            $reponse .= '<input id="' . ($ligne->id) . ($ligne->id) . '" name="quantite" type="number" min="0" max="500" class="validate center-align">';
+            $reponse .= '<label for="' . ($ligne->id) . ($ligne->id) . '">Qté</label>';
             $reponse .= '</div>';
             $reponse .= '</div>';
             $reponse .= '<a class="waves-effect waves-light marginNeg darken-4 green btn-small" onclick="ajoutFilm(' . ($ligne->id) . ')"><i class="material-icons left">shopping_cart</i>Ajouter</a>';
