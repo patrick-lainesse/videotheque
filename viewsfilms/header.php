@@ -63,7 +63,7 @@ session_start();
                     echo '<li><a href="/videotheque/viewsfilms/panier.php" class="waves-effect waves-light" type="submit">Panier</a></li>';
                 }
 
-                echo '<a href="/videotheque/viewsfilms/deconnexion.php" a class="waves-effect waves-light red">Se déconnecter</a>';
+                echo '<a href="/videotheque/viewsfilms/deconnexion.php" class="waves-effect waves-light red"><i class="material-icons left">exit_to_app</i>Se déconnecter</a>';
                 echo '<li><a class="waves-effect waves-light">';
                 echo $_SESSION['usager'];
                 echo '</a></li>';
