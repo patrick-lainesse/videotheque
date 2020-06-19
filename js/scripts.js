@@ -3,6 +3,10 @@ function test() {
     console.log("test");
 }
 
+function ajoutMembre() {
+    document.getElementById('formMembre').submit();
+}
+
 function connecter() {
     document.getElementById('formConnecter').submit();
 }
@@ -92,4 +96,14 @@ $(document).ready(function () {
     $('#modalConnexion').modal();
 
     $(".dropdown-trigger").dropdown({hover: false});
+
+    // ??? pour rendre l'input de la date editable: https://stackoverflow.com/questions/35708106/how-to-make-the-materialize-date-picker-in-fact-pickadate-editable
+    $('.datepicker').datepicker({
+        editable: true,
+        format: 'yyyy-mm-dd',
+        formatSubmit: 'yyyy-mm-dd', /*à arranger dd mmmm yyyy???*/
+        i18n: {
+            months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+        }
+    });
 });

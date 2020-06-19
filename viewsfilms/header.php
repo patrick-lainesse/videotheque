@@ -70,7 +70,7 @@ session_start();
             } else {            // Si non connecté, afficher l'option pour se connecter
                 echo '<li>';
                 // Trigger modal de connexion
-                echo '<li><a href="/videotheque/test.html"><i class="material-icons left">person_add</i>Devenir membre</a></li>';   // changer lien???
+                echo '<li><a href="/videotheque/viewsfilms/formAjoutMembre.php"><i class="material-icons left">person_add</i>Devenir membre</a></li>';
                 echo '<a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">';
                 echo '<i class="material-icons left">vpn_key</i>';
                 echo 'Connexion';
