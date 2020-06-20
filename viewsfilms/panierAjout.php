@@ -16,6 +16,7 @@ $stmt->bind_param("iii", $quantite, $idMembre, $idFilm);
 $stmt->execute();
 
 // ??? ne pas afficher / exécuter la requête si dépasse la qté max
+// ??? après exécution, tenter de rester sur la même page et le même modal, si possible
 echo 'Film ' . $_POST['idFilm'] . ' ajouté au panier du membre ' . $_SESSION['usager'] . ' : ' . $_SESSION['idMembre'];
 
 include 'footer.html';
