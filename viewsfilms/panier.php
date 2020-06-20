@@ -25,7 +25,8 @@ require_once $chemin;
             <tr>
                 <?php
                 include 'html_functions/panierTableRow.php';
-                $idMembre = $_SESSION['idMembre'];
+
+                $idMembre = $_SESSION['idMembre'];  // ??? si déconnecte à partir de cette page: Notice: Undefined index: idMembre in /opt/lampp/htdocs/videotheque/viewsfilms/panier.php on line 28
                 //$requete = 'SELECT membres.idMembre, membres.courriel, connexion.mdp, connexion.role FROM membres INNER JOIN connexion ON membres.idMembre = connexion.idMembre WHERE membres.courriel=? AND connexion.mdp=?';
                 $requete = 'SELECT films.image, films.titre, panier.quantite, films.prix FROM panier INNER JOIN films ON panier.idFilm = films.id WHERE panier.idMembre=?';
                 $stmt = $connexion->prepare($requete);
@@ -54,7 +55,7 @@ require_once $chemin;
             </tbody>
         </table>
         <div class="right-align">
-            <p><strong>Sous-total:</strong> <?php echo $sousTotal;?>$
+            <p><strong>Sous-total:</strong> <?php echo $sousTotal; ?>$
                 <br><strong>TVQ:</strong> <? echo $tvq = number_format($sousTotal * 0.09975, 2); ?>$
                 <br><strong>TPS:</strong> <? echo $tps = number_format($sousTotal * 0.05, 2); ?>$
                 <br><strong>Total:</strong> <? echo number_format($sousTotal + $tvq + $tps, 2); ?>$
