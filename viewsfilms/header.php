@@ -56,6 +56,7 @@ session_start();
             if (isset($_SESSION['usager'])) {
 
                 if ($_SESSION['role'] == 'admin') {
+                    echo '<li><a class="waves-effect waves-light red-text" type="submit" onclick="admin();">Gestion par liste</a></li>';
                     echo '<li><a class="waves-effect waves-light red-text" type="submit" onclick="enregistrer();">+ Film</a></li>';
                     echo '<li><a class="waves-effect waves-light red-text" href="/videotheque/viewsfilms/admin.php">Modifier film</a></li>';
                     //<li><a type="submit" onclick="update();">Modifier film</a></li>   ???
@@ -90,6 +91,8 @@ session_start();
 </ul>
 
 <form id="formLister" action="/videotheque/viewsfilms/lister.php" method="POST">
+</form>
+<form id="formAdmin" action="/videotheque/viewsfilms/admin.php" method="POST">
 </form>
 <form id="formEnregistrer" action="/videotheque/viewsfilms/formAjoutFilm.php" method="POST">
 </form>

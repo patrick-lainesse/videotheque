@@ -3,6 +3,10 @@ function test() {
     console.log("test");
 }
 
+function admin() {
+    document.getElementById('formAdmin').submit();
+}
+
 function ajoutFilm(formID) {
     document.getElementById(formID).submit();
 }

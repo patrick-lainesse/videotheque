@@ -37,7 +37,7 @@ if ($_FILES['pochette']['tmp_name'] !== "") {
 
     if ($typeForm == "update" || $typeForm == "effacer") {
         // Enlever l'ancienne image si elle a été changée
-        if ($pochette != "avatar.jpg" && $pochette != $_POST['image']) {    //quand il y avait pas d'image avant???: Notice: Undefined index: image in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 39
+        if ($pochette != "avatar.jpg" && $pochette != $_POST['image']) {    //TODO: quand il y avait pas d'image avant Notice: Undefined index: image in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 39
             $rmPoc = '../images/' . $pochette;
             $tabFichiers = glob('../images/*');
 
@@ -67,6 +67,7 @@ if ($_FILES['pochette']['tmp_name'] !== "") {
 // tester valeurs par défaut, popularité diff et messages d'erreur pour le chmod != 777     ???
 
 if ($typeForm == 'enregistrer') {
+    // TODO: s'assurer que le film ne s'ajoute pas si le formulaire n'est pas dûment rempli
     $requete = 'INSERT INTO films (id, titre, realisateur, categorie, duree, prix, popularite, image, youtube) VALUES (0,?,?,?,?,?,?,?,?)';
     $stmt = $connexion->prepare($requete);
     $stmt->bind_param("sssidiss", $titre, $realisateur, $categorie, $duree, $prix, $popularite, $pochette, $hashYT);
