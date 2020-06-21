@@ -1,7 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
-$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
-require_once $chemin;   // TODO: ajouter au readme
+//$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
+//require_once $chemin;   // TODO: ajouter au readme
+require_once $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
 
 $num = $_POST['idFilm'];
 $typeForm = $_POST['typeForm'];
@@ -17,7 +18,7 @@ function afficherForm($ligne)
         <?php
     } elseif ($typeForm == 'effacer') {
         ?>
-        <h3 class="white-text center">Voulez-vous bien effacer le film <?php echo $num; ?>de la base de données?</h3>
+        <h3 class="white-text center">Voulez-vous bien supprimer le film <?php echo $num; ?> de la base de données?</h3>
         <?php
     }
     ?><!--// TODO: arranger responsive -->
@@ -100,7 +101,15 @@ function afficherForm($ligne)
                 </div>
             </div>
             <div class="row">
-                <button class="btn waves-effect red darken-4" type="submit" name="action">Enregistrer
+                <button class="btn waves-effect red darken-4" type="submit" name="action">
+                    <?php
+                    // Texte à afficher sur le bouton
+                    if ($typeForm == 'update') {
+                        echo 'Modifier';
+                    } if ($typeForm == 'effacer') {
+                        echo 'Supprimer';
+                    }
+                    ?>
                     <i class="material-icons right">send</i>
                 </button>
             </div>
