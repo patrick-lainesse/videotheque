@@ -1,7 +1,10 @@
+<!--Le stmt->close() effectue également un free_result: : https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
+
+// TODO: Empêcher l'accès à cette page lorsque non connecté
 ?>
 
     <div class="container">
@@ -9,7 +12,7 @@ require_once $chemin;
             <h3>Votre panier
                 <a class="waves-effect waves-light darken-4 green btn-small marginTop30 right"><i
                             class="material-icons left">delete_forever
-                    </i>Vider le panier</a></h3><!--??? programmer-->
+                    </i>Vider le panier</a></h3><!--TODO : programmer vider le panier-->
         </div>
         <table class="centered">
             <thead>
@@ -26,30 +29,28 @@ require_once $chemin;
                 <?php
                 include 'html_functions/panierTableRow.php';
 
-                $idMembre = $_SESSION['idMembre'];  // ??? si déconnecte à partir de cette page: Notice: Undefined index: idMembre in /opt/lampp/htdocs/videotheque/viewsfilms/panier.php on line 28
-                //$requete = 'SELECT membres.idMembre, membres.courriel, connexion.mdp, connexion.role FROM membres INNER JOIN connexion ON membres.idMembre = connexion.idMembre WHERE membres.courriel=? AND connexion.mdp=?';
+                // requête à la base de données pour obtenir le panier de l'usager connecté
+                $idMembre = $_SESSION['idMembre'];
                 $requete = 'SELECT films.image, films.titre, panier.quantite, films.prix FROM panier INNER JOIN films ON panier.idFilm = films.id WHERE panier.idMembre=?';
-                $stmt = $connexion->prepare($requete);
-                $stmt->bind_param("i", $idMembre);
-                $stmt->execute();
-                $reponse = $stmt->get_result();
+
                 try {
-                    // ??? gérer cas 0 résultats, probablement mettre la requête avant le bloc html
-                    //$panier = mysqli_query($connexion, $stmt);???
+                    $stmt = $connexion->prepare($requete);
+                    $stmt->bind_param("i", $idMembre);
+                    $stmt->execute();
+                    $reponse = $stmt->get_result();
 
                     $sousTotal = 0;
 
+                    // place les résultats sur une rangée de tableau
                     while ($ligne = mysqli_fetch_object($reponse)) {
-                        //global $sousTotal;
                         $sousTotal += ($ligne->prix);
-                        // fonction qui place les données dans une rangée du tableau
                         tableRow(($ligne->image), ($ligne->titre), ($ligne->quantite), ($ligne->prix));
                     }
-                    //mysqli_free_result($);???
                 } catch (Exception $e) {
                     echo 'Problème de lecture dans la base de données.';
                 } finally {
-                    mysqli_close($connexion);   //???
+                    $stmt->close();     // effectue aussi un free_result()
+                    mysqli_close($connexion);
                 }
                 ?>
             </tbody>
