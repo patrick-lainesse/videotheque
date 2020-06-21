@@ -2,10 +2,10 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
 require_once $chemin;
-// renommer requêtesSQL???
+// TODO: renommer requêtesSQL
 
-// peut être soit update ou enregistrer
-$typeForm = $_POST['typeForm'];
+// Peut être soit update ou enregistrer
+$typeForm = $_POST['typeForm']; // TODO: changer pour que ce soit la valeur du bouton, 'action'
 
 $idFilm = $_POST['idFilm'];
 $titre = $_POST['titre'];
@@ -14,11 +14,11 @@ $categorie = $_POST['categorie'];
 $duree = $_POST['duree'];
 $prix = $_POST['prix'];
 
-// popularité à intégrer ???
+// TODO: popularité à éliminer
 $popularite = 0;
 $hashYT = $_POST['hashYT'];
-// tester avec path absolu ???
-$dossier = "../images/";        // s'assurer que le dossier qui recevra les images a 777 comme permissions
+// TODO: tester avec path absolu
+$dossier = "../images/";        // S'assurer que le dossier qui recevra les images a 777 comme permissions
 
 if ($typeForm == "enregistrer") {
     $pochette = "avatar.jpg";

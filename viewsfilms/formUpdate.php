@@ -1,10 +1,9 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
-require_once $chemin;   /*à ajouter au readme???*/
+require_once $chemin;   // TODO: ajouter au readme
 
 $num = $_POST['idFilm'];
-
 $typeForm = $_POST['typeForm'];
 
 function afficherForm($ligne)
