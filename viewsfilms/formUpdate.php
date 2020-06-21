@@ -12,102 +12,113 @@ function afficherForm($ligne)
     global $typeForm;
 
     if ($typeForm == 'update') {
-        $affiche = '<h3 class="white-text center">Modifier les informations pour le film ' . $num . '</h3>';
+        ?>
+        <h3 class="white-text center">Modifier les informations pour le film <?php echo $num; ?></h3>
+        <?php
     } elseif ($typeForm == 'effacer') {
-        $affiche = '<h3 class="white-text center">Voulez-vous bien effacer le film ' . $num . ' de la base de données?</h3>';
+        ?>
+        <h3 class="white-text center">Voulez-vous bien effacer le film <?php echo $num; ?>de la base de données?</h3>
+        <?php
     }
-    // arranger responsive ???
-    $affiche .= '<img src="../images/' . ($ligne->image) . '" class="floatLeft">';
-    $affiche .= '<div class="row margin50">';
-    $affiche .= '<form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data" action="enregistrer.php" method="POST">';
-
-    if ($typeForm == 'update') {
-        $affiche .= '<input type="hidden" id="typeForm" name="typeForm" value="update">';
-    } elseif ($typeForm == 'effacer') {
-        $affiche .= '<input type="hidden" id="typeForm" name="typeForm" value="effacer">';
-    }
-    $affiche .= '<!--onsubmit="return valider();"???-->';
-    $affiche .= '<div class="row">';
-    $affiche .= '<div class="input-field col s4">';
-    $affiche .= '<input id="idFilm" name="idFilm" type="number" value="' . $num . '" readonly>';
-    $affiche .= '<label for="idFilm">Identifiant du film</label>';
-    $affiche .= '</div>';
-    $affiche .= '<div class="input-field col s8">';
-    $affiche .= '<input id="titre" name="titre" type="text" class="validate" value="' . ($ligne->titre) . '">';
-    $affiche .= '<label for="titre">Titre du film</label>';
-    $affiche .= '</div>';
-    $affiche .= '</div>';
-    $affiche .= '<h5 class="white-text">Réalisateur</h5>';
-    $affiche .= '<div class="row">';
-    $affiche .= '<div class="input-field col s6">';
-    $charEspace = strpos(($ligne->realisateur), " ");
-    $affiche .= '<input id="prenom" name="prenom" type="text" class="validate" value="' . substr(($ligne->realisateur), 0, $charEspace) . '">';
-    $affiche .= '<label for="prenom">Prénom</label>';
-    $affiche .= '</div>';
-    $affiche .= '<div class="input-field col s6">';
-    $affiche .= '<input id="nom" name="nom" type="text" class="validate" value="' . substr(($ligne->realisateur), $charEspace) . '">';
-    $affiche .= '<label for="nom">Nom</label>';
-    $affiche .= '</div>';
-    $affiche .= '</div>';
-    $affiche .= '<div class="row">';
-    $affiche .= '<div class="input-field col s4 grey darken-4">';
-    /*??? à faire: https://stackoverflow.com/questions/3030604/php-pre-select-drop-down-option*/
-    $affiche .= '<select id="categorie" name="categorie">';
-    $affiche .= '<option value="Action">Action</option>';
-    $affiche .= '<option value="Animation">Animation</option>';
-    $affiche .= '<option value="Comédie">Comédie</option>';
-    $affiche .= '<option value="Drame">Drame</option>';
-    $affiche .= '<option value="Horreur">Horreur</option>';
-    $affiche .= '<option value="Romance">Romance</option>';
-    $affiche .= '<option value="Science-fiction">Science-fiction</option>';
-    $affiche .= '</select>';
-    $affiche .= '<label>Catégorie</label>';
-    $affiche .= '</div>';
-    $affiche .= '<div class="input-field col s4">';
-    $affiche .= '<input id="duree" name="duree" type="number" min="0" step="1" max="700" class="validate" value="' . ($ligne->duree) . '">';
-    $affiche .= '<label for="duree">Durée</label>';
-    $affiche .= '</div>';
-    $affiche .= '<div class="input-field col s4">';
-    $affiche .= '<input id="prix" name="prix" type="number" min="0" max="500" step="0.01" class="validate" value="' . ($ligne->prix) . '">';
-    $affiche .= '<label for="prix">Prix</label>';
-    $affiche .= '</div>';
-    $affiche .= '</div>';
-    $affiche .= '<div class="row" > ';
-    $affiche .= '<div class="file-field input-field col s6">';
-    $affiche .= '<div class="btn waves-effect red darken-4">';
-    $affiche .= '<span>Image</span>';
-    $affiche .= '<input type="file" id="pochette" name="pochette">';
-    $affiche .= '</div>';
-    $affiche .= '<div class="file-path-wrapper">';
-    $affiche .= '<input class="file-path validate" type="text">';
-    $affiche .= '</div>';
-    $affiche .= '</div>';
-    $affiche .= '<div class="input-field col s6">';
-    $affiche .= '<input id="hashYT" name="hashYT" type="text" class="validate" value="' . ($ligne->youtube) . '"> ';
-    $affiche .= '<label for="hashYT">Hash YouTube</label>';
-    $affiche .= '</div>';
-    $affiche .= ' </div>';
-    $affiche .= '<div class="row">';
-    $affiche .= '<button class="btn waves-effect red darken-4" type="submit" name="action">Enregistrer';
-    $affiche .= '<i class="material-icons right">send</i>';
-    $affiche .= '</button>';
-    $affiche .= '</div>';
-    $affiche .= '</form>';
-    $affiche .= '</div>';
-    return $affiche;
-}
-
+    ?><!--// TODO: arranger responsive -->
+    <img src="../images/<?php echo($ligne->image); ?>" class="floatLeft">
+    <div class="row margin50">
+        <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data" action="enregistrer.php"
+              method="POST">
+            <?php
+            if ($typeForm == 'update') { ?>
+                <input type="hidden" id="typeForm" name="typeForm" value="update">
+                <?php
+            } elseif ($typeForm == 'effacer') { ?>
+                <input type="hidden" id="typeForm" name="typeForm" value="effacer">
+                <?php
+            }
+            //TODO: onsubmit="return valider()"
+            ?>
+            <div class="row">
+                <div class="input-field col s4">
+                    <input id="idFilm" name="idFilm" type="number" value="<?php echo $num; ?>" readonly>
+                    <label for="idFilm">Identifiant du film</label>
+                </div>
+                <div class="input-field col s8">
+                    <input id="titre" name="titre" type="text" class="validate" value=" <?php echo($ligne->titre); ?>">
+                    <label for="titre">Titre du film</label>
+                </div>
+            </div>
+            <h5 class="white-text">Réalisateur</h5>
+            <div class="row">
+                <div class="input-field col s6">
+                    <?php $charEspace = strpos(($ligne->realisateur), " "); ?>
+                    <input id="prenom" name="prenom" type="text" class="validate"
+                           value="<?php echo substr(($ligne->realisateur), 0, $charEspace); ?>">
+                    <label for="prenom">Prénom</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="nom" name="nom" type="text" class="validate"
+                           value="<?php echo substr(($ligne->realisateur), $charEspace); ?>">
+                    <label for="nom">Nom</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4 grey darken-4">
+                    <!--TODO: à faire: https://stackoverflow.com/questions/3030604/php-pre-select-drop-down-option-->
+                    <select id="categorie" name="categorie">
+                        <option value="Action">Action</option>
+                        <option value="Animation">Animation</option>
+                        <option value="Comédie">Comédie</option>
+                        <option value="Drame">Drame</option>
+                        <option value="Horreur">Horreur</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Science-fiction">Science-fiction</option>
+                    </select>
+                    <label>Catégorie</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="duree" name="duree" type="number" min="0" step="1" max="700" class="validate"
+                           value="<?php echo($ligne->duree); ?>">
+                    <label for="duree">Durée</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="prix" name="prix" type="number" min="0" max="500" step="0.01" class="validate"
+                           value="<?php echo($ligne->prix); ?>">
+                    <label for="prix">Prix</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="file-field input-field col s6">
+                    <div class="btn waves-effect red darken-4">
+                        <span>Image</span>
+                        <input type="file" id="pochette" name="pochette">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="input-field col s6">
+                    <input id="hashYT" name="hashYT" type="text" class="validate" value="<?php ($ligne->youtube) ?>">
+                    <label for="hashYT">Hash YouTube</label>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect red darken-4" type="submit" name="action">Enregistrer
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <?php
+}   // fin de la fonction afficherForm($ligne)
 
 $requete = "SELECT * FROM films WHERE id=?";
 
 $stmt = $connexion->prepare($requete);
 $stmt->bind_param("i", $num);
 $stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt->get_result();  // TODO: try-catch
 if (!$ligne = $result->fetch_object()) {
     echo "Film " . $num . " introuvable";
     mysqli_close($connexion);
     exit;
 }
-echo afficherForm($ligne);
+afficherForm($ligne);
 mysqli_close($connexion);

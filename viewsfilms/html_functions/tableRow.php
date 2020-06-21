@@ -7,8 +7,8 @@ function tableRow($film)
         <td><?php echo $film->getTitre(); ?></td>
         <td><?php echo $film->getRealisateur(); ?></td>
         <td><?php echo $film->getCategorie(); ?></td>
-        <td><?php echo $film->getDuree(); ?></td>
-        <td><?php echo $film->getPrix(); ?></td>
+        <td><?php echo $film->getDuree(); ?> min</td>
+        <td><?php echo $film->getPrix(); ?>$</td>
         <td>
             <form id="formUpdate" action="formUpdate.php" method="POST">    <!--TODO: form not allowed here-->
                 <input type="hidden" id="typeForm" name="typeForm" value="update">
