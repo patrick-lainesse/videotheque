@@ -3,7 +3,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 ?>
-<h3 class="white-text center">Ajouter un film à la base de données</h3>
+<h5 class="white-text center margin50">Ajouter un film à la base de données</h5>
 <div class="row margin50">
     <form class="col s6 offset-s3" id="formEnreg" enctype="multipart/form-data" action="enregistrer.php" method="POST">
         <!--onsubmit="return valider();"???-->

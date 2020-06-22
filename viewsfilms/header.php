@@ -55,19 +55,25 @@ session_start();
             // Si connecté, afficher l'adresse couriel
             if (isset($_SESSION['usager'])) {
 
+                echo '<li><a class="waves-effect waves-light">';
+                echo $_SESSION['usager'];
+                echo '</a></li>';
+
                 if ($_SESSION['role'] == 'admin') {
-                    echo '<li><a class="waves-effect waves-light red-text" type="submit" onclick="admin();">Gestion par liste</a></li>';
-                    echo '<li><a class="waves-effect waves-light red-text" type="submit" onclick="enregistrer();">+ Film</a></li>';
-                    echo '<li><a class="waves-effect waves-light red-text" href="/videotheque/viewsfilms/admin.php">Modifier film</a></li>';
-                    //<li><a type="submit" onclick="update();">Modifier film</a></li>   ???
+                    ?>
+                    <li><a class="waves-effect waves-light red-text" type="submit" onclick="admin();">Gestion par liste</a></li>
+                    <li><a class="waves-effect waves-light red-text" type="submit" onclick="enregistrer();">+ Film</a></li>
+                    <li><a class="waves-effect waves-light red-text" href="/videotheque/viewsfilms/formulaires/effacerChoixFilm.php">
+                            - Film</a></li>
+                    <li><a class="waves-effect waves-light red-text" href="/videotheque/viewsfilms/formulaires/updateChoixFilm.php">
+                            Modifier film</a></li>
+                    <?php
                 } else {
                     echo '<li><a href="/videotheque/viewsfilms/panier.php" class="waves-effect waves-light" type="submit">Panier</a></li>';
                 }
 
                 echo '<a href="/videotheque/viewsfilms/deconnexion.php" class="waves-effect waves-light red"><i class="material-icons left">exit_to_app</i>Se déconnecter</a>';
-                echo '<li><a class="waves-effect waves-light">';
-                echo $_SESSION['usager'];
-                echo '</a></li>';
+
             } else {            // Si non connecté, afficher l'option pour se connecter
                 echo '<li>';
                 // Trigger modal de connexion
