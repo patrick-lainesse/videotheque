@@ -3,7 +3,8 @@ Nom: Patrick Lainesse
 Matricule: 740302
 Date: 22/06/2020
 
-Fonction qui effectue la requête SQL et affiche la liste du panier d'achat d'un membre
+Page qui affiche le panier d'un usager en effectuant la requête SQL. Affiche un tableau avec
+seulement l'en-tête et une facture vide si le panier de l'usager est vide.
 Note: Le stmt->close() effectue également un free_result
 https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result
 -->
@@ -35,8 +36,6 @@ require_once $chemin;
         <tbody>
         <tr>
             <?php
-            include 'elementsHTML/panierTableRow.php';      // TODO: Enlever cette ligne
-
             // requête à la base de données pour obtenir le panier de l'usager connecté
             $idMembre = $_SESSION['idMembre'];
             $requete = 'SELECT films.id, films.image, films.titre, panier.quantite, films.prix FROM panier INNER JOIN films ON panier.idFilm = films.id WHERE panier.idMembre=?';
@@ -52,8 +51,6 @@ require_once $chemin;
                 // place les résultats sur une rangée de tableau
                 while ($ligne = mysqli_fetch_object($reponse)) {
                     $sousTotal += ($ligne->prix) * ($ligne->quantite);
-                    // TODO: ça devrait pas être panierTableRow????
-                    //tableRow(($ligne->image), ($ligne->titre), ($ligne->quantite), ($ligne->prix));
                     echo '<form action="fonctionsSQL/fonctionsPanier.php" method="POST">';
                     echo '<input type="hidden" name="fonction" value="supprimerFilmPanier">';
                     echo '<input type="hidden" name="idMembre" value="' . ($idMembre) . '">';
@@ -63,9 +60,8 @@ require_once $chemin;
                     echo '<td>' . ($ligne->titre) . '</td>';
                     echo '<td>' . ($ligne->quantite) . '</td>';
                     echo '<td>' . ($ligne->prix) . '$</td>';
-                    // TODO: réaction au clic sur ce bouton
+                    // TODO: option pour enlever juste une partie des films de la liste
                     echo '<td><button type="submit" class="waves-effect waves-light darken-4 red btn-small"><i class="material-icons left">delete</i>Supprimer</button></td>';
-                    //echo '<td><a type="submit" class="waves-effect waves-light darken-4 red btn-small"><i class="material-icons left">delete</i>Supprimer</a></td>';
                     echo '</tr>';
                     echo '</form>';
                 }

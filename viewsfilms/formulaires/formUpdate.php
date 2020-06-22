@@ -22,11 +22,11 @@ function afficherForm($ligne)
 
     if ($typeForm == 'update') {
         ?>
-        <h3 class="white-text center">Modifier les informations pour le film <?php echo $num; ?></h3>
+        <h5 class="white-text center">Modifier les informations pour le film <?php echo $num; ?></h5>
         <?php
     } elseif ($typeForm == 'effacer') {
         ?>
-        <h3 class="white-text center">Voulez-vous bien supprimer le film <?php echo $num; ?> de la base de données?</h3>
+        <h5 class="white-text center">Voulez-vous bien supprimer le film <?php echo $num; ?> de la base de données?</h5>
         <?php
     }
     ?><!--// TODO: arranger responsive -->

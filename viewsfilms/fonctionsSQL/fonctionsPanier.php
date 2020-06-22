@@ -7,7 +7,8 @@ require_once $chemin;
 
 // S'asssurer que seuls les membres connectés accèdent à ces fonctions
 if (!isset($_SESSION['usager']) || $_SESSION['role'] != 'membre') {
-    Header('location:../index.php');
+    $message = urlencode("Vous devez être connecté en tant que membre pour accéder à cette page.");
+    header('location:../index.php?Message=' . $message);
 }
 
 // récupérer la fonction qui est désirée

@@ -17,6 +17,8 @@ $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 ?>
 
+<!--TODO: Enlever +film du header et ajouter cette option dans la page Options d'administration à la place-->
+
 <div class="container">
     <div class="row">
         <h3 class="center-align">Options d'administration</h3>
@@ -36,12 +38,13 @@ require_once $chemin;
         <tbody>
         <tr>
             <?php
-            include 'elementsHTML/tableRow.php';
-            include 'Film.php'; // TODO tester sans ce include
+            include 'elementsHTML/tableRowAdmin.php';
+            include 'Film.php';
 
             // S'asssurer que seuls les admin accèdent à la page
             if ($_SESSION['role'] != 'admin') {
-                Header('location:../index.php');
+                $message = urlencode("Vous devez être connecté en tant qu'administrateur pour accéder à cette page.");
+                header('location:../index.php?Message=' . $message);
             }
 
             $requete = 'SELECT id, titre, realisateur, categorie, duree, prix, image, youtube from films';

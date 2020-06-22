@@ -36,15 +36,14 @@ function seConnecter()
             $_SESSION['idMembre'] = $ligne->idMembre;
 
             if ($ligne->role == 'admin') {
-                Header("location:admin.php?membre=.$courriel");
+                header("location:admin.php?membre=.$courriel");
             } else {
-                Header("location:panier.php?membre=.$courriel");
+                header("location:panier.php?membre=.$courriel");
             }
         }
     } catch (Exception $e) {
-        echo 'Erreur de connexion au serveur, veuillez réessayer plus tard.';
-        Header("location:../index.php");
-        // TODO: plutôt afficher le message d'erreur au sommet de la page d'accueil
+        $message = urlencode("Erreur de connexion au serveur, veuillez réessayer plus tard.");
+        header("location:../index.php?Message=' . $message");
     }
 }
 
