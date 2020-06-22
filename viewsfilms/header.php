@@ -44,44 +44,44 @@ session_start();
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down black">
             <li><a href="/videotheque/index.php" class="waves-effect waves-light" type="submit">ACCUEIL</a></li>
-            <li><a class="waves-effect waves-light" type="submit" onclick="lister();">Nos films</a></li>
+            <li><a href="/videotheque/viewsfilms/lister.php" class="waves-effect waves-light">Nos films</a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>
             </li>
         </ul>
 
-        <!--menu dépendant de la connexion-->
+        <!--le menu qui s'affiche dépend du rôle de celui qui est connecté-->
         <ul class="right black">
             <?php
             // Si connecté, afficher l'adresse couriel
             if (isset($_SESSION['usager'])) {
 
+                // afficher le courriel de l'usager connecté
                 echo '<li><a class="waves-effect waves-light">';
                 echo $_SESSION['usager'];
                 echo '</a></li>';
 
+                // options exclusives aux admin
                 if ($_SESSION['role'] == 'admin') {
                     ?>
-                    <li><a class="waves-effect waves-light red-text" type="submit" onclick="admin();">Gestion par liste</a></li>
-                    <li><a class="waves-effect waves-light red-text" type="submit" onclick="enregistrer();">+ Film</a></li>
-                    <li><a class="waves-effect waves-light red-text" href="/videotheque/viewsfilms/formulaires/effacerChoixFilm.php">
-                            - Film</a></li>
-                    <li><a class="waves-effect waves-light red-text" href="/videotheque/viewsfilms/formulaires/updateChoixFilm.php">
-                            Modifier film</a></li>
+                    <li><a href="/videotheque/viewsfilms/formAjoutFilm.php" class="waves-effect waves-light red-text">+
+                            Film</a></li>
+                    <li><a href="/videotheque/viewsfilms/admin.php" class="waves-effect waves-light red-text">Options
+                            d'administation</a></li>
                     <?php
                 } else {
                     echo '<li><a href="/videotheque/viewsfilms/panier.php" class="waves-effect waves-light" type="submit">Panier</a></li>';
                 }
 
-                echo '<a href="/videotheque/viewsfilms/deconnexion.php" class="waves-effect waves-light red"><i class="material-icons left">exit_to_app</i>Se déconnecter</a>';
+                echo '<li><a href="/videotheque/viewsfilms/deconnexion.php" class="waves-effect waves-light red"><i class="material-icons left">exit_to_app</i>Se déconnecter</a></li>';
 
             } else {            // Si non connecté, afficher l'option pour se connecter
-                echo '<li>';
-                // Trigger modal de connexion
-                echo '<li><a href="/videotheque/viewsfilms/formAjoutMembre.php"><i class="material-icons left">person_add</i>Devenir membre</a></li>';
-                echo '<a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">';
-                echo '<i class="material-icons left">vpn_key</i>';
-                echo 'Connexion';
-                echo '</a></li>';
+                ?>
+                <!--Trigger du modal pour saisir courriel et mot de passe-->
+                <li><a href="/videotheque/viewsfilms/formAjoutMembre.php"><i class="material-icons left">person_add</i>
+                        Devenir membre</a></li>
+                <a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
+                    <i class="material-icons left">vpn_key</i>Connexion</a></li>
+                <?php
                 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formConnexion.html";
             }
             ?>
@@ -95,12 +95,3 @@ session_start();
     <li><a href="/videotheque/test.html">Javascript</a></li>
     <li><a href="/videotheque/test.html">Mobile</a></li>
 </ul>
-
-<form id="formLister" action="/videotheque/viewsfilms/lister.php" method="POST">
-</form>
-<form id="formAdmin" action="/videotheque/viewsfilms/admin.php" method="POST">
-</form>
-<form id="formEnregistrer" action="/videotheque/viewsfilms/formAjoutFilm.php" method="POST">
-</form>
-<form id="formUpdate" action="/videotheque/viewsfilms/formUpdate.php" method="POST">
-</form>
