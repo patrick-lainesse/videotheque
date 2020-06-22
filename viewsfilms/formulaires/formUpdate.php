@@ -1,3 +1,11 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Formulaire qui affiche les infos du film sélectionné par un admin et qui permet de mettre à jour
+les informations d'un film.
+-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 //$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
@@ -24,7 +32,7 @@ function afficherForm($ligne)
     ?><!--// TODO: arranger responsive -->
     <img src="../images/<?php echo($ligne->image); ?>" class="floatLeft">
     <div class="row margin50">
-        <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data" action="enregistrer.php"
+        <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data" action="../requetesSQL.php"
               method="POST">
             <?php
             if ($typeForm == 'update') { ?>

@@ -1,10 +1,20 @@
-<!--Le stmt->close() effectue également un free_result: : https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result-->
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Page d'accueil d'un administrateur, qui affiche la liste des films de la base de données et contient
+des boutons pour chacun, permet de modifier un film ou de l'effacer de la base de données. Si un non
+administrateur tente de se connecter à cette page, il sera redirigé vers l'index.
+
+Notes:
+La fonction Le stmt->close() effectue également un free_result:
+https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result
+-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
-
-// TODO: Empêcher l'accès à cette page lorsque non connecté
 ?>
 
 <div class="container">
@@ -26,12 +36,12 @@ require_once $chemin;
         <tbody>
         <tr>
             <?php
-            include 'html_functions/tableRow.php';
+            include 'elementsHTML/tableRow.php';
             include 'Film.php'; // TODO tester sans ce include
 
-            // s'asssurer que seuls les admin accèdent à la page
+            // S'asssurer que seuls les admin accèdent à la page
             if ($_SESSION['role'] != 'admin') {
-                Header('location:index.php');
+                Header('location:../index.php');
             }
 
             $requete = 'SELECT id, titre, realisateur, categorie, duree, prix, image, youtube from films';
@@ -56,13 +66,6 @@ require_once $chemin;
             ?>
         </tbody>
     </table>
-    <!--<div class="right-align">
-        <p><strong>Sous-total:</strong> <?php /*echo $sousTotal; */?>$
-            <br><strong>TVQ:</strong> <?/* echo $tvq = number_format($sousTotal * 0.09975, 2); */?>$
-            <br><strong>TPS:</strong> <?/* echo $tps = number_format($sousTotal * 0.05, 2); */?>$
-            <br><strong>Total:</strong> <?/* echo number_format($sousTotal + $tvq + $tps, 2); */?>$
-        </p>
-    </div>-->
 </div>
 
 <?php

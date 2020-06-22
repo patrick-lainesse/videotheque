@@ -1,11 +1,20 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Formulaire qui s'affiche quand un admin clique sur +Film, pour ajouter un film à la base de données.
+-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
+
+// TODO: message d'erreur lorsque ajout d'un film sans image ou avec des cases vides
 ?>
 <h5 class="white-text center margin50">Ajouter un film à la base de données</h5>
 <div class="row margin50">
-    <form class="col s6 offset-s3" id="formEnreg" enctype="multipart/form-data" action="enregistrer.php" method="POST">
+    <form class="col s6 offset-s3" id="formEnreg" enctype="multipart/form-data" action="../requetesSQL.php" method="POST">
         <!--onsubmit="return valider();"???-->
         <input type="hidden" id="typeForm" name="typeForm" value="enregistrer">
         <div class="row">
@@ -59,7 +68,7 @@ require_once $chemin;
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-            <!--expliquer hash???-->
+            <!--TODO: expliquer hash ou implémenter le youtube api-->
             <div class="input-field col s6">
                 <input id="hashYT" name="hashYT" type="text" class="validate">
                 <label for="hashYT">Hash YouTube</label>

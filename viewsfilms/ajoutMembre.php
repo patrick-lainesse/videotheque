@@ -1,3 +1,11 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Fonction qui reçoit les données du formulaire formAjoutMembre et qui ajoute un membre à la base de données.
+Si l'ajout est réussi, le membre est alors connecté automatiquement.
+-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
@@ -23,4 +31,4 @@ $stmt->execute();
 mysqli_close($connexion);
 ?>
 <br><br>
-<a href="lister.php">Retour à la page d'accueil</a><!--à changer???-->
+<a href="lister.php">Retour à la page d'accueil</a><!--TODO: vérif si connexion réussie = redirection, sinon msg erreur, voir connexion .php-->

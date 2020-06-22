@@ -1,8 +1,15 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Code qui reçoit les données des formulaires pour modifier, supprimer ou ajouter un film à la base
+de données, et effectue les requêtes à la base de données.
+-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
 require_once $chemin;
-// TODO: renommer requêtesSQL
 
 // Peut être soit update ou enregistrer
 $typeForm = $_POST['typeForm']; // TODO: changer pour que ce soit la valeur du bouton, 'action'
@@ -63,8 +70,6 @@ if ($_FILES['pochette']['tmp_name'] !== "") {
     @unlink($tmp);  // Enlever le fichier temporaire chargé
     $pochette = $nomPochette . $extension;
 }
-//id	titre	realisateur	categorie	duree	prix	popularite	image	youtube
-// tester valeurs par défaut, popularité diff et messages d'erreur pour le chmod != 777     ???
 
 if ($typeForm == 'enregistrer') {
     // TODO: s'assurer que le film ne s'ajoute pas si le formulaire n'est pas dûment rempli
@@ -79,16 +84,14 @@ if ($typeForm == 'enregistrer') {
     $requete = 'DELETE from films where id=?';
     $stmt = $connexion->prepare($requete);
     $stmt->bind_param("i", $idFilm);
-    // Notice: Undefined variable: nomPochette in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 85
+    // TODO: Notice: Undefined variable: nomPochette in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 85
 }
 
-//$stmt = $connexion->prepare($requete);
-//$stmt->bind_param("sssidiss", $titre, $realisateur, $categorie, $duree, $prix, $popularite, $pochette, $hashYT);
 $stmt->execute();
 echo "<p>Film " . $connexion->insert_id . " bien enregistré. " . $nomPochette . "</p>"; // ??? enlever nomPochette
-// quand laissé field image vide???: Notice: Undefined variable: nomPochette in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 81
+// TODO: quand laissé field image vide: Notice: Undefined variable: nomPochette in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 81
 mysqli_close($connexion);
 ?>
 <br><br>
-<a href="lister.php">Retour à la page d'accueil</a><!--à changer???-->
+<a href="lister.php">Retour à la page d'accueil</a><!--TODO: à changer-->
 

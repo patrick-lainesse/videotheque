@@ -1,3 +1,12 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Code qui reçoit les données du formulaire formConnexion et qui vérifie si le mot de passe correspond
+à l'adresse courriel. Si oui, l'usager est redirigé soit vers son panier, soit vers la page d'admin.
+Sinon, il est retourné à la page d'accueil.
+-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
@@ -35,6 +44,7 @@ function seConnecter()
     } catch (Exception $e) {
         echo 'Erreur de connexion au serveur, veuillez réessayer plus tard.';
         Header("location:../index.php");
+        // TODO: plutôt afficher le message d'erreur au sommet de la page d'accueil
     }
 }
 

@@ -63,7 +63,7 @@ try {
     echo 'Problème de lecture dans la base de données.';
 } finally {
     mysqli_close($connexion);
-    include 'modalYouTube.php';
+    include 'elementsHTML/modalYouTube.php';
 }
 
 include 'footer.html';

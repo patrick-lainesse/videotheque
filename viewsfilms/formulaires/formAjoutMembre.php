@@ -1,3 +1,10 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Formulaire pour saisir les informations des nouveaux membres.
+-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
@@ -18,7 +25,7 @@ require_once $chemin;
             </div>
             <div class="input-field col s4">
                 <input type="text" class="datepicker" id="ddn" name="ddn">
-                <!--à faire: changer couleurs et langue dans preview???-->
+                <!--TODO: à faire: changer couleurs et langue dans preview-->
                 <label for="ddn">Date de naissance</label>
             </div>
         </div>

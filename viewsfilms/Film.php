@@ -1,3 +1,10 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Classe qui permet d'envoyer d'instancier et de sérialiser des objets films et ses attributs par des formulaires.
+-->
 <?php
 
 // Todo: utiliser le mot-clé use pour utiliser cette classe
@@ -13,6 +20,9 @@ class Film
     private $youtube;
 
 
+    // TODO: Un constructeur de realisateur qui prend le nom et le prénom comme paramètres
+    // TODO: pas une bonne pratique d'avoir du output dans une classe de structures de données
+    // TODO: implémenter serializable
     public function boutonDelete()
     {
         //echo '<a class="waves-effect waves-light marginTop10 darken-4 red btn-small"><i class="material-icons left">delete</i>Supprimer</a>';

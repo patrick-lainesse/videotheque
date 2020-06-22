@@ -1,10 +1,18 @@
-<!--Le stmt->close() effectue également un free_result: : https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result-->
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Fonction qui effectue la requête SQL et affiche la liste du panier d'achat d'un membre
+Note: Le stmt->close() effectue également un free_result
+https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result
+-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 
-// TODO: Empêcher l'accès à cette page lorsque non connecté
+// TODO: Empêcher l'accès à cette page lorsque non connecté, voir admin.php
 ?>
 
     <div class="container">
@@ -27,7 +35,7 @@ require_once $chemin;
             <tbody>
             <tr>
                 <?php
-                include 'html_functions/panierTableRow.php';
+                include 'elementsHTML/panierTableRow.php';
 
                 // requête à la base de données pour obtenir le panier de l'usager connecté
                 $idMembre = $_SESSION['idMembre'];
@@ -44,6 +52,7 @@ require_once $chemin;
                     // place les résultats sur une rangée de tableau
                     while ($ligne = mysqli_fetch_object($reponse)) {
                         $sousTotal += ($ligne->prix);
+                        // TODO: ça devrait pas être panierTableRow????
                         tableRow(($ligne->image), ($ligne->titre), ($ligne->quantite), ($ligne->prix));
                     }
                 } catch (Exception $e) {

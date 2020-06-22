@@ -1,5 +1,14 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+En tête de chaque page. Contient un manu de navigation qui change selon qu'un usager est connecté ou
+non, ainsi que le rôle de ce membre.
+MaterializeCSS utilisé comme framework.
+-->
 <?php
-ob_start();     // fouiller davantage ???
+ob_start();     // TODO: fouiller davantage et commenter
 session_start();
 ?>
 <!DOCTYPE html>
@@ -63,7 +72,7 @@ session_start();
                 // options exclusives aux admin
                 if ($_SESSION['role'] == 'admin') {
                     ?>
-                    <li><a href="/videotheque/viewsfilms/formAjoutFilm.php" class="waves-effect waves-light red-text">+
+                    <li><a href="/videotheque/viewsfilms/formulaires/formAjoutFilm.php" class="waves-effect waves-light red-text">+
                             Film</a></li>
                     <li><a href="/videotheque/viewsfilms/admin.php" class="waves-effect waves-light red-text">Options
                             d'administation</a></li>
@@ -77,18 +86,19 @@ session_start();
             } else {            // Si non connecté, afficher l'option pour se connecter
                 ?>
                 <!--Trigger du modal pour saisir courriel et mot de passe-->
-                <li><a href="/videotheque/viewsfilms/formAjoutMembre.php"><i class="material-icons left">person_add</i>
+                <li><a href="/videotheque/viewsfilms/formulaires/formAjoutMembre.php"><i class="material-icons left">person_add</i>
                         Devenir membre</a></li>
                 <a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
                     <i class="material-icons left">vpn_key</i>Connexion</a></li>
                 <?php
-                include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formConnexion.html";
+                include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formConnexion.html";
             }
             ?>
         </ul>
     </div>
 </nav>
 
+<!--TODO: recopier le code php pour générer ce menu-->
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/videotheque/test.html">Sass</a></li>
     <li><a href="/videotheque/test.html">Components</a></li>
