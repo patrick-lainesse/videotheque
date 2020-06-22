@@ -3,10 +3,12 @@ function test() {
     console.log("test");
 }
 
+// Todo: nettoyer les fonctions qui ne font que soumettre des formulaires invisibles
 function admin() {
     document.getElementById('formAdmin').submit();
 }
 
+// Fonction appelée lorsqu'on clique sur le bouton "ajouter au panier" de la page qui liste les films
 function ajoutFilm(formID) {
     document.getElementById(formID).submit();
 }

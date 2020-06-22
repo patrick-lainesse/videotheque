@@ -1,6 +1,6 @@
 <?php
 
-
+// Todo: utiliser le mot-clé use pour utiliser cette classe
 class Film
 {
     private $id;
