@@ -27,6 +27,7 @@ $hashYT = $_POST['hashYT'];
 // TODO: tester avec path absolu
 $dossier = "../images/";        // S'assurer que le dossier qui recevra les images a 777 comme permissions
 
+//TODO: implémenter des try-catch
 if ($typeForm == "enregistrer") {
     $pochette = "avatar.jpg";
 } elseif ($typeForm == "update" || $typeForm == 'effacer') {

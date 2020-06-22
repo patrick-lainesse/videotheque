@@ -32,8 +32,8 @@ function afficherForm($ligne)
     ?><!--// TODO: arranger responsive -->
     <img src="../images/<?php echo($ligne->image); ?>" class="floatLeft">
     <div class="row margin50">
-        <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data" action="../requetesSQL.php"
-              method="POST">
+        <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data"
+              action="../requetesSQL.php" method="POST">
             <?php
             if ($typeForm == 'update') { ?>
                 <input type="hidden" id="typeForm" name="typeForm" value="update">

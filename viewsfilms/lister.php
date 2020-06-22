@@ -21,10 +21,9 @@ try {
                 <div class="card-image">
                     <?php
                     // Affiche du film
-                    echo '<img src="../images/' . ($ligne->image) . '" data-target="modal1"
-                     idFilm="' . ($ligne->id) . '" titre="' . ($ligne->titre) . '>"
-                     hashYT="' . ($ligne->youtube) . '" class="modal-trigger"
-                                  onclick="chargerModal.call(this)">';
+                    echo '<img src="../images/' . ($ligne->image)
+                        . '" data-target="modal1" idFilm="' . ($ligne->id) . '" titre="' . ($ligne->titre)
+                        . ' "hashYT="' . ($ligne->youtube) . '" class="modal-trigger" onclick="chargerModal.call(this)">';
                     ?>
                 </div>
                 <div class="card-content">
@@ -63,7 +62,7 @@ try {
     echo 'Problème de lecture dans la base de données.';
 } finally {
     mysqli_close($connexion);
-    include 'elementsHTML/modalYouTube.php';
+    include 'elementsHTML/modalYouTube.html';
 }
 
 include 'footer.html';
