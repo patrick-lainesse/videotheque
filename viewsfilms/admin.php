@@ -16,12 +16,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 ?>
-
-<!--TODO: Enlever +film du header et ajouter cette option dans la page Options d'administration à la place-->
-
 <div class="container">
     <div class="row">
         <h3 class="center-align">Options d'administration</h3>
+    </div>
+    <div class="row">
+        <a href="/videotheque/viewsfilms/formulaires/formAjoutFilm.php"
+           class="btn-small right waves-effect waves-light darken-4 green">
+            Ajouter un film<i class="material-icons left">movie_filter</i>
+        </a>
     </div>
     <table class="centered">
         <thead>
@@ -51,7 +54,6 @@ require_once $chemin;
 
             try {
                 $stmt = $connexion->prepare($requete);
-                //$stmt->bind_param("i", $idMembre);
                 $stmt->execute();
                 $reponse = $stmt->get_result();
 

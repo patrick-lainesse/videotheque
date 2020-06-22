@@ -71,12 +71,7 @@ session_start();
 
                 // options exclusives aux admin
                 if ($_SESSION['role'] == 'admin') {
-                    ?>
-                    <li><a href="/videotheque/viewsfilms/formulaires/formAjoutFilm.php" class="waves-effect waves-light red-text">+
-                            Film</a></li>
-                    <li><a href="/videotheque/viewsfilms/admin.php" class="waves-effect waves-light red-text">Options
-                            d'administation</a></li>
-                    <?php
+                    echo '<li><a href="/videotheque/viewsfilms/admin.php" class="waves-effect waves-light red-text">Options d\'administation</a></li>';
                 } else {
                     echo '<li><a href="/videotheque/viewsfilms/panier.php" class="waves-effect waves-light" type="submit">Panier</a></li>';
                 }
