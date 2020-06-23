@@ -43,7 +43,7 @@ CREATE TABLE `films` (
 --
 
 INSERT INTO `films` (`id`, `titre`, `realisateur`, `categorie`, `duree`, `prix`, `image`) VALUES
-(1, 'Adaptation', 'Charlie Kaufman', 'Drame', 115, '10.99', 'adaptation.jpg'),/*TODO: enlever le commentaire 0*/
+(1, 'Adaptation', 'Charlie Kaufman', 'Drame', 115, '10.99', 'adaptation.jpg'),
 (2, 'Arrival', 'Denis Villeneuve', 'Science-fiction', 116, '17.99', 'arrival.jpg'),
 (3, 'Léolo', 'Jean-Claude Lauzon', 'Drame', 107, '15.99', 'leolo.jpg'),
 (4, 'Stalker', 'Andrei Tarkovsky', 'Science-fiction', 162, '21.99', 'stalker.jpg'),

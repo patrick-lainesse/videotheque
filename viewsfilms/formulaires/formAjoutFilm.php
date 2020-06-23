@@ -9,8 +9,6 @@ Formulaire qui s'affiche quand un admin clique sur +Film, pour ajouter un film �
 include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
-
-// TODO: message d'erreur lorsque ajout d'un film sans image ou avec des cases vides
 ?>
 <h5 class="white-text center margin50">Ajouter un film à la base de données</h5>
 <div class="row margin50">

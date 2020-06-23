@@ -18,12 +18,12 @@ function tableRow($film)
         <td><?php echo $film->getDuree(); ?> min</td>
         <td><?php echo $film->getPrix(); ?>$</td>
         <td>
-            <form id="formUpdate" action="formulaires/formUpdate.php" method="POST">    <!--TODO: form not allowed here-->
+            <form id="formUpdate" action="../formulaires/formUpdate.php" method="POST">
                 <input type="hidden" id="typeForm" name="typeForm" value="update">
                 <input type="hidden" name="idFilm" value="<?php echo $film->getId(); ?>">
                 <?php echo $film->boutonModifier(); ?><br>
             </form>
-            <form id="formEffacer" action="formulaires/formUpdate.php" method="POST">    <!--TODO: form not allowed here-->
+            <form id="formEffacer" action="../formulaires/formUpdate.php" method="POST">
                 <input type="hidden" id="typeForm" name="typeForm" value="effacer">
                 <input type="hidden" name="idFilm" value="<?php echo $film->getId(); ?>">
                 <?php echo $film->boutonDelete(); ?>

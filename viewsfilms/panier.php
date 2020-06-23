@@ -64,7 +64,6 @@ if ($_SESSION['role'] != 'membre') {
                     echo '<td>' . ($ligne->titre) . '</td>';
                     echo '<td>' . ($ligne->quantite) . '</td>';
                     echo '<td>' . ($ligne->prix) . '$</td>';
-                    // TODO: option pour enlever juste une partie des films de la liste
                     echo '<td><button type="submit" class="waves-effect waves-light darken-4 red btn-small"><i class="material-icons left">delete</i>Supprimer</button></td>';
                     echo '</tr>';
                     echo '</form>';
