@@ -7,7 +7,6 @@ Classe qui permet d'envoyer d'instancier et de sérialiser des objets films et s
 -->
 <?php
 
-// Todo: utiliser le mot-clé use pour utiliser cette classe
 class Film
 {
     private $id;

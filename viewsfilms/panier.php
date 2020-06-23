@@ -13,7 +13,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 
-// TODO: Empêcher l'accès à cette page lorsque non connecté, voir admin.php
+// Vérification de connexion en temps que membre pour empêcher l'accès aux autres utilisateurs
+if ($_SESSION['role'] != 'membre') {
+    $message = urlencode("Vous devez être connecté en tant que membre pour accéder à cette page.");
+    header('location:../index.php?Message=' . $message);
+}
+
 ?>
 
 <div class="container">
@@ -38,7 +43,8 @@ require_once $chemin;
             <?php
             // requête à la base de données pour obtenir le panier de l'usager connecté
             $idMembre = $_SESSION['idMembre'];
-            $requete = 'SELECT films.id, films.image, films.titre, panier.quantite, films.prix FROM panier INNER JOIN films ON panier.idFilm = films.id WHERE panier.idMembre=?';
+            $requete = 'SELECT films.id, films.image, films.titre, panier.quantite, films.prix '
+                . 'FROM panier INNER JOIN films ON panier.idFilm = films.id WHERE panier.idMembre=?';
 
             try {
                 $stmt = $connexion->prepare($requete);

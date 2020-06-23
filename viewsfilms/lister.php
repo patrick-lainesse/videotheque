@@ -12,8 +12,6 @@ try {
     echo '<div class="carousel film">';
 
     while ($ligne = mysqli_fetch_object($listeFilms)) {
-        // Todo: extraire le code du carousel dans un fichier html, et plutôt faire un include et remplir en utilisant les ID
-        // Todo: pour le readme: printscreen du carousel en indiquant quel id va où
         ?>
 
         <div class="carousel-item film">
@@ -41,7 +39,7 @@ try {
                                     <!--Le id est concatené deux fois pour le différencier du formID-->
                                     <input id="<?php echo ($ligne->id) . ($ligne->id); ?>" name="quantite"
                                            type="number" min="0" max="500" class="validate center-align">
-                                    <!-- Todo: valider le max 500 par jscript et empêcher la requête si c'est le cas-->
+                                    <!-- TODO: valider le max 500 par jscript et empêcher la requête si c'est le cas-->
                                     <label for="<?php echo ($ligne->id) . ($ligne->id); ?>">Qté</label>
                                 </div>
                             </div>

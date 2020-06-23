@@ -29,6 +29,7 @@ $stmt = $connexion->prepare($requete);
 $stmt->bind_param("si", $mdpMembre, $idMembre);
 $stmt->execute();
 mysqli_close($connexion);
+
+$message = urlencode("Votre compte a été créé avec succès. Veuillez vous connecter.");
+header('location:../index.php?Message=' . $message);
 ?>
-<br><br>
-<a href="lister.php">Retour à la page d'accueil</a><!--TODO: vérif si connexion réussie = redirection, sinon msg erreur, voir connexion .php-->

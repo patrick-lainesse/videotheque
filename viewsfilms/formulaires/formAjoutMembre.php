@@ -5,6 +5,7 @@ Date: 22/06/2020
 
 Formulaire pour saisir les informations des nouveaux membres.
 -->
+<!--TODO: boutons apparaissent mal-->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
 $chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";

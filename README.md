@@ -13,6 +13,13 @@ Site web multipages d'achat de films implémentant le CRUD.
 - PHP: Utilise $_SERVER['DOCUMENT_ROOT'] lors des inclusions de fichiers pour faciliter l'inclusion des header dans les fichiers situés à différents endroits dans la structre du site.
 - css et js: Utilise un path absolu à partir du root du serveur pour la même raison.
 
+### Header
+- Contient un menu navbar qui devient un drawer en mode mobile
+- Contient un modal qui apparaît au bas de l'écran pour se connecter
+- L'option gestion apparaît lorsque connecté comme admin
+- L'option panier apparaît lorsque connecté comme admin
+- Les liens du header sont présentés à partir du root du projet pour qu'ils fonctionnent peu importe où est située la page. 
+
 ### lister.php
 - Les fiches des films s'affichent dans un carousel (Materializecss).
 - Lors d'un clic sur un film, un modal (modal.html) s'affiche, contenant un preview de YouTube en iframe et les informations sur ce film.

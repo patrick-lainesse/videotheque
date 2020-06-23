@@ -8,7 +8,7 @@ non, ainsi que le rôle de ce membre.
 MaterializeCSS utilisé comme framework.
 -->
 <?php
-ob_start();     // TODO: fouiller davantage et commenter
+ob_start();
 session_start();
 ?>
 <!DOCTYPE html>
@@ -17,23 +17,17 @@ session_start();
     <meta charset="UTF-8">
     <title>Vidéothèque</title>
 
-    <!--Import Google Icon Font-->
+    <!--Importe Icônes Google-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
+    <!--Importe materialize.css-->
     <link type="text/css" rel="stylesheet" href="/videotheque/css/materialize.min.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="/videotheque/css/styles.css"/>
     <link rel="icon"
           type="images/svg"
           href="/videotheque/images/videocam-24px.svg">
-
-    <!--Let browser know website is optimized for mobile-->
+    <!--Indication d'optimisation pour mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <script type="text/javascript" src="/videotheque/js/jquery-3.5.1.min.js"></script>
-    <!--TODO: remettre le min.js lorsque le développement sera terminé, et remettre les scripts à la fin du body-->
-    <!--<script type="text/javascript" src="js/materialize.min.js"></script>-->
-    <script type="text/javascript" src="/videotheque/js/materialize.js"></script>
-    <script type="text/javascript" src="/videotheque/js/scripts.js"></script>
 </head>
 <body>
 
@@ -85,14 +79,17 @@ session_start();
                 <li><a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
                         <i class="material-icons left">vpn_key</i>Connexion</a></li>
                 <?php
-                include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formConnexion.html";
+                /*include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formConnexion.html";*/
             }
             ?>
         </ul>
     </div>
 </nav>
 
-<!--TODO: recopier le code php pour générer ce menu + rendre navbar adaptive-->
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formConnexion.html";
+?>
+
 <!--Menu qui remplace la navbar en mode mobile-->
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/videotheque/index.php" class="waves-effect waves-light" type="submit">ACCUEIL</a></li>
