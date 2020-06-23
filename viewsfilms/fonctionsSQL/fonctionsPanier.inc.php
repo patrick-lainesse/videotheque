@@ -21,9 +21,8 @@ if (!isset($_SESSION['usager']) || $_SESSION['role'] != 'membre') {
     header('location:../index.php?Message=' . $message);
 }
 
-// Récupérer la fonction qui est désirée
+// Rediriger vers la fonction est désirée
 $fonction = $_POST['fonction'];
-
 switch ($fonction) {
 
     case 'supprimerFilmPanier':
@@ -113,6 +112,7 @@ function supprimerFilmPanier($idMembre, $idFilm)
         header('location:../index.php?Message=' . $message);
     } finally {
         mysqli_close($connexion);
+        $stmt->close();
         header('location: ../panier.php');
     }
 }

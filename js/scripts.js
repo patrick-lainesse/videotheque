@@ -48,39 +48,41 @@ const chargerModal = function () {
  *               (source: exemples sur Studium)
  *************************************************************************************/
 
-function validerNum(elem){
-    var num=document.getElementById(elem).value;
-    var numRegExp=new RegExp("^[0-9]{1,4}$");
-    if(num!="" && numRegExp.test(num))
+function validerNum(elem) {
+    var num = document.getElementById(elem).value;
+    var numRegExp = new RegExp("^[0-9]{1,4}$");
+    if (num != "" && numRegExp.test(num))
         return true;
     return false;
 }
 
-function valider(){
-    var num=document.getElementById('num').value;
-    var titre=document.getElementById('titre').value;
-    var duree=document.getElementById('duree').value;
-    var res=document.getElementById('res').value;
-    var numRegExp=new RegExp("^[0-9]{1,4}$");
-    if(num!="" && titre!="" && duree!="" && res!="")
-        if(numRegExp.test(num))
-            return true;
-    return false;
+
+/**
+ * Vérifie que toutes les entrées des formulaires sont bien remplies
+ * Pas nécessaire de valider le ID ou la catégorie car ils sont inaccesibles à l'utilisateur.
+ * Le prénom n'est pas validé non plus pour les cas de noms d'artistes particuliers.
+ * Image non validée car on pourrait ajouter un film sans image (avatar.jpg serait alors utilisé).
+ *
+ * @param $idMembre
+ * @param $idFilm
+ * @param $quantite
+ * @requires $idMembre, $idFilm et $quantite sont des Number
+ * @returns redirige vers la liste de films
+ */
+function valider() {
+
+    let titre = document.getElementById('titre').value;
+    let nom = document.getElementById('nom').value;
+    let duree = document.getElementById('duree').value;
+    let prix = document.getElementById('prix').value;
+
+    if (titre !== "" && nom !== "" && duree !== "" && prix !== "") {
+        return true;
+    } else {
+        alert("Veuillez remplir convenablement tous les champs");
+        return false;
+    }
 }
-//Cas d'un button
-/*
-function valider(){
-	var formEnreg=document.getElementById('formEnreg');
-	var num=document.getElementById('num').value;
-	var titre=document.getElementById('titre').value;
-	var duree=document.getElementById('duree').value;
-	var res=document.getElementById('res').value;
-	var numRegExp=new RegExp("^[0-9]{1,4}$");
-	if(num!="" && titre!="" && duree!="" && res!="")
-		if(numRegExp.test(num))
-			formEnreg.submit();
-}
-*/
 
 
 /*************************************************************************************

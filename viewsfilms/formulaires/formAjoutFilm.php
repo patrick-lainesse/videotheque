@@ -14,8 +14,7 @@ require_once $chemin;
 ?>
 <h5 class="white-text center margin50">Ajouter un film à la base de données</h5>
 <div class="row margin50">
-    <form class="col s6 offset-s3" id="formEnreg" enctype="multipart/form-data" action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST">
-        <!--onsubmit="return valider();"???-->
+    <form class="col s6 offset-s3" id="formEnreg" enctype="multipart/form-data" action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
         <input type="hidden" id="typeForm" name="typeForm" value="enregistrer">
         <div class="row">
             <div class="input-field col s12">
@@ -56,9 +55,8 @@ require_once $chemin;
                 <label for="prix">Prix</label>
             </div>
         </div>
-        <!--mettre un preview de l'image???-->
+        <!--TODO: mettre un preview de l'image-->
         <div class="row">
-            <!--<form action="#" class="col s6">???-->
             <div class="file-field input-field col s6">
                 <div class="btn waves-effect red darken-4">
                     <span>Image</span>
@@ -73,7 +71,6 @@ require_once $chemin;
                 <input id="hashYT" name="hashYT" type="text" class="validate">
                 <label for="hashYT">Hash YouTube</label>
             </div>
-            <!--</form>-->
         </div>
         <div class="row">
             <button class="btn waves-effect red darken-4" type="submit" name="action">Enregistrer
@@ -82,5 +79,3 @@ require_once $chemin;
         </div>
     </form>
 </div>
-
-<!--source avatar: https://www.publicdomainpictures.net/en/view-image.php?image=210079&picture=question-mark ???-->

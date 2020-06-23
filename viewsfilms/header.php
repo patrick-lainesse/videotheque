@@ -6,6 +6,10 @@ Date: 22/06/2020
 En tête de chaque page. Contient un manu de navigation qui change selon qu'un usager est connecté ou
 non, ainsi que le rôle de ce membre.
 MaterializeCSS utilisé comme framework.
+Sources:
+- avatar.jpg: https://www.publicdomainpictures.net/en/view-image.php?image=210079&picture=question-mark
+- Affiches de film: IMDB
+- Previews de films: YouTube
 -->
 <?php
 ob_start();
@@ -27,6 +31,11 @@ session_start();
           href="/videotheque/images/videocam-24px.svg">
     <!--Indication d'optimisation pour mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--TODO: Voir si moyen de faire afficher les formulaires correctement avec scripts seulement dans footer-->
+    <script type="text/javascript" src="/videotheque/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/videotheque/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/videotheque/js/scripts.js"></script>
 
 </head>
 <body>

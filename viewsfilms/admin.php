@@ -53,16 +53,15 @@ require_once $chemin;
                 $stmt->execute();
                 $reponse = $stmt->get_result();
 
-                // place les résultats dans un objet de la classe Film, puis sur une rangée de tableau
+                // Place les résultats dans un objet de la classe Film, puis sur une rangée de tableau
                 while ($ligne = mysqli_fetch_object($reponse, Film::class)) {
-                    //tableRow(($ligne->image), ($ligne->titre), ($ligne->quantite), ($ligne->prix));
                     tableRow($ligne);
                 }
-                mysqli_free_result($reponse);
             } catch (Exception $e) {
-                echo 'Problème de lecture dans la base de données.';
+                $message = urlencode("Erreur lors du chargement de la liste de films.");
+                header('location:../index.php?Message=' . $message);
             } finally {
-                $stmt->close();     // effectue aussi un free_result()
+                $stmt->close();
                 mysqli_close($connexion);
             }
             ?>

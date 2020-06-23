@@ -1,11 +1,16 @@
 # videotheque
 Site web multipages d'achat de films implémentant le CRUD.
 
-## Technologies utilisées:
+## Technologies utilisées
 - PHP
 - mysqli
 - Materializecss
 - jQuery
+
+## Copyright
+- avatar.jpg: https://www.publicdomainpictures.net/en/view-image.php?image=210079&picture=question-mark
+- Affiches de film: IMDB
+- Previews de films: YouTube
 
 ## À propos des différents fichiers
 
