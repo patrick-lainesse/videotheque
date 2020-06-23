@@ -43,8 +43,8 @@ if ($typeForm == "enregistrer") {
 if ($_FILES['pochette']['tmp_name'] !== "") {
 
 
+    // Gestion du fichier image
     if ($typeForm == "update" || $typeForm == "effacer") {
-        // Enlever l'ancienne image si elle a été changée
         if ($pochette != "avatar.jpg" && $pochette != $_POST['image']) {    //TODO: quand il y avait pas d'image avant Notice: Undefined index: image in /opt/lampp/htdocs/videotheque/viewsfilms/enregistrer.php on line 39
             $rmPoc = '../images/' . $pochette;
             $tabFichiers = glob('../images/*');
