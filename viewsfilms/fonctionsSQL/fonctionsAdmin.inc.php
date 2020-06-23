@@ -94,5 +94,5 @@ echo "<p>Film " . $connexion->insert_id . " bien enregistré. " . $nomPochette .
 mysqli_close($connexion);
 ?>
 <br><br>
-<a href="lister.php">Retour à la page d'accueil</a><!--TODO: à changer-->
+<a href="../lister.php">Retour à la page d'accueil</a><!--TODO: à changer-->
 

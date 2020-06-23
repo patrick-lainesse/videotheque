@@ -29,10 +29,10 @@ Site web multipages d'achat de films implémentant le CRUD.
 ### formAjoutFilm.php et formUpdate.php
 - Le nom du réalisateur est stocké en un seul String dans la base de données, mais séparé en deux à l'aide des fonctions strpos et substr en PHP.
 
-### requetesSQL.php
+### fonctionsAdmin.inc.php
 - Le même fichier est utilisé pour gérer update et ajout de films.
 - Contient des clauses if pour vérifier d'où provient la requête.
 
-### fonctionsPanier.php
+### fonctionsPanier.inc.php
 - Gère toutes les fonctions / requêtes relative au panier d'achats d'un membre
 - Vérifie si un film est déjà présent avant de l'ajouter, et si oui, ajuste la quantité

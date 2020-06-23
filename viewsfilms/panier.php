@@ -57,7 +57,7 @@ if ($_SESSION['role'] != 'membre') {
                 // place les résultats sur une rangée de tableau
                 while ($ligne = mysqli_fetch_object($reponse)) {
                     $sousTotal += ($ligne->prix) * ($ligne->quantite);
-                    echo '<form action="fonctionsSQL/fonctionsPanier.php" method="POST">';
+                    echo '<form action="fonctionsSQL/fonctionsPanier.inc.php" method="POST">';
                     echo '<input type="hidden" name="fonction" value="supprimerFilmPanier">';
                     echo '<input type="hidden" name="idMembre" value="' . ($idMembre) . '">';
                     echo '<input type="hidden" name="idFilm" value="' . ($ligne->id) . '">';

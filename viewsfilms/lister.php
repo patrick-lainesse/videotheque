@@ -34,7 +34,7 @@ try {
                         $idMembre = $_SESSION['idMembre'];
                         ?>
                         <!--ID unique au formulaire pour gérer le onClick du bouton Ajouter-->
-                        <form id="<?php echo($ligne->id); ?>" action="fonctionsSQL/fonctionsPanier.php" method="POST">
+                        <form id="<?php echo($ligne->id); ?>" action="fonctionsSQL/fonctionsPanier.inc.php" method="POST">
                             <input type="hidden" name="fonction" value="ajoutFilmPanier">
                             <input type="hidden" name="idMembre" value="<?php echo $idMembre; ?>">
                             <input type="hidden" name="idFilm" value="<?php echo($ligne->id); ?>">

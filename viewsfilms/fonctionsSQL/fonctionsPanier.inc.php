@@ -10,7 +10,6 @@ La fonction Le stmt->close() effectue également un free_result:
 https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 
@@ -22,7 +21,7 @@ if (!isset($_SESSION['usager']) || $_SESSION['role'] != 'membre') {
     header('location:../index.php?Message=' . $message);
 }
 
-// récupérer la fonction qui est désirée
+// Récupérer la fonction qui est désirée
 $fonction = $_POST['fonction'];
 
 switch ($fonction) {
@@ -33,6 +32,9 @@ switch ($fonction) {
     case 'ajoutFilmPanier':
         ajoutFilmPanier($_POST['idMembre'], $_POST['idFilm'], $_POST['quantite']);
         break;
+    default:
+        $message = urlencode("Problème côté serveur à effectuer la requête désirée.");
+        header('location:../index.php?Message=' . $message);
 }
 
 /**
@@ -46,7 +48,6 @@ switch ($fonction) {
  */
 function ajoutFilmPanier($idMembre, $idFilm, $quantite)
 {
-
     global $connexion;
 
     // Vérifier si ce filmID est déjà dans le panier
@@ -100,7 +101,6 @@ function ajoutFilmPanier($idMembre, $idFilm, $quantite)
  */
 function supprimerFilmPanier($idMembre, $idFilm)
 {
-
     global $connexion;
 
     $requete = 'DELETE from panier WHERE idMembre=? AND idFilm=?';
@@ -116,5 +116,3 @@ function supprimerFilmPanier($idMembre, $idFilm)
         header('location: ../panier.php');
     }
 }
-
-include '../footer.html';
