@@ -5,8 +5,6 @@ Date: 22/06/2020
 
 Page qui affiche le panier d'un usager en effectuant la requête SQL. Affiche un tableau avec
 seulement l'en-tête et une facture vide si le panier de l'usager est vide.
-Note: Le stmt->close() effectue également un free_result
-https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result
 -->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
@@ -71,6 +69,7 @@ if ($_SESSION['role'] != 'membre') {
                     echo '</tr>';
                     echo '</form>';
                 }
+                mysqli_free_result($reponse);
             } catch (Exception $e) {
                 echo 'Problème de lecture dans la base de données.';
             } finally {

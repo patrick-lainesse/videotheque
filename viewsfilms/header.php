@@ -31,14 +31,14 @@ session_start();
 </head>
 <body>
 
-<!-- Options du menu de choix par catégorie -->
+<!-- Options du menu de choix par catégorie. Le choix est transmis à lister.php par la méthode GET -->
 <ul id="dropdown1" class="dropdown-content black">
-    <li><a class="white-text" href="#">Action</a></li>
-    <li><a class="white-text" href="#">Animation</a></li>
-    <li><a class="white-text" href="#">Comédie</a></li>
-    <li><a class="white-text" href="#">Drame</a></li>
-    <li><a class="white-text" href="#">Horreur</a></li>
-    <li><a class="white-text" href="#">Romance</a></li>
+    <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Action">Action</a></li>
+    <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Animation">Animation</a></li>
+    <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Comédie">Comédie</a></li>
+    <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Drame">Drame</a></li>
+    <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Horreur">Horreur</a></li>
+    <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Romance">Romance</a></li>
 </ul>
 
 <nav>
@@ -95,7 +95,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formCon
     <li><a href="/videotheque/index.php" class="waves-effect waves-light" type="submit">ACCUEIL</a></li>
     <li><a href="/videotheque/viewsfilms/lister.php" class="waves-effect waves-light">Nos films</a></li>
     <!--<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>-->
-    <!--TODO: Dropdown fonctionne pas-->
+    <!--TODO: Dropdown fonctionne pas en mobile-->
     <?php
     if (isset($_SESSION['usager'])) {
 
@@ -120,7 +120,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formCon
                 Devenir membre</a></li>
         <li><a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
                 <i class="material-icons left">vpn_key</i>Connexion</a></li>
-        <!--TODO: créer une page connexion-->
+        <!--TODO: créer une page connexion pour mobile ou faire fonctionner modal-->
         <?php
     } ?>
 </ul>

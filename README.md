@@ -24,7 +24,8 @@ Site web multipages d'achat de films implémentant le CRUD.
 - Les fiches des films s'affichent dans un carousel (Materializecss).
 - Lors d'un clic sur un film, un modal (modal.html) s'affiche, contenant un preview de YouTube en iframe et les informations sur ce film.
 - Pour charger les bons vidéos de YouTube, le hash de l'URL du film sur YouTube doit être stocké dans la base de données. Par exemple: https://www.youtube.com/watch?v= **yrK1f4TsQfM**
-- Lorsque connectés, une option s'ajoute aux membres pour leur permettre d'ajouter une certaine quantité d'un film à son panier d'achats
+- Lorsque connectés, une option s'ajoute aux membres pour leur permettre d'ajouter une certaine quantité d'un film à son panier d'achats.
+- La sélection d'une catégorie dans le menu de navigation ne fait qu'afficher les films de cette catégorie.
 
 ### formAjoutFilm.php et formUpdate.php
 - Le nom du réalisateur est stocké en un seul String dans la base de données, mais séparé en deux à l'aide des fonctions strpos et substr en PHP.

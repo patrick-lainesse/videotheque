@@ -6,10 +6,6 @@ Date: 22/06/2020
 Page d'accueil d'un administrateur, qui affiche la liste des films de la base de données et contient
 des boutons pour chacun, permet de modifier un film ou de l'effacer de la base de données. Si un non
 administrateur tente de se connecter à cette page, il sera redirigé vers l'index.
-
-Notes:
-La fonction Le stmt->close() effectue également un free_result:
-https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result
 -->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
@@ -62,6 +58,7 @@ require_once $chemin;
                     //tableRow(($ligne->image), ($ligne->titre), ($ligne->quantite), ($ligne->prix));
                     tableRow($ligne);
                 }
+                mysqli_free_result($reponse);
             } catch (Exception $e) {
                 echo 'Problème de lecture dans la base de données.';
             } finally {

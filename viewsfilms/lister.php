@@ -3,12 +3,20 @@ include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 
-$requete = 'SELECT * FROM films';
-
-// Requête SQL pour faire afficher tous les films et leurs informations dans un carousel
 try {
-    $listeFilms = mysqli_query($connexion, $requete);
+    // Récupérer la catégorie si un choix a été fait
+    if (isset($_GET['categorie'])) {
+        $requete = 'SELECT * FROM films WHERE categorie=?';
+        $stmt = $connexion->prepare($requete);
+        $stmt->bind_param("s", $_GET['categorie']);
+    } else {
+        $requete = 'SELECT * FROM films';
+        $stmt = $connexion->prepare($requete);
+    }
+    $stmt->execute();
+    $listeFilms = $stmt->get_result();
 
+    // Faire afficher les films et leurs informations dans un carousel
     echo '<div class="carousel film">';
 
     while ($ligne = mysqli_fetch_object($listeFilms)) {
@@ -63,6 +71,7 @@ try {
 } catch (Exception $e) {
     echo 'Problème de lecture dans la base de données.';
 } finally {
+    $stmt->close();
     mysqli_close($connexion);
     include 'elementsHTML/modalYouTube.html';
 }
