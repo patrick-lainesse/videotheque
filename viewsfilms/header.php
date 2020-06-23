@@ -30,7 +30,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <script type="text/javascript" src="/videotheque/js/jquery-3.5.1.min.js"></script>
-    <!--remettre le min.js lorsque le développement sera terminé, et remettre les scripts à la fin du body ???-->
+    <!--TODO: remettre le min.js lorsque le développement sera terminé, et remettre les scripts à la fin du body-->
     <!--<script type="text/javascript" src="js/materialize.min.js"></script>-->
     <script type="text/javascript" src="/videotheque/js/materialize.js"></script>
     <script type="text/javascript" src="/videotheque/js/scripts.js"></script>
@@ -39,16 +39,16 @@ session_start();
 
 <!-- Options du menu de choix par catégorie -->
 <ul id="dropdown1" class="dropdown-content black">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Animation</a></li>
-    <li><a href="#">Comédie</a></li>
-    <li><a href="#">Drame</a></li>
-    <li><a href="#">Horreur</a></li>
-    <li><a href="#">Romance</a></li>
+    <li><a class="white-text" href="#">Action</a></li>
+    <li><a class="white-text" href="#">Animation</a></li>
+    <li><a class="white-text" href="#">Comédie</a></li>
+    <li><a class="white-text" href="#">Drame</a></li>
+    <li><a class="white-text" href="#">Horreur</a></li>
+    <li><a class="white-text" href="#">Romance</a></li>
 </ul>
 
 <nav>
-    <!--menu général pour visionner le catalogue de films-->
+    <!--Menu général pour visionner le catalogue de films-->
     <div class="nav-wrapper black">
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down black">
@@ -58,33 +58,32 @@ session_start();
             </li>
         </ul>
 
-        <!--le menu qui s'affiche dépend du rôle de celui qui est connecté-->
-        <ul class="right black">
+        <!--Menu qui s'affiche dépend du rôle de celui qui est connecté-->
+        <ul class="right hide-on-med-and-down black black">
             <?php
             // Si connecté, afficher l'adresse couriel
             if (isset($_SESSION['usager'])) {
 
-                // afficher le courriel de l'usager connecté
-                echo '<li><a class="waves-effect waves-light">';
-                echo $_SESSION['usager'];
-                echo '</a></li>';
+                // Afficher le courriel de l'usager connecté
+                echo '<li>' . $_SESSION['usager'] . '</li>';
 
-                // options exclusives aux admin
+                // Options du menu dépendant du rôle de l'usager
                 if ($_SESSION['role'] == 'admin') {
                     echo '<li><a href="/videotheque/viewsfilms/admin.php" class="waves-effect waves-light red-text">Options d\'administation</a></li>';
                 } else {
                     echo '<li><a href="/videotheque/viewsfilms/panier.php" class="waves-effect waves-light" type="submit">Panier</a></li>';
                 }
 
-                echo '<li><a href="/videotheque/viewsfilms/deconnexion.php" class="waves-effect waves-light red"><i class="material-icons left">exit_to_app</i>Se déconnecter</a></li>';
+                echo '<li><a href="/videotheque/viewsfilms/deconnexion.php" class="waves-effect waves-light red">'
+                    . '<i class="material-icons left">exit_to_app</i>Se déconnecter</a></li>';
 
             } else {            // Si non connecté, afficher l'option pour se connecter
                 ?>
                 <!--Trigger du modal pour saisir courriel et mot de passe-->
                 <li><a href="/videotheque/viewsfilms/formulaires/formAjoutMembre.php"><i class="material-icons left">person_add</i>
                         Devenir membre</a></li>
-                <a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
-                    <i class="material-icons left">vpn_key</i>Connexion</a></li>
+                <li><a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
+                        <i class="material-icons left">vpn_key</i>Connexion</a></li>
                 <?php
                 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formConnexion.html";
             }
@@ -93,10 +92,38 @@ session_start();
     </div>
 </nav>
 
-<!--TODO: recopier le code php pour générer ce menu-->
+<!--TODO: recopier le code php pour générer ce menu + rendre navbar adaptive-->
+<!--Menu qui remplace la navbar en mode mobile-->
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="/videotheque/test.html">Sass</a></li>
-    <li><a href="/videotheque/test.html">Components</a></li>
-    <li><a href="/videotheque/test.html">Javascript</a></li>
-    <li><a href="/videotheque/test.html">Mobile</a></li>
+    <li><a href="/videotheque/index.php" class="waves-effect waves-light" type="submit">ACCUEIL</a></li>
+    <li><a href="/videotheque/viewsfilms/lister.php" class="waves-effect waves-light">Nos films</a></li>
+    <!--<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>-->
+    <!--TODO: Dropdown fonctionne pas-->
+    <?php
+    if (isset($_SESSION['usager'])) {
+
+        // afficher le courriel de l'usager connecté
+        echo '<li>' . $_SESSION['usager'] . '</li>';
+
+        // Options du menu dépendant du rôle de l'usager
+        if ($_SESSION['role'] == 'admin') {
+            echo '<li><a href="/videotheque/viewsfilms/admin.php" class="waves-effect waves-light red-text">Options d\'administation</a></li>';
+        } else {
+            echo '<li><a href="/videotheque/viewsfilms/panier.php" class="waves-effect waves-light" type="submit">Panier</a></li>';
+        }
+
+        echo '<li><a href="/videotheque/viewsfilms/deconnexion.php" class="waves-effect waves-light red">'
+            . '<i class="material-icons left">exit_to_app</i>Se déconnecter</a></li>';
+
+    } else {            // Si non connecté, afficher l'option pour se connecter
+        ?>
+        <!--Trigger du modal pour saisir courriel et mot de passe-->
+        <li><a href="/videotheque/viewsfilms/formulaires/formAjoutMembre.php">
+                <i class="material-icons left">person_add</i>
+                Devenir membre</a></li>
+        <li><a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
+                <i class="material-icons left">vpn_key</i>Connexion</a></li>
+        <!--TODO: créer une page connexion-->
+        <?php
+    } ?>
 </ul>
