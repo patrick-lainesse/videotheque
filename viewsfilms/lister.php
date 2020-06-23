@@ -31,11 +31,15 @@ try {
 
                     // Affiche le bouton pour ajouter le film au panier si connecté en tant que membre
                     if (isset($_SESSION['usager']) && $_SESSION['role'] == 'membre') {
+                        $idMembre = $_SESSION['idMembre'];
                         ?>
-                        <form id="<?php echo($ligne->id); ?>" action="panierAjout.php" method="POST">
+                        <!--ID unique au formulaire pour gérer le onClick du bouton Ajouter-->
+                        <form id="<?php echo($ligne->id); ?>" action="fonctionsSQL/fonctionsPanier.php" method="POST">
+                            <input type="hidden" name="fonction" value="ajoutFilmPanier">
+                            <input type="hidden" name="idMembre" value="<?php echo $idMembre; ?>">
+                            <input type="hidden" name="idFilm" value="<?php echo($ligne->id); ?>">
                             <div class="row">
                                 <div class="input-field col offset-s4 s4">
-                                    <input type="hidden" name="idFilm" value="<?php echo($ligne->id); ?>">
                                     <!--Le id est concatené deux fois pour le différencier du formID-->
                                     <input id="<?php echo ($ligne->id) . ($ligne->id); ?>" name="quantite"
                                            type="number" min="0" max="500" class="validate center-align">
@@ -48,7 +52,7 @@ try {
                                 <i class="material-icons left">shopping_cart</i>Ajouter</a>
                         </form>
                         <?php
-                    }   // fin du if pour le bouton acheter le film ?>
+                    }   // fin du if qui vérifie si l'usager est connecté en tant que membre ?>
                 </div>
             </div>
         </div>
