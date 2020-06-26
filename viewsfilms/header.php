@@ -32,7 +32,7 @@ session_start();
     <!--Indication d'optimisation pour mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <!--TODO: Voir si moyen de faire afficher les formulaires correctement avec scripts seulement dans footer-->
+    <!--TODO: Problème avec formulaires si scripts seulement dans footer-->
     <script type="text/javascript" src="/videotheque/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="/videotheque/js/materialize.min.js"></script>
     <script type="text/javascript" src="/videotheque/js/scripts.js"></script>

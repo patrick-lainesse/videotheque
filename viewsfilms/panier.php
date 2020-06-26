@@ -17,14 +17,21 @@ if ($_SESSION['role'] != 'membre') {
     header('location:../index.php?Message=' . $message);
 }
 
+$idMembre = $_SESSION['idMembre'];
 ?>
 
 <div class="container">
     <div class="row">
-        <h3>Votre panier
-            <a class="waves-effect waves-light darken-4 green btn-small marginTop30 right"><i
-                        class="material-icons left">delete_forever
-                </i>Vider le panier</a></h3><!--TODO : programmer vider le panier-->
+        <form action="fonctionsSQL/fonctionsPanier.inc.php" method="POST">
+            <h3>Votre panier
+                <input type="hidden" name="fonction" value="viderPanier">
+                <input type="hidden" name="idMembre" value="<?php echo ($idMembre); ?>">
+                <button type="submit" class="waves-effect waves-light darken-4 green btn-small marginTop30 right">
+                    <i class="material-icons left">delete_forever</i>
+                    Vider le panier
+                </button>
+            </h3>
+        </form>
     </div>
     <table class="centered">
         <thead>
@@ -40,7 +47,7 @@ if ($_SESSION['role'] != 'membre') {
         <tr>
             <?php
             // requête à la base de données pour obtenir le panier de l'usager connecté
-            $idMembre = $_SESSION['idMembre'];
+            /*$idMembre = $_SESSION['idMembre'];*/
             $requete = 'SELECT films.id, films.image, films.titre, panier.quantite, films.prix '
                 . 'FROM panier INNER JOIN films ON panier.idFilm = films.id WHERE panier.idMembre=?';
 

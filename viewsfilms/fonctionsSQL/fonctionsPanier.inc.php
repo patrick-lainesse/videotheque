@@ -4,36 +4,34 @@ Matricule: 740302
 Date: 22/06/2020
 
 Requêtes qui s'appliquent au panier des membres.
-
-Notes:
-La fonction Le stmt->close() effectue également un free_result:
-https://stackoverflow.com/questions/19531195/stmt-close-vs-stmt-free-result
 -->
 <?php
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 
-// TODO: enlever header ici???
-
 // S'asssurer que seuls les membres connectés accèdent à ces fonctions
 if (!isset($_SESSION['usager']) || $_SESSION['role'] != 'membre') {
     $message = urlencode("Vous devez être connecté en tant que membre pour accéder à cette page.");
-    header('location:../index.php?Message=' . $message);
+    header('location:../../index.php?Message=' . $message);
 }
 
 // Rediriger vers la fonction est désirée
 $fonction = $_POST['fonction'];
 switch ($fonction) {
 
-    case 'supprimerFilmPanier':
-        supprimerFilmPanier($_POST['idMembre'], $_POST['idFilm']);
-        break;
     case 'ajoutFilmPanier':
         ajoutFilmPanier($_POST['idMembre'], $_POST['idFilm'], $_POST['quantite']);
         break;
+    case 'supprimerFilmPanier':
+        supprimerFilmPanier($_POST['idMembre'], $_POST['idFilm']);
+        break;
+    case 'viderPanier':
+        viderPanier($_POST['idMembre']);
+        //viderPanier();
+        break;
     default:
         $message = urlencode("Problème côté serveur à effectuer la requête désirée.");
-        header('location:../index.php?Message=' . $message);
+        header('location:../../index.php?Message=' . $message);
 }
 
 /**
@@ -43,7 +41,6 @@ switch ($fonction) {
  * @param $idFilm
  * @param $quantite
  * @requires $idMembre, $idFilm et $quantite sont des Number
- * @returns redirige vers la liste de films
  */
 function ajoutFilmPanier($idMembre, $idFilm, $quantite)
 {
@@ -59,7 +56,7 @@ function ajoutFilmPanier($idMembre, $idFilm, $quantite)
         $filmDejaLa = $resultat->fetch_array(MYSQLI_ASSOC);
     } catch (Exception $e) {
         $message = urlencode("Erreur lors de l'ajout à votre panier d'achats.");
-        header('location:../index.php?Message=' . $message);
+        header('location:../../index.php?Message=' . $message);
     } finally {
         $message = urlencode($filmDejaLa['idFilm']);
         header('location:../../index.php?Message=' . $message);
@@ -83,7 +80,7 @@ function ajoutFilmPanier($idMembre, $idFilm, $quantite)
         $stmt->execute();
     } catch (Exception $e) {
         $message = urlencode("Erreur lors de l'ajout à votre panier d'achats.");
-        header('location:../index.php?Message=' . $message);
+        header('location:../../index.php?Message=' . $message);
     } finally {
         $stmt->close();
         header('location: ../lister.php');
@@ -96,11 +93,13 @@ function ajoutFilmPanier($idMembre, $idFilm, $quantite)
  * @param $idMembre (int)
  * @param $idFilm (int)
  * @requires $idMembre et $idFilm sont des Number
- * @returns redirige vers le panier
  */
 function supprimerFilmPanier($idMembre, $idFilm)
 {
     global $connexion;
+
+    $message = urlencode($idMembre);
+    header('location:../../index.php?Message=' . $message);
 
     $requete = 'DELETE from panier WHERE idMembre=? AND idFilm=?';
     try {
@@ -109,7 +108,32 @@ function supprimerFilmPanier($idMembre, $idFilm)
         $stmt->execute();
     } catch (Exception $e) {
         $message = urlencode("Erreur lors de la suppresion du film de votre panier d'achats.");
-        header('location:../index.php?Message=' . $message);
+        header('location:../../index.php?Message=' . $message);
+    } finally {
+        mysqli_close($connexion);
+        $stmt->close();
+        header('location: ../panier.php');
+    }
+}
+
+/**
+ * Supprime l'entrée correspondant aux paramètres dans la table panier de la base de données
+ *
+ * @param $idMembre (int)
+ * @requires $idMembre est un Number
+ */
+function viderPanier($idMembre)
+{
+    global $connexion;
+
+    $requete = 'DELETE from panier WHERE idMembre=?';
+    try {
+        $stmt = $connexion->prepare($requete);
+        $stmt->bind_param("i", $idMembre);
+        $stmt->execute();
+    } catch (Exception $e) {
+        $message = urlencode("Erreur lors de la suppresion des films de votre panier d'achats.");
+        header('location:../../index.php?Message=' . $message);
     } finally {
         mysqli_close($connexion);
         $stmt->close();

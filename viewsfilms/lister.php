@@ -3,6 +3,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 
+// TODO: s'assurer qu'on ne peut pas ajouter <1 film
+
 try {
     // Récupérer la catégorie si un choix a été fait
     if (isset($_GET['categorie'])) {
