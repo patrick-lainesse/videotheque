@@ -5,13 +5,9 @@ Date: 22/06/2020
 
 Formulaire qui affiche les infos du film sélectionné par un admin et qui permet de mettre à jour
 les informations d'un film.
-
-TODO: Les cases semblent avoir du txt sur txt lorsqu'on affiche un formulaire update
 -->
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
-//$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
-//require_once $chemin;   // TODO: ajouter au readme
 require_once $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
 
 $num = $_POST['idFilm'];
@@ -35,7 +31,7 @@ function afficherForm($ligne)
     <img src="../images/<?php echo($ligne->image); ?>" class="floatLeft">
     <div class="row margin50">
         <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data"
-              action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST">
+              action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
             <?php
             if ($typeForm == 'update') { ?>
                 <input type="hidden" id="typeForm" name="typeForm" value="update">
@@ -44,7 +40,6 @@ function afficherForm($ligne)
                 <input type="hidden" id="typeForm" name="typeForm" value="effacer">
                 <?php
             }
-            //TODO: onsubmit="return valider()"
             ?>
             <div class="row">
                 <div class="input-field col s4">
@@ -130,14 +125,17 @@ function afficherForm($ligne)
 
 $requete = "SELECT * FROM films WHERE id=?";
 
-$stmt = $connexion->prepare($requete);
-$stmt->bind_param("i", $num);
-$stmt->execute();
-$result = $stmt->get_result();  // TODO: try-catch
-if (!$ligne = $result->fetch_object()) {
-    echo "Film " . $num . " introuvable";
+try {
+    $stmt = $connexion->prepare($requete);
+    $stmt->bind_param("i", $num);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $ligne = $result->fetch_object();
+} catch (Exception $e) {
+    $message = urlencode("Erreur lors de la modifications des données du film.");
+    header('location:../../index.php?Message=' . $message);
+} finally {
+    $stmt->close();
     mysqli_close($connexion);
-    exit;
 }
 afficherForm($ligne);
-mysqli_close($connexion);

@@ -15,7 +15,7 @@ Site web multipages d'achat de films implémentant le CRUD.
 ## À propos des différents fichiers
 
 ### Général
-- PHP: Utilise $_SERVER['DOCUMENT_ROOT'] lors des inclusions de fichiers pour faciliter l'inclusion des header dans les fichiers situés à différents endroits dans la structre du site.
+- PHP: Utilise $_SERVER['DOCUMENT_ROOT'] lors des inclusions de fichiers pour faciliter l'inclusion des header dans les fichiers situés à différents endroits dans la structure du site.
 - css et js: Utilise un path absolu à partir du root du serveur pour la même raison.
 
 ### Header
