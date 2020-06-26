@@ -63,7 +63,6 @@ function ajoutFilmPanier($idMembre, $idFilm, $quantite)
         $stmt->close();
     }
 
-    // TODO: ne pas afficher / exécuter la requête si dépasse la qté max
     // Insérer les films ou mettre à jour la quantité dans le panier de l'usager
     try {
         if ($filmDejaLa['quantite'] > 0) {

@@ -14,7 +14,7 @@ require_once $chemin;
 <h3 class="white-text center">Entrez vos données personnelles</h3>
 <div class="row margin50">
     <form class="col s6 offset-s3" id="formMembre" action="/videotheque/viewsfilms/ajoutMembre.php" method="POST">
-        <!--onsubmit="return valider();"???-->
+        <!--TODO: onsubmit="return valider();"-->
         <div class="row">
             <div class="input-field col s4">
                 <input id="prenomMembre" name="prenomMembre" type="text" class="validate">

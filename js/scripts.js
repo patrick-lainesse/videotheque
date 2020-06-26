@@ -1,22 +1,4 @@
-// utilisé pour debugging, enlever lorsque le projet sera terminé
-function test() {
-    console.log("test");
-}
-
-// Todo: nettoyer les fonctions qui ne font que soumettre des formulaires invisibles
-function admin() {
-    document.getElementById('formAdmin').submit();
-}
-
-// Fonction appelée lorsqu'on clique sur le bouton "ajouter au panier" de la page qui liste les films
-function ajoutFilm(formID) {
-    document.getElementById(formID).submit();
-}
-
-function ajoutMembre() {
-    document.getElementById('formMembre').submit();
-}
-
+/*TODO: En-tête et nettoyer les fonctions qui ne font que soumettre des formulaires*/
 function connecter() {
     document.getElementById('formConnecter').submit();
 }
@@ -33,6 +15,7 @@ function update() { // ??? à corriger avec header
     document.getElementById('formEnregistrer').submit();
 }
 
+/*TODO: à changer si API*/
 const chargerModal = function () {
 
     const modal = $("#modalHeader");
@@ -48,26 +31,13 @@ const chargerModal = function () {
  *               (source: exemples sur Studium)
  *************************************************************************************/
 
-function validerNum(elem) {
-    var num = document.getElementById(elem).value;
-    var numRegExp = new RegExp("^[0-9]{1,4}$");
-    if (num != "" && numRegExp.test(num))
-        return true;
-    return false;
-}
-
-
 /**
- * Vérifie que toutes les entrées des formulaires sont bien remplies
- * Pas nécessaire de valider le ID ou la catégorie car ils sont inaccesibles à l'utilisateur.
+ * Vérifie que toutes les entrées des formulaires sont bien remplies.
+ * Pas nécessaire de valider le idFilm ou la catégorie car ils sont inaccesibles à l'utilisateur.
  * Le prénom n'est pas validé non plus pour les cas de noms d'artistes particuliers.
  * Image non validée car on pourrait ajouter un film sans image (avatar.jpg serait alors utilisé).
  *
- * @param $idMembre
- * @param $idFilm
- * @param $quantite
- * @requires $idMembre, $idFilm et $quantite sont des Number
- * @returns redirige vers la liste de films
+ * @returns true ou false pour empêcher le formulaire d'envoyer la requête
  */
 function valider() {
 
@@ -84,14 +54,13 @@ function valider() {
     }
 }
 
-
 /*************************************************************************************
  *               FONCTIONS RELIÉES AUX ÉLÉMENTS GRAPHIQUES DES PAGES
  *************************************************************************************/
 
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.sidenav');
-    /*var instances = M.Sidenav.init(elems, options);*/     // ??? à enlever si utilise pas d'options
+    /*var instances = M.Sidenav.init(elems, options);*/     // TODO: à enlever si utilise pas d'options
     var instances = M.Sidenav.init(elems);
 });
 
@@ -109,7 +78,7 @@ $(document).ready(function () {
 
     $(".dropdown-trigger").dropdown({hover: false});
 
-    // ??? pour rendre l'input de la date editable: https://stackoverflow.com/questions/35708106/how-to-make-the-materialize-date-picker-in-fact-pickadate-editable
+    // TODO: pour rendre l'input de la date editable: https://stackoverflow.com/questions/35708106/how-to-make-the-materialize-date-picker-in-fact-pickadate-editable
     $('.datepicker').datepicker({
         editable: true,
         format: 'yyyy-mm-dd',

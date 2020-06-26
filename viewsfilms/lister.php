@@ -3,8 +3,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
 $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 
-// TODO: s'assurer qu'on ne peut pas ajouter <1 film
-
 try {
     // Récupérer la catégorie si un choix a été fait
     if (isset($_GET['categorie'])) {
@@ -44,7 +42,8 @@ try {
                         $idMembre = $_SESSION['idMembre'];
                         ?>
                         <!--ID unique au formulaire pour gérer le onClick du bouton Ajouter-->
-                        <form id="<?php echo($ligne->id); ?>" action="fonctionsSQL/fonctionsPanier.inc.php" method="POST">
+                        <form id="<?php echo($ligne->id); ?>" action="fonctionsSQL/fonctionsPanier.inc.php"
+                              method="POST">
                             <input type="hidden" name="fonction" value="ajoutFilmPanier">
                             <input type="hidden" name="idMembre" value="<?php echo $idMembre; ?>">
                             <input type="hidden" name="idFilm" value="<?php echo($ligne->id); ?>">
@@ -53,13 +52,12 @@ try {
                                     <!--Le id est concatené deux fois pour le différencier du formID-->
                                     <input id="<?php echo ($ligne->id) . ($ligne->id); ?>" name="quantite"
                                            type="number" min="0" max="500" class="validate center-align">
-                                    <!-- TODO: valider le max 500 par jscript et empêcher la requête si c'est le cas-->
                                     <label for="<?php echo ($ligne->id) . ($ligne->id); ?>">Qté</label>
                                 </div>
                             </div>
-                            <a class="waves-effect waves-light marginNeg darken-4 green btn-small"
-                               onclick="ajoutFilm(<?php echo($ligne->id); ?>)">
-                                <i class="material-icons left">shopping_cart</i>Ajouter</a>
+                            <button type="submit" class="waves-effect waves-light marginNeg darken-4 green btn-small">
+                                <i class="material-icons left">shopping_cart</i>Ajouter
+                            </button>
                         </form>
                         <?php
                     }   // fin du if qui vérifie si l'usager est connecté en tant que membre ?>
