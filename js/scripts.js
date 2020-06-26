@@ -1,18 +1,11 @@
-/*TODO: En-tête et nettoyer les fonctions qui ne font que soumettre des formulaires*/
+/*
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+*/
+
 function connecter() {
     document.getElementById('formConnecter').submit();
-}
-
-function enregistrer() {
-    document.getElementById('formEnregistrer').submit();
-}
-
-function lister() {
-    document.getElementById('formLister').submit();
-}
-
-function update() { // ??? à corriger avec header
-    document.getElementById('formEnregistrer').submit();
 }
 
 /*TODO: à changer si API*/
@@ -29,6 +22,7 @@ const chargerModal = function () {
 /*************************************************************************************
  *               FONCTIONS DE VALIDATION DES FORMULAIRES
  *               (source: exemples sur Studium)
+ *               La plupart des validations sont fournies par le framework Materialize
  *************************************************************************************/
 
 /**
@@ -60,7 +54,6 @@ function valider() {
 
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.sidenav');
-    /*var instances = M.Sidenav.init(elems, options);*/     // TODO: à enlever si utilise pas d'options
     var instances = M.Sidenav.init(elems);
 });
 
