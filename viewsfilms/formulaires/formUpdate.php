@@ -29,6 +29,7 @@ function afficherForm($ligne)
     }
     ?><!--// TODO: arranger responsive -->
     <img src="../images/<?php echo($ligne->image); ?>" class="floatLeft">
+    <!--TODO: Mettre un preview de l'image-->
     <div class="row margin50">
         <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data"
               action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
