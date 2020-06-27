@@ -24,6 +24,7 @@ img {
 
 .film {
     height: 600px;
+    top: -100px;
     margin-top: -200px;
 }
 
