@@ -103,7 +103,8 @@ function afficherForm($ligne)
                     </div>
                 </div>
                 <div class="input-field col s6">
-                    <input id="hashYT" name="hashYT" type="text" class="validate" value="<?php ($ligne->youtube) ?>">
+                    <input id="hashYT" name="hashYT" type="text" class="validate"
+                           value="<?php echo($ligne->youtube); ?>">
                     <label for="hashYT">Hash YouTube</label>
                 </div>
             </div>
@@ -113,7 +114,8 @@ function afficherForm($ligne)
                     // Texte à afficher sur le bouton
                     if ($typeForm == 'update') {
                         echo 'Modifier';
-                    } if ($typeForm == 'effacer') {
+                    }
+                    if ($typeForm == 'effacer') {
                         echo 'Supprimer';
                     }
                     ?>

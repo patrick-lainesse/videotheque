@@ -34,6 +34,9 @@ Site web multipages d'achat de films implémentant le CRUD.
 
 ### formAjoutFilm.php et formUpdate.php
 - Le nom du réalisateur est stocké en un seul String dans la base de données, mais séparé en deux à l'aide des fonctions strpos et substr en PHP.
+- Lorsqu'un admin téléverse une image locale pour ajouter à la fiche d'un film, un preview s'affiche.
+- hash YouTube: voir ci-haut dans lister.php
+- Les options modifier ou effacer un film préremplissent les formulaires à partir de données obtenues de la base de données. 
 
 ### fonctionsAdmin.inc.php
 - Le même fichier est utilisé pour gérer update et ajout de films.

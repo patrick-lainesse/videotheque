@@ -68,7 +68,6 @@ require_once $chemin;
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-            <!--TODO: expliquer hash ou implémenter le youtube api-->
             <div class="input-field col s6">
                 <input id="hashYT" name="hashYT" type="text" class="validate">
                 <label for="hashYT">Hash YouTube</label>
