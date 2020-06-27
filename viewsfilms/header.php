@@ -103,9 +103,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formCon
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/videotheque/index.php" class="waves-effect waves-light" type="submit">ACCUEIL</a></li>
     <li><a href="/videotheque/viewsfilms/lister.php" class="waves-effect waves-light">Nos films</a></li>
-    <!--<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>-->
-    <!--TODO: Dropdown fonctionne pas en mobile-->
-    <!--TODO: Menu ne semble pas pouvoir s'ouvrir en mode admin (formulaires update, etc)-->
+    <li><a class="dropdown-trigger" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>
     <?php
     if (isset($_SESSION['usager'])) {
 
@@ -130,7 +128,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formCon
                 Devenir membre</a></li>
         <li><a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
                 <i class="material-icons left">vpn_key</i>Connexion</a></li>
-        <!--TODO: créer une page connexion pour mobile ou faire fonctionner modal-->
         <?php
     } ?>
 </ul>

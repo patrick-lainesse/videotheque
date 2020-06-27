@@ -11,7 +11,7 @@ function connecter() {
     document.getElementById('formConnecter').submit();
 }
 
-/*TODO: à changer si API*/
+// Insère les liens vers les vidéos YouTube dans la liste des films
 const chargerModal = function () {
 
     const modal = $("#modalHeader");
