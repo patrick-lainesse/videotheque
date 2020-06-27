@@ -67,15 +67,21 @@ function afficherForm($ligne)
             </div>
             <div class="row">
                 <div class="input-field col s4 grey darken-4">
-                    <!--TODO: à faire: https://stackoverflow.com/questions/3030604/php-pre-select-drop-down-option-->
                     <select id="categorie" name="categorie">
-                        <option value="Action">Action</option>
-                        <option value="Animation">Animation</option>
-                        <option value="Comédie">Comédie</option>
-                        <option value="Drame">Drame</option>
-                        <option value="Horreur">Horreur</option>
-                        <option value="Romance">Romance</option>
-                        <option value="Science-fiction">Science-fiction</option>
+                        <?php
+                        // Préselection de la catégorie stockée dans la base de données
+                        $categories = array("Action", "Animation", "Comédie", "Drame", "Horreur", "Romance", "Science-fiction");
+                        $catLength = count($categories);
+
+                        for ($x = 0; $x < $catLength; $x++) {
+                            if ($categories[$x] === ($ligne->categorie)) {
+                                echo '<option value="' . $categories[$x] . '" selected>' . $categories[$x] . '</option>';
+                            } else {
+                                echo '<option value="' . $categories[$x] . '">' . $categories[$x] . '</option>';
+                            }
+
+                        }
+                        ?>
                     </select>
                     <label>Catégorie</label>
                 </div>

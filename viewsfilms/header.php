@@ -32,10 +32,9 @@ session_start();
     <!--Indication d'optimisation pour mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <!--TODO: Problème avec formulaires si scripts seulement dans footer-->
+    <!--Nécessaire de précharger ces scripts pour certains éléments graphiques du framework-->
     <script type="text/javascript" src="/videotheque/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="/videotheque/js/materialize.min.js"></script>
-    <script type="text/javascript" src="/videotheque/js/scripts.js"></script>
 
 </head>
 <body>
