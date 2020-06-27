@@ -27,8 +27,8 @@ function afficherForm($ligne)
         <h5 class="white-text center">Voulez-vous bien supprimer le film <?php echo $num; ?> de la base de données?</h5>
         <?php
     }
-    ?><!--// TODO: arranger responsive -->
-    <img id="previewUpload" src="../../images/<?php echo($ligne->image); ?>" class="floatLeft">
+    ?>
+    <img id="previewUpload" src="../../images/<?php echo($ligne->image); ?>" class="imagePreview">
     <div class="row margin50">
         <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data"
               action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
@@ -79,7 +79,6 @@ function afficherForm($ligne)
                             } else {
                                 echo '<option value="' . $categories[$x] . '">' . $categories[$x] . '</option>';
                             }
-
                         }
                         ?>
                     </select>

@@ -28,10 +28,11 @@ img {
     margin-top: -200px;
 }
 
-.floatLeft {
+.imagePreview {
     float: left;
     margin-top: 60px;
     margin-left: 30px;
+    opacity: 0.2;
     position: absolute;
 }
 
@@ -50,7 +51,6 @@ img {
     color: white;
     text-align: center;
 }
-
 
 ul.dropdown-content.select-dropdown li span {
     background-color: #000000;
@@ -102,4 +102,40 @@ input[type=number] {
 
 tr {
     border-bottom: 1px solid white !important;
+}
+
+.datepicker-date-display {
+    background-color: black;
+}
+
+.datepicker-day-button {
+    color: black !important;
+}
+
+.datepicker-controls .select-wrapper input {
+    color: red !important;
+}
+
+.datepicker-day-button:focus {
+    color: black !important;
+    background-color: black;
+}
+
+.datepicker-done,
+.datepicker-cancel,
+.select-dropdown li>span,
+.is-today {
+    color: red; !important
+}
+
+td.is-selected,
+.month-prev:active,
+.month-prev:focus,
+.month-next:active,
+.month-next:focus {
+    background-color: red !important
+}
+
+td.is-selected.is-today {
+    color: black !important
 }

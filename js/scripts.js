@@ -51,6 +51,19 @@ function valider() {
     }
 }
 
+/* Vérifie que le courriel entré est valide
+ * Source: https://www.wired.com/2008/08/four-regular-expressions-to-check-email-addresses/
+ *
+ * @returns true ou false pour empêcher le formulaire d'envoyer la requête
+ */
+function validerMail() {
+
+    let courriel = document.getElementById('courrielMembre').value;
+    let mailRegExp = new RegExp('[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}');
+
+    return mailRegExp.test(courriel);
+}
+
 /*************************************************************************************
  *               FONCTIONS RELIÉES AUX ÉLÉMENTS GRAPHIQUES DES PAGES
  *************************************************************************************/
@@ -80,11 +93,12 @@ $(document).ready(function () {
 
     $(".dropdown-trigger").dropdown({hover: false});
 
-    // TODO: pour rendre l'input de la date editable: https://stackoverflow.com/questions/35708106/how-to-make-the-materialize-date-picker-in-fact-pickadate-editable
     $('.datepicker').datepicker({
         editable: true,
+        yearRange: 30,
+        defaultDate: new Date(1980, 1, 1),
+        setDefaultDate: true,
         format: 'yyyy-mm-dd',
-        formatSubmit: 'yyyy-mm-dd', /*à arranger dd mmmm yyyy???*/
         i18n: {
             months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
         }

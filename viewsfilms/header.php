@@ -35,6 +35,7 @@ session_start();
     <!--Nécessaire de précharger ces scripts pour certains éléments graphiques du framework-->
     <script type="text/javascript" src="/videotheque/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="/videotheque/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/videotheque/js/scripts.js"></script>
 
 </head>
 <body>
@@ -104,6 +105,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formCon
     <li><a href="/videotheque/viewsfilms/lister.php" class="waves-effect waves-light">Nos films</a></li>
     <!--<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>-->
     <!--TODO: Dropdown fonctionne pas en mobile-->
+    <!--TODO: Menu ne semble pas pouvoir s'ouvrir en mode admin (formulaires update, etc)-->
     <?php
     if (isset($_SESSION['usager'])) {
 

@@ -31,5 +31,5 @@ $stmt->execute();
 mysqli_close($connexion);
 
 $message = urlencode("Votre compte a été créé avec succès. Veuillez vous connecter.");
-header('location:../index.php?Message=' . $message);
+header('location:../../index.php?Message=' . $message);
 ?>

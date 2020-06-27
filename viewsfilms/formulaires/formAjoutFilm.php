@@ -11,8 +11,7 @@ $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 ?>
 <h5 class="white-text center margin50">Ajouter un film à la base de données</h5>
-<!--// TODO: arranger responsive -->
-<img id="previewUpload" src="../../images/avatar.jpg" class="floatLeft">
+<img id="previewUpload" src="../../images/avatar.jpg" class="imagePreview">
 <div class="row margin50">
     <form class="col s6 offset-s3" id="formEnreg" enctype="multipart/form-data" action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
         <input type="hidden" id="typeForm" name="typeForm" value="enregistrer">
