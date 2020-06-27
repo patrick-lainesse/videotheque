@@ -2,6 +2,9 @@
 Nom: Patrick Lainesse
 Matricule: 740302
 Date: 22/06/2020
+
+Sources:
+    - Fonction readURL (upload d'images): https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
 */
 
 function connecter() {
@@ -52,12 +55,18 @@ function valider() {
  *               FONCTIONS RELIÉES AUX ÉLÉMENTS GRAPHIQUES DES PAGES
  *************************************************************************************/
 
+// Affichage des preview des images lorsque téléchargées par l'administrateur dans les formulaires
+function myReadUrl(ref) {
+    document.getElementById('previewUpload').src = window.URL.createObjectURL(ref.files[0]);
+}
+
+// Charger le menu sidenav pour visionner le site en mobile
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems);
 });
 
-// initialisation des styles éléments importés par MaterializeCSS
+// Initialisation des styles éléments importés par MaterializeCSS
 $(document).ready(function () {
     $('.sidenav').sidenav();
 

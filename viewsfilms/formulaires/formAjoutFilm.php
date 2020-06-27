@@ -11,6 +11,8 @@ $chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
 require_once $chemin;
 ?>
 <h5 class="white-text center margin50">Ajouter un film à la base de données</h5>
+<!--// TODO: arranger responsive -->
+<img id="previewUpload" src="../../images/avatar.jpg" class="floatLeft">
 <div class="row margin50">
     <form class="col s6 offset-s3" id="formEnreg" enctype="multipart/form-data" action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
         <input type="hidden" id="typeForm" name="typeForm" value="enregistrer">
@@ -53,12 +55,14 @@ require_once $chemin;
                 <label for="prix">Prix</label>
             </div>
         </div>
-        <!--TODO: mettre un preview de l'image-->
         <div class="row">
             <div class="file-field input-field col s6">
                 <div class="btn waves-effect red darken-4">
                     <span>Image</span>
-                    <input type="file" id="pochette" name="pochette">
+                    <!--source pour onchange: http://localhost/videotheque/viewsfilms/formulaires/formUpdate.php-->
+                    <input type="file" id="pochette" name="pochette"
+                           onchange="document.getElementById('previewUpload').src = window.URL.createObjectURL(this.files[0])">
+                    <!--<input type="file" id="pochette" name="pochette">-->
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">

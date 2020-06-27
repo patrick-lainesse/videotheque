@@ -28,8 +28,7 @@ function afficherForm($ligne)
         <?php
     }
     ?><!--// TODO: arranger responsive -->
-    <img src="../images/<?php echo($ligne->image); ?>" class="floatLeft">
-    <!--TODO: Mettre un preview de l'image-->
+    <img id="previewUpload" src="../../images/<?php echo($ligne->image); ?>" class="floatLeft">
     <div class="row margin50">
         <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data"
               action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
@@ -95,7 +94,9 @@ function afficherForm($ligne)
                 <div class="file-field input-field col s6">
                     <div class="btn waves-effect red darken-4">
                         <span>Image</span>
-                        <input type="file" id="pochette" name="pochette">
+                        <!--source pour onchange: http://localhost/videotheque/viewsfilms/formulaires/formUpdate.php-->
+                        <input type="file" id="pochette" name="pochette"
+                               onchange="document.getElementById('previewUpload').src = window.URL.createObjectURL(this.files[0])">
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">
