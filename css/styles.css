@@ -7,6 +7,12 @@ img {
     max-width: 200px !important;
 }
 
+.videotheque {
+    font-family: 'Montserrat Subrayada', sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
+
 .imgTable {
     max-height: 100px;
 }

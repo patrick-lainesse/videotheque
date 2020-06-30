@@ -23,6 +23,8 @@ session_start();
 
     <!--Importe Icônes Google-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Importe la police pour le titre de l'accueil-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
     <!--Importe materialize.css-->
     <link type="text/css" rel="stylesheet" href="/videotheque/css/materialize.min.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="/videotheque/css/styles.css"/>

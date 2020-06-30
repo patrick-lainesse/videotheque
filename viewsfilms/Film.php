@@ -18,10 +18,6 @@ class Film
     private $image;
     private $youtube;
 
-
-    // TODO: Un constructeur de realisateur qui prend le nom et le prénom comme paramètres
-    // TODO: pas une bonne pratique d'avoir du output dans une classe de structures de données
-    // TODO: implémenter serializable
     public function boutonDelete()
     {
         //echo '<a class="waves-effect waves-light marginTop10 darken-4 red btn-small"><i class="material-icons left">delete</i>Supprimer</a>';

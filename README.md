@@ -45,3 +45,10 @@ Site web multipages d'achat de films implémentant le CRUD.
 ### fonctionsPanier.inc.php
 - Gère toutes les fonctions / requêtes relative au panier d'achats d'un membre
 - Vérifie si un film est déjà présent avant de l'ajouter, et si oui, ajuste la quantité
+
+### Film.php
+- Classe pour créer des objets films. Plus ou moins bien utilisé dans admin.php pour l'instant.
+
+## J'aurais aimé...
+- Implémenter le YouTube API, pour automatiquement ajouter le preview des films sans avoir à stocker l'URL des vidéos.
+- Améliorer l'implémentation de la classe films dans les différentes requêtes, mais cette matière et les notes de cours ont été rendues disponibles alors que j'étais déjà très avancé dans le projet. J'aimerais bien mieux l'intégrer dans la prochaine étape de développement du projet, avec Ajax.

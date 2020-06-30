@@ -16,6 +16,12 @@ if (isset($_GET['Message'])) {
     echo '<p class="center-align red-text">' . $_GET['Message'] . '</p>';
 }
 ?>
-<h1 class="center">Location de films</h1>
+<h1 class="videotheque text-darken-4 red-text">VIDÉOTHÈQUE</h1>
+<h4 class="center">LE contrepoids aux Netflix, Disney<br>et autres géants de ce monde.</h4>
+
+<div class="row center-align marginTop30">
+    <a href="viewsfilms/formulaires/formAjoutMembre.php" class="waves-effect waves-light btn darken-4 red">Devenir membre</a>
+    <a href="viewsfilms/lister.php" class="waves-effect waves-light btn darken-4 red">Parcourir notre catalogue</a>
+</div>
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/footer.html";
