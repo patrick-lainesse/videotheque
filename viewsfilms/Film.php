@@ -3,7 +3,7 @@ Nom: Patrick Lainesse
 Matricule: 740302
 Date: 22/06/2020
 
-Classe qui permet d'envoyer d'instancier et de sérialiser des objets films et ses attributs par des formulaires.
+Classe qui permet d'instancier des objets films et ses attributs par des formulaires.
 -->
 <?php
 

@@ -50,6 +50,7 @@ session_start();
     <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Drame">Drame</a></li>
     <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Horreur">Horreur</a></li>
     <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Romance">Romance</a></li>
+    <li><a class="white-text" href="/videotheque/viewsfilms/lister.php?categorie=Science-fiction">Science-fiction</a></li>
 </ul>
 
 <nav>
@@ -105,7 +106,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/formulaires/formCon
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/videotheque/index.php" class="waves-effect waves-light" type="submit">ACCUEIL</a></li>
     <li><a href="/videotheque/viewsfilms/lister.php" class="waves-effect waves-light">Nos films</a></li>
-    <li><a class="dropdown-trigger" data-target="dropdown1">Catégories<i class="material-icons right">arrow_drop_down</i></a>
     <?php
     if (isset($_SESSION['usager'])) {
 
