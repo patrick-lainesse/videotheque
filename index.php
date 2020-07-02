@@ -7,9 +7,8 @@ Page d'accueil du site. C'est aussi ici que seront redirigés les usagers décon
 de se connecter à des pages auxquelles il n'a pas accès, en affichant un message d'erreur.
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
-$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
-require_once $chemin;
+include "viewsfilms/header.php";
+require_once "bd/connexion.inc.php";
 
 // Afficher un message d'erreur s'il y a lieu
 if (isset($_GET['Message'])) {
@@ -24,4 +23,4 @@ if (isset($_GET['Message'])) {
     <a href="viewsfilms/lister.php" class="waves-effect waves-light btn darken-4 red">Parcourir notre catalogue</a>
 </div>
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/footer.html";
+include "viewsfilms/footer.html";

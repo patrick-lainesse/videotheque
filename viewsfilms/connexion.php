@@ -8,9 +8,8 @@ Code qui reçoit les données du formulaire formConnexion et qui vérifie si le 
 Sinon, il est retourné à la page d'accueil.
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
-$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
-require_once $chemin;
+include 'header.php';
+require_once '../bd/connexion.inc.php';
 
 function seConnecter()
 {
@@ -49,4 +48,4 @@ function seConnecter()
 
 seConnecter();
 
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/footer.html";
+include 'footer.html';

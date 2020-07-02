@@ -20,7 +20,6 @@ class Film
 
     public function boutonDelete()
     {
-        //echo '<a class="waves-effect waves-light marginTop10 darken-4 red btn-small"><i class="material-icons left">delete</i>Supprimer</a>';
         echo '<button class="btn-small waves-effect waves-light marginTop10 darken-4 red" type="submit" name="action" value="supprimer">Supprimer';
         echo '<i class="material-icons right">delete</i>';
         echo '</button>';
@@ -28,7 +27,6 @@ class Film
 
     public function boutonModifier()
     {
-        //echo '<a class="waves-effect waves-light darken-4 green btn-small"><i class="material-icons left">create</i>Modifier</a>';
         echo '<button class="btn-small waves-effect waves-light darken-4 green" type="submit" name="action" value="modifier">Modifier';
         echo '<i class="material-icons right">create</i>';
         echo '</button>';

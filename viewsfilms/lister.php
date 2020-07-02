@@ -1,7 +1,6 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
-$chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
-require_once $chemin;
+include 'header.php';
+require_once '../bd/connexion.inc.php';
 
 try {
     // Récupérer la catégorie si un choix a été fait
@@ -27,7 +26,7 @@ try {
                 <div class="card-image">
                     <?php
                     // Affiche du film
-                    echo '<img src="../images/' . ($ligne->image)
+                    echo '<img src="images/' . ($ligne->image)
                         . '" data-target="modal1" idFilm="' . ($ligne->id) . '" titre="' . ($ligne->titre)
                         . ' "hashYT="' . ($ligne->youtube) . '" class="modal-trigger" onclick="chargerModal.call(this)">';
                     ?>
@@ -42,7 +41,7 @@ try {
                         $idMembre = $_SESSION['idMembre'];
                         ?>
                         <!--ID unique au formulaire pour gérer le onClick du bouton Ajouter-->
-                        <form id="<?php echo($ligne->id); ?>" action="fonctionsSQL/fonctionsPanier.inc.php"
+                        <form id="<?php echo($ligne->id); ?>" action="viewsfilms/fonctionsSQL/fonctionsPanier.inc.php"
                               method="POST">
                             <input type="hidden" name="fonction" value="ajoutFilmPanier">
                             <input type="hidden" name="idMembre" value="<?php echo $idMembre; ?>">

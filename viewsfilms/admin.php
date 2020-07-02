@@ -8,16 +8,15 @@ des boutons pour chacun, permet de modifier un film ou de l'effacer de la base d
 administrateur tente de se connecter à cette page, il sera redirigé vers l'index.
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
-$chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
-require_once $chemin;
+include 'header.php';
+require_once '../bd/connexion.inc.php';
 ?>
 <div class="container">
     <div class="row">
         <h3 class="center-align">Options d'administration</h3>
     </div>
     <div class="row">
-        <a href="/videotheque/viewsfilms/formulaires/formAjoutFilm.php"
+        <a href="viewsfilms/formulaires/formAjoutFilm.php"
            class="btn-small right waves-effect waves-light darken-4 green">
             Ajouter un film<i class="material-icons left">movie_filter</i>
         </a>
@@ -70,4 +69,4 @@ require_once $chemin;
 </div>
 
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/footer.html";
+include 'footer.html';

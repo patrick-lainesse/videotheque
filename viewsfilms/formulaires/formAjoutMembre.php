@@ -6,13 +6,12 @@ Date: 22/06/2020
 Formulaire pour saisir les informations des nouveaux membres.
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
-$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
-require_once $chemin;
+include '../header.php';
+require_once '../../bd/connexion.inc.php';
 ?>
 <h3 class="white-text center">Entrez vos données personnelles</h3>
 <div class="row margin50">
-    <form class="col s6 offset-s3" id="formMembre" action="/videotheque/viewsfilms/fonctionsSQL/ajoutMembre.php" method="POST" onsubmit="return validerMail()">
+    <form class="col s6 offset-s3" id="formMembre" action="viewsfilms/fonctionsSQL/ajoutMembre.php" method="POST" onsubmit="validerMail()">
         <div class="row">
             <div class="input-field col s4">
                 <input id="prenomMembre" name="prenomMembre" type="text" class="validate">
@@ -44,3 +43,5 @@ require_once $chemin;
         </div>
     </form>
 </div>
+<?php
+include '../footer.html';

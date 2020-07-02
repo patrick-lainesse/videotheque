@@ -7,9 +7,7 @@ Fonction qui reçoit les données du formulaire formAjoutMembre et qui ajoute un
 Si l'ajout est réussi, le membre est alors connecté automatiquement.
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
-$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
-require_once $chemin;
+require_once '../../bd/connexion.inc.php';
 
 $nomMembre = $_POST['prenomMembre'] . " " . $_POST['nomMembre'];
 $ddn = $_POST['ddn'];
@@ -32,4 +30,3 @@ mysqli_close($connexion);
 
 $message = urlencode("Votre compte a été créé avec succès. Veuillez vous connecter.");
 header('location:../../index.php?Message=' . $message);
-?>

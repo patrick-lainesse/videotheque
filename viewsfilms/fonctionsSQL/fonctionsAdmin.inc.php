@@ -7,9 +7,7 @@ Code qui reçoit les données des formulaires pour modifier, supprimer ou ajoute
 de données, et effectue les requêtes à la base de données.
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
-$chemin = $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
-require_once $chemin;
+require_once '../../bd/connexion.inc.php';
 
 // Identifier s'il doit s'agir d'une requête update ou enregistrer
 $typeForm = $_POST['typeForm'];
@@ -48,35 +46,33 @@ if ($typeForm == "enregistrer") {
 }
 
 // Gestion du fichier image sur le serveur
-if ($_FILES['pochette']['tmp_name'] !== "") {
+if ($typeForm == "update" || $typeForm == "effacer") {
+    if ($pochette != "avatar.jpg") {
+        $rmPoc = '../../images/' . $pochette;
+        $tabFichiers = glob('../../images/*');
 
-    if ($typeForm == "update" || $typeForm == "effacer") {
-        if ($pochette != "avatar.jpg" && $pochette != $_POST['image']) {
-            $rmPoc = '../images/' . $pochette;
-            $tabFichiers = glob('../images/*');
-
-            // Parcourir les images jusqu'à ce qu'on trouve l'ancienne image
-            foreach ($tabFichiers as $fichier) {
-                if (is_file($fichier) && $fichier == trim($rmPoc)) {
-                    // Enlever le fichier
-                    unlink($fichier);
-                    break;
-                }
+        // Parcourir les images jusqu'à ce qu'on trouve l'ancienne image
+        foreach ($tabFichiers as $fichier) {
+            if (is_file($fichier) && $fichier == trim($rmPoc)) {
+                // Enlever le fichier
+                unlink($fichier);
+                break;
             }
         }
     }
-
-    $nomPochette = sha1($titre . time());
-
-    // Déplacer la photo dans le serveur
-    $tmp = $_FILES['pochette']['tmp_name'];
-    $fichier = $_FILES['pochette']['name'];
-    $extension = strrchr($fichier, '.');
-
-    @move_uploaded_file($tmp, $dossier . $nomPochette . $extension);
-    @unlink($tmp);  // Enlever du serveur le fichier temporaire chargé
-    $pochette = $nomPochette . $extension;
 }
+
+$nomPochette = sha1($titre . time());
+
+// Déplacer la photo dans le serveur
+$tmp = $_FILES['pochette']['tmp_name'];
+$fichier = $_FILES['pochette']['name'];
+$extension = strrchr($fichier, '.');
+
+@move_uploaded_file($tmp, $dossier . $nomPochette . $extension);
+@unlink($tmp);  // Enlever du serveur le fichier temporaire chargé
+$pochette = $nomPochette . $extension;
+
 
 // Efectuer la requête SQL pour modifier la base de données
 if ($typeForm == 'enregistrer') {
@@ -97,5 +93,4 @@ $stmt->execute();
 $stmt->close();
 mysqli_close($connexion);
 header('location:../admin.php');
-?>
 

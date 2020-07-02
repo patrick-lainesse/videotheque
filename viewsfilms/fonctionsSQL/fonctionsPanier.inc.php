@@ -6,8 +6,7 @@ Date: 22/06/2020
 Requêtes qui s'appliquent au panier des membres.
 -->
 <?php
-$chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
-require_once $chemin;
+require_once '../../bd/connexion.inc.php';
 
 // S'asssurer que seuls les membres connectés accèdent à ces fonctions
 if (!isset($_SESSION['usager']) || $_SESSION['role'] != 'membre') {

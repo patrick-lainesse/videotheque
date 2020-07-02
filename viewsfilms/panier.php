@@ -7,9 +7,8 @@ Page qui affiche le panier d'un usager en effectuant la requête SQL. Affiche un
 seulement l'en-tête et une facture vide si le panier de l'usager est vide.
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/videotheque/viewsfilms/header.php';
-$chemin = $_SERVER['DOCUMENT_ROOT'] . '/videotheque/bd/connexion.inc.php';
-require_once $chemin;
+include 'header.php';
+require_once '../bd/connexion.inc.php';
 
 // Vérification de connexion en temps que membre pour empêcher l'accès aux autres utilisateurs
 if ($_SESSION['role'] != 'membre') {
@@ -22,7 +21,7 @@ $idMembre = $_SESSION['idMembre'];
 
 <div class="container">
     <div class="row">
-        <form action="fonctionsSQL/fonctionsPanier.inc.php" method="POST">
+        <form action="viewsfilms/fonctionsSQL/fonctionsPanier.inc.php" method="POST">
             <h3>Votre panier
                 <input type="hidden" name="fonction" value="viderPanier">
                 <input type="hidden" name="idMembre" value="<?php echo ($idMembre); ?>">
@@ -62,12 +61,12 @@ $idMembre = $_SESSION['idMembre'];
                 // place les résultats sur une rangée de tableau
                 while ($ligne = mysqli_fetch_object($reponse)) {
                     $sousTotal += ($ligne->prix) * ($ligne->quantite);
-                    echo '<form action="fonctionsSQL/fonctionsPanier.inc.php" method="POST">';
+                    echo '<form action="viewsfilms/fonctionsSQL/fonctionsPanier.inc.php" method="POST">';
                     echo '<input type="hidden" name="fonction" value="supprimerFilmPanier">';
                     echo '<input type="hidden" name="idMembre" value="' . ($idMembre) . '">';
                     echo '<input type="hidden" name="idFilm" value="' . ($ligne->id) . '">';
                     echo '<tr>';
-                    echo '<td><img src="/videotheque/images/' . ($ligne->image) . '" id="affiche" class="imgTable"></td>';
+                    echo '<td><img src="images/' . ($ligne->image) . '" id="affiche" class="imgTable"></td>';
                     echo '<td>' . ($ligne->titre) . '</td>';
                     echo '<td>' . ($ligne->quantite) . '</td>';
                     echo '<td>' . ($ligne->prix) . '$</td>';
@@ -95,4 +94,4 @@ $idMembre = $_SESSION['idMembre'];
 </div>
 
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/footer.html";
+include 'footer.html';

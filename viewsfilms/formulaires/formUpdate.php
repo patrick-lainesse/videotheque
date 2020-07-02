@@ -7,8 +7,8 @@ Formulaire qui affiche les infos du film sélectionné par un admin et qui perme
 les informations d'un film.
 -->
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . "/videotheque/viewsfilms/header.php";
-require_once $_SERVER['DOCUMENT_ROOT'] . "/videotheque/bd/connexion.inc.php";
+include '../header.php';
+require_once '../../bd/connexion.inc.php';
 
 $num = $_POST['idFilm'];
 $typeForm = $_POST['typeForm'];
@@ -28,10 +28,10 @@ function afficherForm($ligne)
         <?php
     }
     ?>
-    <img id="previewUpload" src="../../images/<?php echo($ligne->image); ?>" class="imagePreview">
+    <img id="previewUpload" src="images/<?php echo($ligne->image); ?>" class="imagePreview">
     <div class="row margin50">
         <form class="col s6 offset-s3" id="formUpdate" enctype="multipart/form-data"
-              action="../fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
+              action="viewsfilms/fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
             <?php
             if ($typeForm == 'update') { ?>
                 <input type="hidden" id="typeForm" name="typeForm" value="update">
@@ -104,7 +104,7 @@ function afficherForm($ligne)
                                onchange="document.getElementById('previewUpload').src = window.URL.createObjectURL(this.files[0])">
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
+                        <input class="file-path validate" type="text" value="<?php echo($ligne->image); ?>">
                     </div>
                 </div>
                 <div class="input-field col s6">
@@ -148,3 +148,4 @@ try {
     mysqli_close($connexion);
 }
 afficherForm($ligne);
+include '../footer.html';
