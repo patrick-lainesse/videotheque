@@ -26,10 +26,10 @@ session_start();
     <!--Importe la police pour le titre de l'accueil-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
 
-    <!--Base pour les différents liens des pages, pour faciliser une arborescence relative-->
+    <!--Base de références pour les liens lorsqu'en développement pour les différents liens des pages, pour faciliser une arborescence relative...-->
     <base href="http://localhost/videotheque/" />
 
-    <!--À changer sur le site Web
+    <!--... à changer pour ceci sur le site de la DESI
     <base href="http://www-desi.iro.umontreal.ca/~lainessp/ift1147/videotheque/" />-->
 
     <!--Importe materialize.css-->
