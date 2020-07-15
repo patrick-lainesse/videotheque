@@ -17,6 +17,10 @@ img {
     max-height: 100px;
 }
 
+.cache {
+    display: none;
+}
+
 .card-content {
     /*background-color: #641b00;*/
     background-color: black;

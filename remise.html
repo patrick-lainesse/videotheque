@@ -1,0 +1,50 @@
+<!--
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 22/06/2020
+
+Page d'accueil du site. C'est aussi ici que seront redirigés les usagers déconnectés ou tentant
+de se connecter à des pages auxquelles il n'a pas accès, en affichant un message d'erreur.
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh"
+          content="30; url=http://www-desi.iro.umontreal.ca/~lainessp/ift1147/videotheque/index.php"/>
+    <title>Travail pratique #2</title>
+
+    <!--Importe Icônes Google-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Importe la police pour le titre de l'accueil-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
+
+    <!--Base de références pour les liens lorsqu'en développement pour les différents liens des pages, pour faciliser une arborescence relative...-->
+    <base href="http://localhost/videotheque/"/>
+
+    <!--... à changer pour ceci sur le site de la DESI
+    <base href="http://www-desi.iro.umontreal.ca/~lainessp/ift1147/videotheque/" />-->
+
+    <!--Importe materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
+    <link rel="icon"
+          type="images/svg"
+          href="images/videocam-24px.svg">
+    <!--Indication d'optimisation pour mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--Nécessaire de précharger ces scripts pour certains éléments graphiques du framework-->
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+
+</head>
+<body>
+<h1 class="videotheque text-darken-4 red-text">VIDÉOTHÈQUE</h1>
+<h4 class="center">Site Web réalisé par:</h4>
+<h5 class="card-title">Patrick Lainesse</h5>
+<p class="card-text">Matricule: 740302</p>
+<a href="http://www-desi.iro.umontreal.ca/~lainessp/ift1147/videotheque/index.php" class="btn btn-primary">Aller au site Web</a>
+</body>
+</html>
