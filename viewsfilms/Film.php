@@ -4,6 +4,7 @@ Matricule: 740302
 Date: 22/06/2020
 
 Classe qui permet d'instancier des objets films et ses attributs par des formulaires.
+// TODO: manque un constructeur
 -->
 <?php
 

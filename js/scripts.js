@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
     $('.sidenav').sidenav();
 
-    $('.carousel').carousel({
+    /*$('.carousel').carousel({
         padding: 200
-    });
+    });*/
 
     $('select').formSelect();
 
