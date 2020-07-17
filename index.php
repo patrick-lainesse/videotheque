@@ -180,39 +180,41 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
 </div>
 
 <!--Emplacement où s'affiche le formulaire pour ajouter un nouveau film ou le modifier-->
-<div id="formulaire" class="cache">
+<div id="divFormulaire" class="cache">
     <h5 id="titreFormulaire" class="white-text center"></h5>
 
     <img id="previewUpload" class="imagePreview">
 
     <div class="row margin50">
         <!--TODO form-->
-        <form class="col s6 offset-s3" id="formEnregistrer" enctype="multipart/form-data"
-              action="viewsfilms/fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">
+        <!--<form class="col s6 offset-s3" id="formulaire" enctype="multipart/form-data"
+              action="viewsfilms/fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">-->
+        <!--TODO: valider-->
+        <form class="col s6 offset-s3" id="formulaire">
             <div class="row">
                 <div class="input-field col s4">
-                    <input id="formIdFilm" name="idFilm" type="number" readonly>
+                    <input id="formIdFilm" name="formIdFilm" type="number" readonly>
                     <label for="formIdFilm">Identifiant du film</label>
                 </div>
                 <div class="input-field col s8">
-                    <input id="formTitre" name="titre" type="text" class="validate">
+                    <input id="formTitre" name="formTitre" type="text" class="validate">
                     <label for="formTitre">Titre du film</label>
                 </div>
             </div>
             <h5 class="white-text">Réalisateur</h5>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="formPrenom" name="prenom" type="text" class="validate">
+                    <input id="formPrenom" name="formPrenom" type="text" class="validate">
                     <label for="formPrenom">Prénom</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="formNom" name="nom" type="text" class="validate">
+                    <input id="formNom" name="formNom" type="text" class="validate">
                     <label for="formNom">Nom</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s4 grey darken-4">
-                    <select id="formCategorie" name="categorie">
+                    <select id="formCategorie" name="formCategorie">
                         <?php
                         // Génération des options du select
                         $categories = array("Action", "Animation", "Comédie", "Drame", "Horreur", "Romance", "Science-fiction");
@@ -226,11 +228,11 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
                     <label>Catégorie</label>
                 </div>
                 <div class="input-field col s4">
-                    <input id="formDuree" name="duree" type="number" min="0" step="1" max="700" class="validate">
+                    <input id="formDuree" name="formDuree" type="number" min="0" step="1" max="700" class="validate">
                     <label for="formDuree">Durée</label>
                 </div>
                 <div class="input-field col s4">
-                    <input id="formPrix" name="prix" type="number" min="0" max="500" step="0.01" class="validate">
+                    <input id="formPrix" name="formPrix" type="number" min="0" max="500" step="0.01" class="validate">
                     <label for="formPrix">Prix</label>
                 </div>
             </div>
@@ -239,7 +241,7 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
                     <div class="btn waves-effect red darken-4">
                         <span>Image</span>
                         <!--source pour onchange: http://localhost/videotheque/viewsfilms/formulaires/formUpdate.php-->
-                        <input type="file" id="pochette" name="pochette"
+                        <input type="file" id="formImage" name="formImage"
                                onchange="document.getElementById('previewUpload').src = window.URL.createObjectURL(this.files[0])">
                     </div>
                     <div class="file-path-wrapper">
@@ -247,12 +249,13 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
                     </div>
                 </div>
                 <div class="input-field col s6">
-                    <input id="formHashYT" name="hashYT" type="text" class="validate">
+                    <input id="formHashYT" name="formHashYT" type="text" class="validate">
                     <label for="hashYT">Hash YouTube</label>
                 </div>
             </div>
             <div class="row">
-                <button id="formBouton" class="btn waves-effect red darken-4" type="submit" name="action">
+                <button id="formBouton" class="btn waves-effect red darken-4">
+                    <!--TODO: <button id="formBouton" class="btn waves-effect red darken-4" type="submit" name="action">-->
                     <i class="material-icons right">send</i>
                 </button>
             </div>

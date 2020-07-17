@@ -28,15 +28,12 @@ Fonctions JavaScript qui relient le html aux requêtes faites au serveur par AJA
 }*/
 
 const lister = function () {
-
     let formFilm = new FormData();
     formFilm.append('route', 'lister');
     $.ajax({
         type: 'POST',
         url: 'films/controleur.php',
         data: formFilm,
-        // processData est nécessaire, sinon erreur dans la console:
-        // "trying to append to an object that doesn't implement FormData"
         processData: false,
         contentType: false,
         dataType: 'json',
@@ -60,8 +57,6 @@ const listerCategorie = function (categorie) {
         type: 'POST',
         url: 'films/controleur.php',
         data: formFilm,
-        // processData est nécessaire, sinon erreur dans la console:
-        // "trying to append to an object that doesn't implement FormData"
         processData: false,
         contentType: false,
         dataType: 'json',
@@ -82,8 +77,6 @@ const listerAdmin = function () {
         type: 'POST',
         url: 'films/controleur.php',
         data: formFilm,
-        // processData est nécessaire, sinon erreur dans la console:
-        // "trying to append to an object that doesn't implement FormData"
         processData: false,
         contentType: false,
         dataType: 'json',
@@ -92,6 +85,29 @@ const listerAdmin = function () {
         },
         fail: function (err) {
             //TODO:
+            alert("erreur");
+        }
+    });
+}
+
+const modifier = function () {
+    let formulaire = document.getElementById('formulaire');
+    let formFilm = new FormData(formulaire);
+    formFilm.append('route', 'modifier');
+    $.ajax({
+        type: 'POST',
+        url: 'films/controleur.php',
+        data: formFilm,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function (reponse) {
+            //$('#divFormFiche').hide();
+            //filmsVue(reponse);
+            alert('modifié!');
+        },
+        fail: function (err) {
+            // TODO: si erreur
             alert("erreur");
         }
     });

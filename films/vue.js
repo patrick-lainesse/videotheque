@@ -145,7 +145,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
     let nouveauFilm;
 
     cacherTout();
-    $('#formulaire').show();
+    $('#divFormulaire').show();
 
     // Afficher le titre et le bouton correspondant au type de requête
     switch (typeRequete) {
@@ -167,6 +167,11 @@ const afficherFormulaire = function (typeRequete, unFilm) {
         case "Modifier":
             titre.html('Modifier les informations pour le film ' + unFilm.id);
             bouton.html(typeRequete + '<i class="material-icons right">create</i>');
+            $('#formulaire').submit(function () {
+                // Envoyer la requête par AJAX et empêcher le bouton d'effectuer un submit du formulaire
+                modifier();
+                return false;
+            });
             break;
         case "Supprimer":
             titre.html('Supprimer le film ' + unFilm.id + ' ?');
@@ -202,5 +207,5 @@ const cacherTout = function () {
     $('#accueil').hide();
     $('#carouselFilms').hide();
     $('#divAdmin').hide();
-    $('#formulaire').hide();
+    $('#divFormulaire').hide();
 }
