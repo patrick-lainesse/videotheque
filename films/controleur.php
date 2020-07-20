@@ -78,7 +78,7 @@ function listerAdmin()
     $resultats['route'] = "listerAdmin";
 
     try {
-        $requete = 'SELECT id, titre, realisateur, categorie, duree, prix, image, youtube from films';
+        $requete = 'SELECT id, titre, realisateur, categorie, duree, prix, image, youtube, sortie from films';
         $modele = new Modele($requete, array());
         $stmt = $modele->executer();
         $resultats['listeFilms'] = array();
@@ -87,7 +87,7 @@ function listerAdmin()
             // La case vide signifie ajouter à la fin du tableau.
         }
     } catch (Exception $e) {
-        // TODO
+        // TODO message erreur admin
     } finally {
         unset($modele);
     }
@@ -98,11 +98,11 @@ function modifier()
     global $resultats;
     $idFilm = $_POST['formIdFilm'];
     $titre = $_POST['formTitre'];
+    $sortie = $_POST['formSortie'];
     $realisateur = $_POST['formPrenom'] . ' ' . $_POST['formNom'];
     $categorie = $_POST['formCategorie'];
     $duree = $_POST['formDuree'];
     $prix = $_POST['formPrix'];
-    $titre = $_POST['formIdFilm'];
     //TODO: image controleur -> pochette
     $image = 'avatar.jpg';
     $youtube = $_POST['formHashYT'];
@@ -116,8 +116,8 @@ function modifier()
         $anciennePochette = $ligne->pochette;
         $pochette = $unModele->verserFichier("pochettes", "pochette", $anciennePochette, $titre);*/
 
-        $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=? WHERE id=?';
-        $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $idFilm));
+        $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=?, sortie=? WHERE id=?';
+        $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie, $idFilm));
         // TODO: éléminer la variable stmt
         $stmt = $modele->executer();
         $resultats['route'] = "modifier";

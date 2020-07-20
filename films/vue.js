@@ -95,7 +95,7 @@ const tableauAdmin = function (listeJSON) {
 
         // TODO: changer si finalement c'est un objet film qui est passé en paramètre
         let filmCourant = new Film(listeJSON[i]);
-        let proprietesFilm = [filmCourant.titre, filmCourant.realisateur, filmCourant.categorie, filmCourant.duree + " min", filmCourant.prix + "$"];
+        let proprietesFilm = [filmCourant.titre, filmCourant.realisateur, filmCourant.categorie, filmCourant.sortie, filmCourant.duree, filmCourant.prix + "$"];
 
         tableauFilms += '<tr>';
         tableauFilms += '<td><img src="images/' + filmCourant.image + '" class="imgTable"></td>';
@@ -130,6 +130,18 @@ const tableauAdmin = function (listeJSON) {
     // Ajouter le code du tableau à la page, puis insérer les boutons modifier et supprimer aux lignes correspondantes
     $('#tableauAdmin').html(tableauFilms);
 
+    // Initialisation du style MaterializeCSS sur le datepicker
+    $('.datepicker').datepicker({
+        editable: true,
+        yearRange: 100,
+        //defaultDate: new Date(1980, 1, 1),
+        setDefaultDate: true,
+        format: 'yyyy-mm-dd',
+        i18n: {
+            months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+        }
+    });
+
     for (let [cle, valeur] of arrayBoutonsModifier) {
         let td = document.getElementById(cle);
         td.appendChild(valeur[0]);
@@ -142,7 +154,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
 
     let titre = $('#titreFormulaire');
     let bouton = $('#formBouton');
-    let nouveauFilm;
+    let nouveauFilm;    // TODO: pas utilisé?
 
     cacherTout();
     $('#divFormulaire').show();
@@ -165,10 +177,10 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             }
             break;*/
         case "Modifier":
-            titre.html('Modifier les informations pour le film ' + unFilm.id);
+            titre.html('Modifier les informations pour ' + unFilm.titre);
             bouton.html(typeRequete + '<i class="material-icons right">create</i>');
             $('#formulaire').submit(function () {
-                // Envoyer la requête par AJAX et empêcher le bouton d'effectuer un submit du formulaire
+                // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
                 modifier();
                 return false;
             });
@@ -184,6 +196,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
     $('#previewUpload').attr("src", "images/" + unFilm.image);
     $('#formIdFilm').attr("value", unFilm.id);
     $('#formTitre').attr("value", unFilm.titre);
+    $('#formSortie').attr("value", unFilm.sortie);
 
     let realisateur = unFilm.realisateur;
     let posEsapce = realisateur.indexOf(" ");

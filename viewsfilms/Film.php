@@ -14,6 +14,7 @@ class Film
     private $titre;
     private $realisateur;
     private $categorie;
+    private $sortie;
     private $duree;
     private $prix;
     private $image;
@@ -71,6 +72,16 @@ class Film
     public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
+    }
+
+    public function getSortie()
+    {
+        return $this->sortie;
+    }
+
+    public function setSortie($sortie)
+    {
+        $this->sortie = $sortie;
     }
 
     public function getDuree()

@@ -9,14 +9,9 @@ de se connecter à des pages auxquelles il n'a pas accès, en affichant un messa
 Source: - Console.log à partir de PHP: https://stackify.com/how-to-log-to-console-in-php/
 -->
 <?php
-//include "viewsfilms/header.php";
-
-
-// Afficher un message d'erreur s'il y a lieu
-/*if (isset($_GET['Message'])) {
-    echo '<p class="center-align red-text">' . $_GET['Message'] . '</p>';
-}
-*/
+// Tableau des catégories de films, utilisé pour générer du code html
+// TODO: placer plutôt dans la classe Film.php
+$tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur", "Romance", "Science-fiction");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -56,24 +51,20 @@ Source: - Console.log à partir de PHP: https://stackify.com/how-to-log-to-conso
 </head>
 <body>
 
-<!-- TODO: MENTIONNER QUE C'EST À CETTE LISTE QUE FAIT APPEL MATERIALIZE.
-Options du menu de choix par catégorie. Le choix est transmis à lister.php par la méthode GET -->
+<!-- Options du menu de choix par catégorie. MaterializeCSS fait référence à cette liste pour générer le dropdown un peu
+     plus loin dans le code. -->
 <ul id="dropdown1" class="dropdown-content black">
     <?php
-    // Todo: déclarer tableau en début de fichier
-    $tCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur", "Romance", "Science-fiction");
-
-    // Affichage de chacune des catégories des films dans des liens du menu dropdown
-    foreach ($tCategorie as $cat) {
+    foreach ($tableauCategorie as $cat) {
         echo '<li><a class="white-text" onclick="listerCategorie(\'' . $cat . '\')">' . $cat . '</a></li>';
     }
     ?>
 </ul>
 <nav>
-    <!--Menu général pour visionner le catalogue de films-->
+    <!--Menu du haut pour visionner le catalogue de films-->
     <div class="nav-wrapper black">
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="left hide-on-med-and-down black">
+        <ul class="left hide-on-small-and-down black">
             <li><a href="" class="waves-effect waves-light">ACCUEIL</a></li>
             <li><a class="waves-effect waves-light" onclick="lister()">Nos films</a></li>
             <!--TODO-->
@@ -84,17 +75,17 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
             </li>
         </ul>
 
-        <!--Menu qui s'affiche dépendant du rôle de celui qui est connecté-->
-        <ul class="right hide-on-med-and-down black black">
+        <!--Menu d'administration-->
+        <ul class="right hide-on-small-and-down black">
             <li><a class="waves-effect waves-light red-text" onclick="listerAdmin()">Options d'administation</a></li>
         </ul>
     </div>
 </nav>
 
-<!--TODO: Menu qui remplace la navbar en mode mobile, placer plus bas-->
+<!--TODO: Menu qui remplace la navbar en mode mobile-->
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="index.php" class="waves-effect waves-light" type="submit">ACCUEIL</a></li>
-    <li><a href="viewsfilms/lister.php" class="waves-effect waves-light">Nos films</a></li>
+    <li><a href="" class="waves-effect waves-light">ACCUEIL</a></li>
+    <li><a class="waves-effect waves-light" onclick="lister()">Nos films</a></li>
     <?php
     if (isset($_SESSION['usager'])) {
 
@@ -152,7 +143,7 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
 </div>
 
 <!--Emplacement où s'affiche le tableau des films avec les options d'administration-->
-<div id="divAdmin" class="container cache">
+<div id="divAdmin" class="container tableAdmin cache">
     <div class="row">
         <h3 class="center-align">Options d'administration</h3>
     </div>
@@ -163,12 +154,13 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
     </div>
     <table class="centered">
         <thead>
-        <tr>
+        <tr><!--TODO: tableau constantes-->
             <th>Affiche</th>
             <th>Film</th>
             <th>Réalisateur</th>
             <th>Catégorie</th>
-            <th>Durée</th>
+            <th>Date<br>de sortie</th>
+            <th>Durée (min)</th>
             <th>Prix</th>
             <th>Gestion</th>
         </tr>
@@ -192,13 +184,17 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
         <!--TODO: valider-->
         <form class="col s6 offset-s3" id="formulaire">
             <div class="row">
-                <div class="input-field col s4">
+                <div class="input-field col s3">
                     <input id="formIdFilm" name="formIdFilm" type="number" readonly>
-                    <label for="formIdFilm">Identifiant du film</label>
+                    <label for="formIdFilm">Identifiant</label>
                 </div>
-                <div class="input-field col s8">
+                <div class="input-field col s6">
                     <input id="formTitre" name="formTitre" type="text" class="validate">
-                    <label for="formTitre">Titre du film</label>
+                    <label for="formTitre">Titre</label>
+                </div>
+                <div class="input-field col s3">
+                    <input type="text" class="datepicker" id="formSortie" name="formSortie">
+                    <label for="formSortie">Date de sortie</label>
                 </div>
             </div>
             <h5 class="white-text">Réalisateur</h5>
@@ -216,20 +212,18 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
                 <div class="input-field col s4 grey darken-4">
                     <select id="formCategorie" name="formCategorie">
                         <?php
-                        // Génération des options du select
-                        $categories = array("Action", "Animation", "Comédie", "Drame", "Horreur", "Romance", "Science-fiction");
-                        $catLength = count($categories);
+                        $catLength = count($tableauCategorie);
 
                         for ($x = 0; $x < $catLength; $x++) {
-                                echo '<option value="' . $categories[$x] . '">' . $categories[$x] . '</option>';
+                                echo '<option value="' . $tableauCategorie[$x] . '">' . $tableauCategorie[$x] . '</option>';
                         }
                         ?>
                     </select>
-                    <label>Catégorie</label>
+                    <label for="formCategorie">Catégorie</label>
                 </div>
                 <div class="input-field col s4">
                     <input id="formDuree" name="formDuree" type="number" min="0" step="1" max="700" class="validate">
-                    <label for="formDuree">Durée</label>
+                    <label for="formDuree">Durée (en min)</label>
                 </div>
                 <div class="input-field col s4">
                     <input id="formPrix" name="formPrix" type="number" min="0" max="500" step="0.01" class="validate">
@@ -251,6 +245,7 @@ Options du menu de choix par catégorie. Le choix est transmis à lister.php par
                 <div class="input-field col s6">
                     <input id="formHashYT" name="formHashYT" type="text" class="validate">
                     <label for="hashYT">Hash YouTube</label>
+                    <!--TODO: un hint avec hover de souris pour infos sur ce qu'est le hash YouTube-->
                 </div>
             </div>
             <div class="row">

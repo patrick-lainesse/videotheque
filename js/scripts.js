@@ -83,17 +83,13 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
     $('.sidenav').sidenav();
 
-    /*$('.carousel').carousel({
-        padding: 200
-    });*/
-
     $('select').formSelect();
 
     $('#modalConnexion').modal();
 
     $(".dropdown-trigger").dropdown({hover: false});
 
-    $('.datepicker').datepicker({
+    /*$('.datepicker').datepicker({
         editable: true,
         yearRange: 30,
         defaultDate: new Date(1980, 1, 1),
@@ -102,5 +98,5 @@ $(document).ready(function () {
         i18n: {
             months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
         }
-    });
+    });*/
 });

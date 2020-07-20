@@ -9,11 +9,12 @@ des films à travers le code.*/
 
 class Film {
 
-    constructor({id, titre, realisateur, categorie, duree, prix, image, youtube} = []) {
+    constructor({id, titre, realisateur, categorie, sortie, duree, prix, image, youtube} = []) {
         this.id = id;
         this.titre = titre;
         this.realisateur = realisateur;
         this.categorie = categorie;
+        this.sortie = sortie;
         this.duree = duree;
         this.prix = prix;
         this.image = image;

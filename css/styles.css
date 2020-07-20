@@ -73,8 +73,7 @@ ul.dropdown-content.select-dropdown li.disabled span {
     color: white;
 }
 
-ul.dropdown-content.select-dropdown li.selected {
-;
+ul.dropdown-content.select-dropdown li.selected {;
     color: white;
 }
 
@@ -106,8 +105,12 @@ input[type=number] {
     margin-top: 50px;
 }
 
-.select-dropdown{
+.select-dropdown {
     color: #FFFFFF;
+}
+
+.tableAdmin {
+    width: 95% !important;
 }
 
 tr {
@@ -133,9 +136,10 @@ tr {
 
 .datepicker-done,
 .datepicker-cancel,
-.select-dropdown li>span,
+.select-dropdown li > span,
 .is-today {
-    color: red; !important
+    color: red;
+!important
 }
 
 td.is-selected,
