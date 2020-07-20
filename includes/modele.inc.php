@@ -39,46 +39,66 @@ class Modele
     }
 
     //TODO: enlever fichier
-
-    // le fichier par défaut est avatar
-    function televerserImage($repertoire, $nomOriginal, $chaine)
+    /*function enleverFichier($dossier,$pochette){
+        if($pochette!=="avatar.jpg"){
+            $rmPoc="../$dossier/".$pochette;
+            $tabFichiers = glob("../$dossier/*");
+            //print_r($tabFichiers);
+            // parcourir les fichier
+            foreach($tabFichiers as $fichier){
+                if(is_file($fichier) && $fichier==trim($rmPoc)) {
+                    // enlever le fichier
+                    unlink($fichier);
+                    break;
+                }
+            }
+        }
+    }*/
+    function supprimerImage($affiche)
     {
-        $cheminDossier = "../$repertoire/";
-        $nomPochette = sha1($chaine . time());
+        if ($affiche != "avatar.jpg") {
+            // TODO: mettre le dossier "images" en constante String?
+            $rmPoc = '../../images/' . $affiche;
+            $tableauImages = glob('../images/*');
+
+            // Parcourir les images jusqu'à ce qu'on trouve l'ancienne image
+            foreach ($tableauImages as $fichier) {
+                if (is_file($fichier) && $fichier == trim($rmPoc)) {
+                    // Supprimer le fichier
+                    unlink($fichier);
+                    break;
+                }
+            }
+        }
+    }
+
+    // TODO: en-têtes
+    //function televerserImage($repertoire, $ancienneImage, $titreOriginal)
+    function televerserImage($ancienneImage, $titreTeleverse)
+    {
+        // TODO: remplacer par images ou String constant
+        $cheminDossier = "../images/";
+        $nomImage = sha1($titreTeleverse . time());
 
         // Par défaut, on associe le film à avatar.jpg
         $affiche = "avatar.jpg";
 
         // Si un fichier a été téléversé, remplacer l'image associée au film par celle téléversée
-        if ($_FILES[$nomOriginal]['tmp_name'] !== "") {
-            $tmp = $_FILES[$nomOriginal]['tmp_name'];
-            $fichier = $_FILES[$nomOriginal]['name'];
+        if ($_FILES[$ancienneImage]['tmp_name'] !== "") {
+            // Téléverser temporairement la nouvelle image
+            // TODO: s'arranger pour que "formImage" reste lié au form par variable constante
+            $tmp = $_FILES["formImage"]['tmp_name'];
+            $fichier = $_FILES["formImage"]['name'];
             $extension = strrchr($fichier, '.');
-            @move_uploaded_file($tmp, $cheminDossier . $nomPochette . $extension);
+            @move_uploaded_file($tmp, $cheminDossier . $nomImage . $extension);
+
             // Enlever le fichier temporaire chargé
             @unlink($tmp); //effacer le fichier temporaire
+
             //Enlever l'ancienne pochette dans le cas de modifier
-            $this->enleverFichier($repertoire, $affiche);
-            $affiche = $nomPochette . $extension;
+            $this->supprimerImage($affiche);
+            $affiche = $nomImage . $extension;
         }
         return $affiche;
     }
-    /*function verserFichier($dossier, $inputNom, $fichierDefaut, $chaine){
-        $cheminDossier="../$dossier/";
-        $nomPochette=sha1($chaine.time());
-        $pochette=$fichierDefaut;
-        if($_FILES[$inputNom]['tmp_name']!==""){
-            //Upload de la photo
-            $tmp = $_FILES[$inputNom]['tmp_name'];
-            $fichier= $_FILES[$inputNom]['name'];
-            $extension=strrchr($fichier,'.');
-            @move_uploaded_file($tmp,$cheminDossier.$nomPochette.$extension);
-            // Enlever le fichier temporaire charg�
-            @unlink($tmp); //effacer le fichier temporaire
-            //Enlever l'ancienne pochette dans le cas de modifier
-            $this->enleverFichier($dossier,$pochette);
-            $pochette=$nomPochette.$extension;
-        }
-        return $pochette;
-    }*/
 }

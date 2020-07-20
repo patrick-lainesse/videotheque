@@ -104,17 +104,19 @@ function modifier()
     $duree = $_POST['formDuree'];
     $prix = $_POST['formPrix'];
     //TODO: image controleur -> pochette
-    $image = 'avatar.jpg';
+    //$image = 'avatar.jpg';
     $youtube = $_POST['formHashYT'];
 
     try {
-        //TODO Recuperer ancienne pochette
-        /*$requette = "SELECT pochette FROM films WHERE idf=?";
-        $unModele = new filmsModele($requette, array($idf));
-        $stmt = $unModele->executer();
+        // TODO: éliminer le mot "pochette"
+        // Remplacer l'ancienne image sur le serveur
+        $requete = "SELECT image FROM films WHERE id=?";
+        $modele = new Modele($requete, array($idFilm));
+        $stmt = $modele->executer();
         $ligne = $stmt->fetch(PDO::FETCH_OBJ);
-        $anciennePochette = $ligne->pochette;
-        $pochette = $unModele->verserFichier("pochettes", "pochette", $anciennePochette, $titre);*/
+        $ancienneImage = $ligne->image;
+        $image = $modele->televerserImage($ancienneImage, $titre);
+        //$image = $modele->verserFichier("pochettes", "pochette", $ancienneImage, $titre);
 
         $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=?, sortie=? WHERE id=?';
         $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie, $idFilm));
@@ -122,7 +124,7 @@ function modifier()
         $stmt = $modele->executer();
         $resultats['route'] = "modifier";
         //TODO: section messages
-        $resultats['msg'] = "Film bien modifie";
+        $resultats['msg'] = $titre . " bien modifié.";
     } catch (Exception $e) {
         // TODO msg erreur
     } finally {
