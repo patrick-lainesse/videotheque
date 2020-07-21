@@ -106,6 +106,7 @@ const modifier = function () {
             //filmsVue(reponse);
             alert('modifié!');
             // TODO: pourquoi il alerte pas? L'image semble OK...
+            message("test");
         },
         fail: function (err) {
             // TODO: si erreur

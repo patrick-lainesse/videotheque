@@ -121,7 +121,8 @@ function modifier()
         $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=?, sortie=? WHERE id=?';
         $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie, $idFilm));
         // TODO: éléminer la variable stmt
-        $stmt = $modele->executer();
+        //$stmt = $modele->executer();
+        $modele->executer();
         $resultats['route'] = "modifier";
         //TODO: section messages
         $resultats['msg'] = $titre . " bien modifié.";

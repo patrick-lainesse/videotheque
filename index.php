@@ -67,8 +67,8 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
         <ul class="left hide-on-small-and-down black">
             <li><a href="" class="waves-effect waves-light">ACCUEIL</a></li>
             <li><a class="waves-effect waves-light" onclick="lister()">Nos films</a></li>
-            <!--TODO-->
-            <li><a class="waves-effect waves-light" onclick="lister();$('#contenu').show()">Nouveautés</a></li>
+            <!--TODO lister nouveautés + sur page d'accueil-->
+            <li><a class="waves-effect waves-light" onclick="message('test')">Nouveautés</a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">
                     Catégories<i class="material-icons right">arrow_drop_down</i>
                 </a>
@@ -115,6 +115,7 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
 </ul>
 
 <!--TODO: Emplacement pour afficher des messages temporaires-->
+<p id="zoneMessage" class="center-align red-text cache"></p>
 
 <!--Emplacement pour afficher l'accueil de la page-->
 <div id="accueil">

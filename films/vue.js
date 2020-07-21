@@ -216,9 +216,20 @@ const afficherFormulaire = function (typeRequete, unFilm) {
     $('select').formSelect();
 }
 
+const message = function (texte) {
+
+    let zoneMessage = $('#zoneMessage');
+    zoneMessage.html(texte);
+    zoneMessage.show();
+    setTimeout(function () {
+        zoneMessage.html("");
+    }, 5000);
+}
+
 const cacherTout = function () {
     $('#accueil').hide();
     $('#carouselFilms').hide();
     $('#divAdmin').hide();
     $('#divFormulaire').hide();
+    $('#zoneMessage').hide();
 }
