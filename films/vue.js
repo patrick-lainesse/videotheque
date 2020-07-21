@@ -6,16 +6,15 @@ Date: 13/07/2020
 Fonctions JavaScript responsables de l'affichage de code HTML.
 */
 
+/* Fonction principale, qui vérifie la route désirée par la réponse de la requête et redirige vers la fonction
+appropriée pour générer la vue appropriée. */
 const vue = function (reponse) {
     const route = reponse.route;
     switch (route) {
-        case "enregistrer" ://TODO renommer les fonctions de manière plus parlante
-        case "supprimer" ://TODO
+        case "enregistrer" :
+        case "supprimer" :
         case "modifier" :
-            $('#messages').html(reponse.msg);//TODO
-            setTimeout(function () {
-                $('#messages').html("");
-            }, 5000);
+            message(reponse.message);
             break;
         case "lister" :
             afficherCatalogue(reponse.listeFilms);
@@ -26,13 +25,11 @@ const vue = function (reponse) {
         case "listerAdmin" :
             tableauAdmin(reponse.listeFilms);
             break;
-        case "fiche" :  // TODO: éliminer
-            afficherFiche(reponse);
-            break;
         default://TODO: afficher message dans zone d'affichage
     }
 };
 
+// TODO: devrait être un objet de la classe film qui soit passé en paramètre ici
 const afficherCatalogue = function (listeJSON) {
     // Cacher tout sauf le menu de navigation, puis réinitialiser le carousel
     cacherTout();
@@ -130,18 +127,6 @@ const tableauAdmin = function (listeJSON) {
     // Ajouter le code du tableau à la page, puis insérer les boutons modifier et supprimer aux lignes correspondantes
     $('#tableauAdmin').html(tableauFilms);
 
-    // Initialisation du style MaterializeCSS sur le datepicker
-    $('.datepicker').datepicker({
-        editable: true,
-        yearRange: 100,
-        //defaultDate: new Date(1980, 1, 1),
-        setDefaultDate: true,
-        format: 'yyyy-mm-dd',
-        i18n: {
-            months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
-        }
-    });
-
     for (let [cle, valeur] of arrayBoutonsModifier) {
         let td = document.getElementById(cle);
         td.appendChild(valeur[0]);
@@ -149,50 +134,67 @@ const tableauAdmin = function (listeJSON) {
     }
 }
 
-
+// Affiche un formulaire prérempli pour les requêtes effacer, modifier ou supprimer un film.
 const afficherFormulaire = function (typeRequete, unFilm) {
 
     let titre = $('#titreFormulaire');
     let bouton = $('#formBouton');
-    let nouveauFilm;    // TODO: pas utilisé?
 
     cacherTout();
     $('#divFormulaire').show();
 
     // Afficher le titre et le bouton correspondant au type de requête
     switch (typeRequete) {
-        /*case "Enregistrer":
+        case "Enregistrer":
             titre.html('Ajouter un nouveau film à la base de données');
             bouton.html(typeRequete + '<i class="material-icons right">send</i>');
-            bouton.onclick = function () {
-                // TODO: valider, ici ou dans requête
-                nouveauFilm = new Film($('#formIdFilm').val(),
-                    $('#formTitre').val(),
-                    $('#formPrenom').val() + ' ' + $('#formNom').val(),
-                    $('#formCategorie').val(),
-                    $('#formDuree').val(),
-                    $('#formPrix').val(),
-                    $('#formHashYT').val());
-                enregistrer(nouveauFilm);
-            }
-            break;*/
+
+            // TODO: valider, ici ou dans requête
+            // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
+            $('#formulaire').submit(function () {
+                enregistrer();
+                return false;
+            })
+            break;
         case "Modifier":
             titre.html('Modifier les informations pour ' + unFilm.titre);
+            preremplirFormulaire(unFilm);
             bouton.html(typeRequete + '<i class="material-icons right">create</i>');
+
+            // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
             $('#formulaire').submit(function () {
-                // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
                 modifier();
                 return false;
             });
             break;
         case "Supprimer":
             titre.html('Supprimer le film ' + unFilm.id + ' ?');
+            preremplirFormulaire(unFilm);
             bouton.html(typeRequete + '<i class="material-icons right">delete</i>');
             break;
-        default://TODO: message d'erreur
+        default:
+            retourIndex();
+            message("Un problème est survenu. Veuillez réessayer plus tard.")
     }
 
-    // Préremplir le formulaire avec les données du film provenant de la base de données
+    // Initialisation du style MaterializeCSS sur le datepicker
+    $('.datepicker').datepicker({
+        editable: true,
+        yearRange: 100,
+        setDefaultDate: true,
+        format: 'yyyy-mm-dd',
+        i18n: {
+            months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+        }
+    });
+
+    // Réinitialiser l'affichage du framework MaterializeCSS
+    M.updateTextFields();
+    $('select').formSelect();
+}
+
+// Affiche des informations obtenues de la base de données dans les cases du formulaires
+const preremplirFormulaire = function (unFilm) {
     $('#previewUpload').attr("src", "images/" + unFilm.image);
     $('#formIdFilm').attr("value", unFilm.id);
     $('#formTitre').attr("value", unFilm.titre);
@@ -210,15 +212,17 @@ const afficherFormulaire = function (typeRequete, unFilm) {
     $('#formPrix').attr("value", unFilm.prix);
     $('#filePathWrapper').attr("value", unFilm.image);
     $('#formHashYT').attr("value", unFilm.youtube);
-
-    // Réinitialiser l'affichage du framework MaterializeCSS
-    M.updateTextFields();
-    $('select').formSelect();
 }
 
+// Affiche un message en rouge dans la zone dédiée
 const message = function (texte) {
-
     let zoneMessage = $('#zoneMessage');
+
+    // Retourner à l'index initial
+    // TODO: C'est probablement ça qui cause le problème
+    // TODO: retourn Index?
+    cacherTout();
+
     zoneMessage.html(texte);
     zoneMessage.show();
     setTimeout(function () {
@@ -226,6 +230,16 @@ const message = function (texte) {
     }, 5000);
 }
 
+// TODO: C'est pas si beau, ce serait préférable probablement sans délai, ou d'inclure délai dans message
+/* Retourne à la page d'accueil après un délai de deux secondes, pour laisser le temps
+   aux messages de s'afficher. */
+const retourIndex = function () {
+    setTimeout(function () {
+        location.reload();
+    }, 2000);
+}
+
+// Cache toutes les sections de la page sauf la navbar
 const cacherTout = function () {
     $('#accueil').hide();
     $('#carouselFilms').hide();

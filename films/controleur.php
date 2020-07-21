@@ -1,8 +1,10 @@
 <?php
 require_once("../includes/modele.inc.php");
-$resultats = array();  // TODO: renommer
+$resultats = array();
 
-//Contrôleur    TODO
+/**
+ * Fonction principale du contrôleur, qui redirige vers la fonction appropriée selon le type de requête.
+ */
 $route = $_POST['route'];
 switch ($route) {
     case "enregistrer" :
@@ -20,15 +22,50 @@ switch ($route) {
     case "enlever" :
         enlever();
         break;
-    case "fiche" :
-        fiche();
-        break;
     case "modifier" :
         modifier();
         break;
 }
 
-// TODO: En-tête des fonctions
+// TODO: utiliser JSON object p
+/**
+ * Récupère les données transmises par AJAX et ajoute un nouveau film à la base de données.
+ */
+function enregistrer()
+{
+    global $resultats;
+    $resultats['route'] = "enregistrer";
+
+    $titre = $_POST['formTitre'];
+    $sortie = $_POST['formSortie'];
+    $realisateur = $_POST['formPrenom'] . ' ' . $_POST['formNom'];
+    $categorie = $_POST['formCategorie'];
+    $duree = $_POST['formDuree'];
+    $prix = $_POST['formPrix'];
+    // Todo: image nécessaire?
+    //$image = $_POST['formImage'];
+    $youtube = $_POST['formHashYT'];
+
+    try {
+        // Instance de Modele pour téléverser l'image
+        $modele = new Modele();
+        $image = $modele->televerserImage("avatar.jpg", $titre);
+        $requete = "INSERT INTO films VALUES(0,?,?,?,?,?,?,?,?)";
+
+        // Nouvelle instance de Modele pour insérer dans la base de données
+        $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie));
+        $stmt = $modele->executer();
+        $resultats['message'] = "Film bien enregistré."; //TODO: dans exception, message d'erreur
+    } catch (Exception $e) {
+        // TODO message erreur enregistrer
+    } finally {
+        unset($modele);
+    }
+}
+
+/**
+ * Effectue une requête SQL pour obtenir la liste de tous les films et retourne la réponse en tableau JSON.
+ */
 function lister()
 {
     // TODO: test
@@ -50,6 +87,9 @@ function lister()
     }
 }
 
+/**
+ * Effectue une requête SQL pour obtenir les films correspondant à une catégorie et retourne la réponse en tableau JSON.
+ */
 function listerCategorie()
 {
     global $resultats;
@@ -72,6 +112,10 @@ function listerCategorie()
     }
 }
 
+// TODO: pareil que lister()!
+/**
+ * Effectue une requête SQL pour obtenir la liste de tous les films et retourne la réponse en tableau JSON.
+ */
 function listerAdmin()
 {
     global $resultats;
@@ -93,8 +137,12 @@ function listerAdmin()
     }
 }
 
+/**
+ * Récupère les données transmises par AJAX et modifie le film correspondant dans la base de données.
+ */
 function modifier()
 {
+    // TODO: Utiliser classe Film.php pour récupérer plus facilment
     global $resultats;
     $idFilm = $_POST['formIdFilm'];
     $titre = $_POST['formTitre'];
@@ -103,12 +151,9 @@ function modifier()
     $categorie = $_POST['formCategorie'];
     $duree = $_POST['formDuree'];
     $prix = $_POST['formPrix'];
-    //TODO: image controleur -> pochette
-    //$image = 'avatar.jpg';
     $youtube = $_POST['formHashYT'];
 
     try {
-        // TODO: éliminer le mot "pochette"
         // Remplacer l'ancienne image sur le serveur
         $requete = "SELECT image FROM films WHERE id=?";
         $modele = new Modele($requete, array($idFilm));
@@ -116,12 +161,9 @@ function modifier()
         $ligne = $stmt->fetch(PDO::FETCH_OBJ);
         $ancienneImage = $ligne->image;
         $image = $modele->televerserImage($ancienneImage, $titre);
-        //$image = $modele->verserFichier("pochettes", "pochette", $ancienneImage, $titre);
 
         $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=?, sortie=? WHERE id=?';
         $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie, $idFilm));
-        // TODO: éléminer la variable stmt
-        //$stmt = $modele->executer();
         $modele->executer();
         $resultats['route'] = "modifier";
         //TODO: section messages
@@ -134,11 +176,3 @@ function modifier()
 }
 
 echo json_encode($resultats);
-/*$test = array(
-    'employees' => array(
-        array('firstName' => 'John', 'lastName' => 'Doe'),
-        array('firstName' => 'Claude', 'lastName' => 'DoClaire')
-    )
-);
-
-echo json_encode($test);*/

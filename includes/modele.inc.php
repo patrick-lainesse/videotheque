@@ -4,18 +4,22 @@ require_once("connexion.inc.php");
 class Modele
 {
     private $requete;
-    private $params;    // paramètres à injecter dans la requête SQL par bind_params TODO: Vraiment?
+    private $params;    // Tableau des paramètres à injecter dans la requête SQL par bind_params
     private $connexion;
 
-    // Constructeur avec valeurs par défaut à null
+    /**
+     * Constructeur avec valeurs par défaut à null
+     */
     function __construct($requete = null, $params = null)
     {
         $this->requete = $requete;
         $this->params = $params;
     }
 
-    // TODO: Refactor: connexionSQL()
-    function obtenirConnexion()
+    /**
+     * Obtient la connexion au serveur SQL nécessaire pour effectuer une requête.
+     */
+    function connexionSQL()
     {
         // TODO: À modifier pour installer sur un serveur réel
         $maConnexion = new Connexion("localhost", "root", "", "bdfilms");
@@ -23,42 +27,72 @@ class Modele
         return $maConnexion->getConnexion();
     }
 
-    // TODO: Refactor: associerParams()
+    function deconnecter()
+    {
+        unset($this->connexion);
+    }
+
+    /**
+     * Associe les paramètres à la requête et l'exécute.
+     */
     function executer()
     {
-        $this->connexion = $this->obtenirConnexion();
+        $this->connexion = $this->connexionSQL();
         $stmt = $this->connexion->prepare($this->requete);
         $stmt->execute($this->params);
         $this->deconnecter();
         return $stmt;
     }
 
-    function deconnecter()
+
+    /**
+     * Renomme le fichier image téléversé par l'utilisateur et le déplace dans le dossier serveur. Fait appel à
+     * supprimerImage si une affiche était déjà associée à ce film.
+     * @param String $ancienneImage        Nom du fichier de l'ancienne image à supprimer
+     * @param String $imageTeleversee      Nom du fichier téléversé par l'utilisateur
+     * @return String $nouvelleImage       Nom généré pour la nouvelle image
+     */
+    function televerserImage($ancienneImage, $imageTeleversee)
     {
-        unset($this->connexion);
+        // TODO: remplacer par images ou String constant
+        $cheminDossier = "../images/";
+        $nomGenere = sha1($imageTeleversee . time());
+        $nouvelleImage = "avatar.jpg";
+
+        // Par défaut, on associe le film à avatar.jpg
+        // TODO: aussi constante: avatar.jpg
+        //$affiche = "avatar.jpg";
+
+        // Si un fichier a été téléversé, remplacer l'image associée au film par celle téléversée
+        if ($_FILES["formImage"]['tmp_name'] !== "") {
+            //if ($_FILES[$ancienneImage]['tmp_name'] !== "") {
+            // Téléverser temporairement la nouvelle image
+            // TODO: s'arranger pour que "formImage" reste lié au form par variable constante
+            $tmp = $_FILES["formImage"]['tmp_name'];
+            $fichierVerse = $_FILES["formImage"]['name'];
+            $extension = strrchr($fichierVerse, '.');
+            @move_uploaded_file($tmp, $cheminDossier . $nomGenere . $extension);
+
+            // Enlever le fichier temporaire chargé
+            @unlink($tmp); //effacer le fichier temporaire
+
+            //Enlever l'ancienne affiche dans le cas de la fonction modifier()
+            // TODO: mettre un if?
+            $this->supprimerImage($ancienneImage);
+            $nouvelleImage = $nomGenere . $extension;
+        }
+        return $nouvelleImage;
     }
 
-    //TODO: enlever fichier
-    /*function enleverFichier($dossier,$pochette){
-        if($pochette!=="avatar.jpg"){
-            $rmPoc="../$dossier/".$pochette;
-            $tabFichiers = glob("../$dossier/*");
-            //print_r($tabFichiers);
-            // parcourir les fichier
-            foreach($tabFichiers as $fichier){
-                if(is_file($fichier) && $fichier==trim($rmPoc)) {
-                    // enlever le fichier
-                    unlink($fichier);
-                    break;
-                }
-            }
-        }
-    }*/
-    function supprimerImage($affiche)
+    /**
+     * Parcourt le dossier images/ du serveur pour éliminer l'ancienne image associée à un film.
+     * @param $ancienneImage      Nom du fichier de l'ancienne image à supprimer.
+     */
+    function supprimerImage($ancienneImage)
     {
-        if ($affiche != "avatar.jpg") {
+        if ($ancienneImage != "avatar.jpg") {
             // TODO: mettre le dossier "images" en constante String?
-            $rmPoc = '../../images/' . $affiche;
+            $rmPoc = '../images/' . $ancienneImage;
             $tableauImages = glob('../images/*');
 
             // Parcourir les images jusqu'à ce qu'on trouve l'ancienne image
@@ -70,35 +104,5 @@ class Modele
                 }
             }
         }
-    }
-
-    // TODO: en-têtes
-    //function televerserImage($repertoire, $ancienneImage, $titreOriginal)
-    function televerserImage($ancienneImage, $titreTeleverse)
-    {
-        // TODO: remplacer par images ou String constant
-        $cheminDossier = "../images/";
-        $nomImage = sha1($titreTeleverse . time());
-
-        // Par défaut, on associe le film à avatar.jpg
-        $affiche = "avatar.jpg";
-
-        // Si un fichier a été téléversé, remplacer l'image associée au film par celle téléversée
-        if ($_FILES[$ancienneImage]['tmp_name'] !== "") {
-            // Téléverser temporairement la nouvelle image
-            // TODO: s'arranger pour que "formImage" reste lié au form par variable constante
-            $tmp = $_FILES["formImage"]['tmp_name'];
-            $fichier = $_FILES["formImage"]['name'];
-            $extension = strrchr($fichier, '.');
-            @move_uploaded_file($tmp, $cheminDossier . $nomImage . $extension);
-
-            // Enlever le fichier temporaire chargé
-            @unlink($tmp); //effacer le fichier temporaire
-
-            //Enlever l'ancienne pochette dans le cas de modifier
-            $this->supprimerImage($affiche);
-            $affiche = $nomImage . $extension;
-        }
-        return $affiche;
     }
 }

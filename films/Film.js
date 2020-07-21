@@ -5,7 +5,7 @@ Date: 16/07/2020
 
 Film.js
 Classe qui permet d'instancier des objets films en JavaScript à partir des tableaux json pour faciliter l'utilisation
-des films à travers le code.*/
+des films à travers le code. */
 
 class Film {
 

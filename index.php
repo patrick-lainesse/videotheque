@@ -3,11 +3,10 @@ Nom: Patrick Lainesse
 Matricule: 740302
 Date: 13/07/2020
 
-TODO: Page d'accueil du site. C'est aussi ici que seront redirigés les usagers déconnectés ou tentant
-de se connecter à des pages auxquelles il n'a pas accès, en affichant un message d'erreur.
-
-Source: - Console.log à partir de PHP: https://stackify.com/how-to-log-to-console-in-php/
+Code HTML de la Single Page Application. La plupart des éléments sont cachés pour être dévoilés par JavaScript selon
+les fonctions désirées par l'utilisateur.
 -->
+
 <?php
 // Tableau des catégories de films, utilisé pour générer du code html
 // TODO: placer plutôt dans la classe Film.php
@@ -149,7 +148,7 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
         <h3 class="center-align">Options d'administration</h3>
     </div>
     <div class="row">
-        <a class="btn-small right waves-effect waves-light darken-4 green" onclick="afficherFormulaire('enregistrer', null)">
+        <a class="btn-small right waves-effect waves-light darken-4 green" onclick="afficherFormulaire('Enregistrer', null)">
             Ajouter un film<i class="material-icons left">movie_filter</i>
         </a>
     </div>
@@ -245,7 +244,7 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
                 </div>
                 <div class="input-field col s6">
                     <input id="formHashYT" name="formHashYT" type="text" class="validate">
-                    <label for="hashYT">Hash YouTube</label>
+                    <label for="formHashYT">Hash YouTube</label>
                     <!--TODO: un hint avec hover de souris pour infos sur ce qu'est le hash YouTube-->
                 </div>
             </div>
