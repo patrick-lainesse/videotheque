@@ -12,6 +12,17 @@ function connecter() {
 }
 
 // Insère les liens vers les vidéos YouTube dans la liste des films
+const chargerModal2 = function (film) {
+
+    const modal = $("#modalHeader");
+    const titre = film.titre;
+    const youtube = film.youtube;
+    modal.html(titre);
+    $("#iframeYT").attr('src', "https://www.youtube.com/embed/" + youtube);
+    $('#modal1').modal();
+}
+
+// Insère les liens vers les vidéos YouTube dans la liste des films
 const chargerModal = function () {
 
     const modal = $("#modalHeader");

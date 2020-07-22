@@ -43,35 +43,57 @@ const afficherCatalogue = function (listeJSON) {
     let taille = listeJSON.length;
     let carteFilm = "";
 
+    /* Initialisation d'un map, qui permet de passer en paramètre des instances de la classe Film.js
+     * dans la fonction du onclick qui fait apparaître le modal avec le preview du film.
+     * Clé: le id de l'image à associer au onclick
+     * Valeur: un objet DOM img */
+    let mapImg = new Map();
+
     for (let i = 0; i < taille; i++) {
 
+        // Convertir chacun des objets du tableau JSON en objet de la classe Film.js
+        let filmCourant = new Film(listeJSON[i]);
+
+        /* Crée un élément img du DOM pour y associer les informations à faire afficher dans le modal
+         * qui apparaît au onclick sur l'image. */
+        let idImg = "img" + filmCourant.id;
+        let imgElement = document.createElement('img');
+        imgElement.src = "images/" + filmCourant.image;
+        imgElement.dataset.target = "modal1";
+        imgElement.classList.add("modal-trigger");
+        imgElement.onclick = function () {
+            chargerModal2(filmCourant);
+        }
+        mapImg.set(idImg, imgElement);
+
+        // Code html de chacun des item à afficher dans le carousel
         carteFilm += '<div class="carousel-item film">';
         carteFilm += '<div class="card">';
-        carteFilm += '<div class="card-image">';
-        /* Associer les données nécessaires comme attributs de l'image, afin de les récupérer
-         * au onclick pour afficher les informations de ce film dans le modal. */
-        carteFilm += '<img src="images/' + listeJSON[i].image
-            + '" data-target="modal1" idFilm="' + listeJSON[i].id + '" titre="'
-            + listeJSON[i].titre + '" hashYT="' + listeJSON[i].youtube
-            + '" class="modal-trigger" onclick="chargerModal.call(this)">';
+        carteFilm += '<div id ="' + idImg + '" class="card-image">';
         carteFilm += '</div>';
         carteFilm += '<div class="card-content">';
-        carteFilm += '<p class="gras">' + listeJSON[i].titre + '</p>'
-            + listeJSON[i].realisateur + '<br>'
-            + listeJSON[i].categorie + '<br>'
-            + listeJSON[i].prix + '$';
+        carteFilm += '<p class="gras">' + filmCourant.titre + '</p>'
+            + filmCourant.sortie.substring(0,4) + '<br>'
+            + filmCourant.realisateur + '<br>'
+            + filmCourant.categorie + '<br>'
+            + filmCourant.prix + '$';
         carteFilm += '</div>';
         carteFilm += '</div>';
         carteFilm += '</div>';
     }
 
+    // Ajouter le code du carousel à la page, puis insérer les tags img aux lignes correspondantes.
     carousel.html(carteFilm);
+
+    for (let [cle, valeur] of mapImg) {
+        let img = document.getElementById(cle);
+        img.appendChild(valeur);
+    }
 
     // Rafraîchir l'affichage du carousel
     $('.carousel').carousel({
         padding: 200
     });
-    // TODO: ajouter une colonne date de sortie à la table films
 }
 
 /**
@@ -91,7 +113,7 @@ const tableauAdmin = function (listeJSON) {
      * et de leur passer en paramètre des instances de la classe Film.
      * Clé: le id de la case où insérer le bouton
      * Valeur: un tableau contenant les boutons "modifier" et "supprimer" */
-    let arrayBoutonsModifier = new Map();
+    let mapBoutons = new Map();
 
     for (let i = 0; i < taille; i++) {
 
@@ -99,19 +121,20 @@ const tableauAdmin = function (listeJSON) {
         let filmCourant = new Film(listeJSON[i]);
         let proprietesFilm = [filmCourant.titre, filmCourant.realisateur, filmCourant.categorie, filmCourant.sortie, filmCourant.duree, filmCourant.prix + "$"];
 
+        // Créer une case pour afficher chacune des propriétés du film
         tableauFilms += '<tr>';
         tableauFilms += '<td><img src="images/' + filmCourant.image + '" class="imgTable"></td>';
-
         for (let propriete of proprietesFilm) {
             tableauFilms += '<td>' + propriete + '</td>';
         }
 
         // Case du tableau où iront les boutons pour modifier / supprimer des films de la base de données
-        let tdAdmin = "admin" + filmCourant.id;
-        tableauFilms += '<td id="' + tdAdmin + '">';
+        let idTdAdmin = "admin" + filmCourant.id;
+        tableauFilms += '<td id="' + idTdAdmin + '">';
         tableauFilms += '</td>';
         tableauFilms += '</tr>';
 
+        // Création des boutons modifier et supprimer, puis ajout au map
         let boutonModifier = document.createElement('button');
         boutonModifier.classList.add("btn-small", "waves-effect", "waves-light", "darken-4", "green");
         boutonModifier.innerHTML = 'Modifier<i class="material-icons right">create</i>';
@@ -126,13 +149,13 @@ const tableauAdmin = function (listeJSON) {
             afficherFormulaire('Supprimer', filmCourant);
         }
 
-        arrayBoutonsModifier.set(tdAdmin, [boutonModifier, boutonSupprimer]);
+        mapBoutons.set(idTdAdmin, [boutonModifier, boutonSupprimer]);
     }
 
     // Ajouter le code du tableau à la page, puis insérer les boutons modifier et supprimer aux lignes correspondantes
     $('#tableauAdmin').html(tableauFilms);
 
-    for (let [cle, valeur] of arrayBoutonsModifier) {
+    for (let [cle, valeur] of mapBoutons) {
         let td = document.getElementById(cle);
         td.appendChild(valeur[0]);
         td.appendChild(valeur[1]);
