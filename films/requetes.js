@@ -8,6 +8,7 @@ Utilisent FormData pour récupérer les données du formulaire de la page index,
 informer le contrôleur PHP du type de requête qui est envoyé.
 Au retour de la réponse, redirige vers vue.js pour afficher les résultats à l'utilisateur. */
 
+// TODO: plutôt utiliser le message qui provient du contrôleur
 const MSG_ERREUR = "Désolé, un problème côté serveur a empêché votre requête de se compléter. Veuillez réessayer plus tard.";
 
 /**
@@ -25,8 +26,7 @@ const enregistrer = function () {
         contentType: false,
         dataType: 'json',
         success: function (reponse) {
-            retourIndex();
-            message(reponse.message);
+            vue(reponse);
         },
         fail: function (erreur) {
             message(MSG_ERREUR);
@@ -104,12 +104,36 @@ const listerAdmin = function () {
 }
 
 /**
- * Effectue une requête pour modifier les informations d'un film dans la base de données.
+ * Effectue une requête pour modifier un film dans la base de données.
  */
 const modifier = function () {
     let formulaire = document.getElementById('formulaire');
     let formFilm = new FormData(formulaire);
     formFilm.append('route', 'modifier');
+    $.ajax({
+        type: 'POST',
+        url: 'films/controleur.php',
+        data: formFilm,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function (reponse) {
+            vue(reponse);
+        },
+        fail: function (erreur) {
+            message(MSG_ERREUR);
+        }
+    });
+}
+
+/**
+ * Effectue une requête pour supprimer un film de la base de données.
+ */
+const supprimer = function () {
+    //let formulaire = $('#formulaire');
+    let formulaire = document.getElementById('formulaire');
+    let formFilm = new FormData(formulaire);
+    formFilm.append('route', 'supprimer');
     $.ajax({
         type: 'POST',
         url: 'films/controleur.php',

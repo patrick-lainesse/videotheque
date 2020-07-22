@@ -20,6 +20,8 @@ class Film
     private $image;
     private $youtube;
 
+    const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Horreur", "Romance", "Science-fiction");
+
     public function getId()
     {
         return $this->id;

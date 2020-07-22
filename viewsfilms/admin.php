@@ -37,7 +37,7 @@ require_once '../bd/connexion.inc.php';
         <tr>
             <?php
             include 'elementsHTML/tableRowAdmin.php';
-            include 'Film.php';
+            //include 'Film.ph'; p
 
             // S'asssurer que seuls les admin accèdent à la page
             if ($_SESSION['role'] != 'admin') {

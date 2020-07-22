@@ -8,9 +8,8 @@ les fonctions désirées par l'utilisateur.
 -->
 
 <?php
+include 'films/Film.php';
 // Tableau des catégories de films, utilisé pour générer du code html
-// TODO: placer plutôt dans la classe Film.php
-$tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur", "Romance", "Science-fiction");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -41,7 +40,6 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
     <!--Nécessaire de précharger ces scripts pour certains éléments graphiques du framework-->
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <!--TODO: plus nécessaire-->
     <script type="text/javascript" src="js/scripts.js"></script>
     <script type="text/javascript" src="films/Film.js"></script>
     <script type="text/javascript" src="films/requetes.js"></script>
@@ -54,7 +52,7 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
      plus loin dans le code. -->
 <ul id="dropdown1" class="dropdown-content black">
     <?php
-    foreach ($tableauCategorie as $cat) {
+    foreach (Film::TABLEAU_CATEGORIES as $cat) {
         echo '<li><a class="white-text" onclick="listerCategorie(\'' . $cat . '\')">' . $cat . '</a></li>';
     }
     ?>
@@ -113,7 +111,7 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
     } ?>
 </ul>
 
-<!--TODO: Emplacement pour afficher des messages temporaires-->
+<!--Emplacement pour afficher des messages temporaires-->
 <p id="zoneMessage" class="center-align red-text cache"></p>
 
 <!--Emplacement pour afficher l'accueil de la page-->
@@ -166,7 +164,6 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
         </tr>
         </thead>
         <tbody id="tableauAdmin">
-        <tr><!--TODO: de trop?-->
         </tbody>
     </table>
 </div>
@@ -212,10 +209,8 @@ $tableauCategorie = array("Action", "Animation", "Comédie", "Drame", "Horreur",
                 <div class="input-field col s4 grey darken-4">
                     <select id="formCategorie" name="formCategorie">
                         <?php
-                        $catLength = count($tableauCategorie);
-
-                        for ($x = 0; $x < $catLength; $x++) {
-                                echo '<option value="' . $tableauCategorie[$x] . '">' . $tableauCategorie[$x] . '</option>';
+                        foreach (Film::TABLEAU_CATEGORIES as $cat) {
+                            echo '<option value="' . $cat . '">' . $cat . '</option>';
                         }
                         ?>
                     </select>

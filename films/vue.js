@@ -73,6 +73,12 @@ const afficherCatalogue = function (listeJSON) {
 
 
 // TODO: devrait être un objet de la classe film qui soit passé en paramètre ici
+// TODO: en-tête
+/**
+ * Affiche un formulaire prérempli pour les requêtes effacer, modifier ou supprimer un film.
+ * @param typeRequete   Type de formulaire à afficher (enregister, modifier ou supprimer)
+ * @param unFilm        Objet de la classe Film.js
+ */
 const tableauAdmin = function (listeJSON) {
 
     // Afficher seulement la section du site nécessaire
@@ -134,7 +140,11 @@ const tableauAdmin = function (listeJSON) {
     }
 }
 
-// Affiche un formulaire prérempli pour les requêtes effacer, modifier ou supprimer un film.
+/**
+ * Affiche un formulaire prérempli pour les requêtes effacer, modifier ou supprimer un film.
+ * @param typeRequete   Type de formulaire à afficher (enregister, modifier ou supprimer)
+ * @param unFilm        Objet de la classe Film.js
+ */
 const afficherFormulaire = function (typeRequete, unFilm) {
 
     let titre = $('#titreFormulaire');
@@ -164,6 +174,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
             $('#formulaire').submit(function () {
                 modifier();
+                // TODO: return false, c'est sketch
                 return false;
             });
             break;
@@ -171,10 +182,16 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             titre.html('Supprimer le film ' + unFilm.id + ' ?');
             preremplirFormulaire(unFilm);
             bouton.html(typeRequete + '<i class="material-icons right">delete</i>');
+            // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
+            $('#formulaire').submit(function () {
+                supprimer();
+                // TODO: return false, c'est sketch
+                return false;
+            });
             break;
         default:
-            retourIndex();
-            message("Un problème est survenu. Veuillez réessayer plus tard.")
+            // TODO: mettre en constante
+            message("Un problème est survenu. Veuillez réessayer plus tard.");
     }
 
     // Initialisation du style MaterializeCSS sur le datepicker
@@ -193,7 +210,10 @@ const afficherFormulaire = function (typeRequete, unFilm) {
     $('select').formSelect();
 }
 
-// Affiche des informations obtenues de la base de données dans les cases du formulaires
+/**
+ * Affiche des informations obtenues de la base de données dans les cases du formulaires.
+ * @param unFilm    Objet de la classe Film.js
+ */
 const preremplirFormulaire = function (unFilm) {
     $('#previewUpload').attr("src", "images/" + unFilm.image);
     $('#formIdFilm').attr("value", unFilm.id);
@@ -214,32 +234,32 @@ const preremplirFormulaire = function (unFilm) {
     $('#formHashYT').attr("value", unFilm.youtube);
 }
 
-// Affiche un message en rouge dans la zone dédiée
+/**
+ * Affiche un message en rouge dans la zone dédiée. Effectue un reload après 5 secondes pour éviter des problèmes
+ * avec le cache des images dans l'affichage des listes.
+ *
+ * @param texte    Message en String à faire afficher
+ */
 const message = function (texte) {
-    let zoneMessage = $('#zoneMessage');
 
-    // Retourner à l'index initial
-    // TODO: C'est probablement ça qui cause le problème
-    // TODO: retourn Index?
     cacherTout();
+    $('#accueil').show();
+
+    let zoneMessage = $('#zoneMessage');
 
     zoneMessage.html(texte);
     zoneMessage.show();
+
     setTimeout(function () {
         zoneMessage.html("");
+        // Reload pour éviter des problèmes avec le cache des images dans l'affichage des listes
+        location.reload();
     }, 5000);
 }
 
-// TODO: C'est pas si beau, ce serait préférable probablement sans délai, ou d'inclure délai dans message
-/* Retourne à la page d'accueil après un délai de deux secondes, pour laisser le temps
-   aux messages de s'afficher. */
-const retourIndex = function () {
-    setTimeout(function () {
-        location.reload();
-    }, 2000);
-}
-
-// Cache toutes les sections de la page sauf la navbar
+/**
+ * Cache toutes les sections de la page sauf la navbar.
+ */
 const cacherTout = function () {
     $('#accueil').hide();
     $('#carouselFilms').hide();

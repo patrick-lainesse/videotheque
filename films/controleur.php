@@ -19,11 +19,11 @@ switch ($route) {
     case "listerAdmin":
         listerAdmin();
         break;
-    case "enlever" :
-        enlever();
-        break;
     case "modifier" :
         modifier();
+        break;
+    case "supprimer" :
+        supprimer();
         break;
 }
 
@@ -142,7 +142,7 @@ function listerAdmin()
  */
 function modifier()
 {
-    // TODO: Utiliser classe Film.php pour récupérer plus facilment
+    // TODO: Utiliser classe pour récupérer plus facilment
     global $resultats;
     $idFilm = $_POST['formIdFilm'];
     $titre = $_POST['formTitre'];
@@ -167,9 +167,39 @@ function modifier()
         $modele->executer();
         $resultats['route'] = "modifier";
         //TODO: section messages
-        $resultats['msg'] = $titre . " bien modifié.";
+        $resultats['message'] = $titre . " bien modifié.";
     } catch (Exception $e) {
         // TODO msg erreur
+    } finally {
+        unset($modele);
+    }
+}
+
+function supprimer()
+{
+    global $resultats;
+    $idFilm = $_POST['formIdFilm'];
+
+    try {
+        $requete = "SELECT * FROM films WHERE id=?";
+        $modele = new Modele($requete, array($idFilm));
+        $stmt = $modele->executer();
+        //if ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+        $ligne = $stmt->fetch(PDO::FETCH_OBJ);
+        $modele->supprimerImage($ligne->image);
+        $requete = 'DELETE FROM films WHERE id=?';
+        $modele = new Modele($requete, array($idFilm));
+        $modele->executer();
+        // TODO: la route utilisée au retour??
+        $resultats['route'] = "supprimer";
+        $resultats['message'] = $ligne->titre . ' bien supprimé de la base de données.';
+        /*} else {
+            // TODO constante message erreur
+            $resultats['message'] = "Un problème est survenu lors de l'exécution de la requête.";
+        }*/
+    } catch (Exception $e) {
+        // TODO: gestion messages d'erreur
+        $resultats['message'] = 'Une erreur est survenue lors de la requête.';
     } finally {
         unset($modele);
     }
