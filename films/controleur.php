@@ -127,8 +127,8 @@ function listerAdmin()
         $stmt = $modele->executer();
         $resultats['listeFilms'] = array();
         while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $resultats['listeFilms'][] = $ligne;
             // La case vide signifie ajouter à la fin du tableau.
+            $resultats['listeFilms'][] = $ligne;
         }
     } catch (Exception $e) {
         // TODO message erreur admin

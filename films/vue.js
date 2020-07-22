@@ -29,7 +29,10 @@ const vue = function (reponse) {
     }
 };
 
-// TODO: devrait être un objet de la classe film qui soit passé en paramètre ici
+/**
+ * Affiche un tableau contenant l'information de tous les films et des boutons pour modifier ou supprimer.
+ * @param listeJSON        Liste des films obtenus par la requête au serveur, en format JSON
+ */
 const afficherCatalogue = function (listeJSON) {
     // Cacher tout sauf le menu de navigation, puis réinitialiser le carousel
     cacherTout();
@@ -71,13 +74,9 @@ const afficherCatalogue = function (listeJSON) {
     // TODO: ajouter une colonne date de sortie à la table films
 }
 
-
-// TODO: devrait être un objet de la classe film qui soit passé en paramètre ici
-// TODO: en-tête
 /**
- * Affiche un formulaire prérempli pour les requêtes effacer, modifier ou supprimer un film.
- * @param typeRequete   Type de formulaire à afficher (enregister, modifier ou supprimer)
- * @param unFilm        Objet de la classe Film.js
+ * Affiche un tableau contenant l'information de tous les films et des boutons pour modifier ou supprimer.
+ * @param listeJSON        Liste des films obtenus par la requête au serveur, en format JSON
  */
 const tableauAdmin = function (listeJSON) {
 
@@ -96,7 +95,7 @@ const tableauAdmin = function (listeJSON) {
 
     for (let i = 0; i < taille; i++) {
 
-        // TODO: changer si finalement c'est un objet film qui est passé en paramètre
+        // Convertir chacun des objets du tableau JSON en film pour faciliter la lecture du code
         let filmCourant = new Film(listeJSON[i]);
         let proprietesFilm = [filmCourant.titre, filmCourant.realisateur, filmCourant.categorie, filmCourant.sortie, filmCourant.duree, filmCourant.prix + "$"];
 
@@ -149,6 +148,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
 
     let titre = $('#titreFormulaire');
     let bouton = $('#formBouton');
+    let formulaire = $('#formulaire');
 
     cacherTout();
     $('#divFormulaire').show();
@@ -161,7 +161,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
 
             // TODO: valider, ici ou dans requête
             // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
-            $('#formulaire').submit(function () {
+            formulaire.submit(function () {
                 enregistrer();
                 return false;
             })
@@ -172,7 +172,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             bouton.html(typeRequete + '<i class="material-icons right">create</i>');
 
             // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
-            $('#formulaire').submit(function () {
+            formulaire.submit(function () {
                 modifier();
                 // TODO: return false, c'est sketch
                 return false;
@@ -183,7 +183,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             preremplirFormulaire(unFilm);
             bouton.html(typeRequete + '<i class="material-icons right">delete</i>');
             // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
-            $('#formulaire').submit(function () {
+            formulaire.submit(function () {
                 supprimer();
                 // TODO: return false, c'est sketch
                 return false;
