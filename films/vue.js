@@ -6,9 +6,14 @@ Date: 13/07/2020
 Fonctions JavaScript responsables de l'affichage de code HTML.
 */
 
-/* Fonction principale, qui vérifie la route désirée par la réponse de la requête et redirige vers la fonction
-appropriée pour générer la vue appropriée. */
+/** Fonction principale, qui vérifie la route désirée par la réponse de la requête et redirige vers la fonction
+ *appropriée pour générer la vue appropriée.
+ * @param {{route:String}} reponse  Type de requête retournée par le serveur
+ * @param {{message:String}} reponse  Message retournée par le serveur
+ * @param {{listeFilms:json}} reponse  Liste de films retournée par le serveur
+ * */
 const vue = function (reponse) {
+    //const route = reponse.route;
     const route = reponse.route;
     switch (route) {
         case "enregistrer" :
@@ -17,6 +22,7 @@ const vue = function (reponse) {
             message(reponse.message);
             break;
         case "lister" :
+            alert('test');
             afficherCatalogue(reponse.listeFilms);
             break;
         case "listerCategorie" :
@@ -123,7 +129,7 @@ const tableauAdmin = function (listeJSON) {
 
         // Créer une case pour afficher chacune des propriétés du film
         tableauFilms += '<tr>';
-        tableauFilms += '<td><img src="images/' + filmCourant.image + '" class="imgTable"></td>';
+        tableauFilms += '<td><img src="images/' + filmCourant.image + '" class="imgTable" alt="Affiche du film"></td>';
         for (let propriete of proprietesFilm) {
             tableauFilms += '<td>' + propriete + '</td>';
         }

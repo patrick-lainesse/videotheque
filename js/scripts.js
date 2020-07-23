@@ -7,10 +7,6 @@ Sources:
     - Fonction readURL (upload d'images): https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
 */
 
-function connecter() {
-    document.getElementById('formConnecter').submit();
-}
-
 // Insère les liens vers les vidéos YouTube dans la liste des films
 const chargerModal2 = function (film) {
 
@@ -22,8 +18,9 @@ const chargerModal2 = function (film) {
     $('#modal1').modal();
 }
 
+// TODO: éliminer si le 2 fonctionne
 // Insère les liens vers les vidéos YouTube dans la liste des films
-const chargerModal = function () {
+/*const chargerModal = function () {
 
     const modal = $("#modalHeader");
     const titre = $(this).attr('titre');
@@ -31,7 +28,7 @@ const chargerModal = function () {
     modal.html(titre);
     $("#iframeYT").attr('src', "https://www.youtube.com/embed/" + hashYT);
     $('#modal1').modal();
-}
+}*/
 
 /*************************************************************************************
  *               FONCTIONS DE VALIDATION DES FORMULAIRES
@@ -80,25 +77,20 @@ function validerMail() {
  *************************************************************************************/
 
 // Affichage des preview des images lorsque téléchargées par l'administrateur dans les formulaires
-// TODO: pas utilisé?
-function myReadUrl(ref) {
+// TODO: Éliminer si fonctionne sans
+/*function myReadUrl(ref) {
     document.getElementById('previewUpload').src = window.URL.createObjectURL(ref.files[0]);
-}
+}*/
 
 // Charger le menu sidenav pour visionner le site en mobile
 document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems);
+    const elems = document.querySelectorAll('.sidenav');
+    // TODO: tester sans et éliminer
+    const instances = M.Sidenav.init(elems);
 });
 
 // Initialisation des styles éléments importés par MaterializeCSS
-$(document).ready(function () {
-    $('.sidenav').sidenav();
-
-    //TODO: plus nécessaire $('select').formSelect();
-
-    // TODO: à enlever pour remise TP, mais remettre si je continue de le développement
-    // $('#modalConnexion').modal();
-
+$(function () {
     $(".dropdown-trigger").dropdown({hover: false});
-});
+    $('.sidenav').sidenav();
+})

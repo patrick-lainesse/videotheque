@@ -83,32 +83,6 @@ include 'films/Film.php';
 <ul class="sidenav" id="mobile-demo">
     <li><a href="" class="waves-effect waves-light">ACCUEIL</a></li>
     <li><a class="waves-effect waves-light" onclick="lister()">Nos films</a></li>
-    <?php
-    if (isset($_SESSION['usager'])) {
-
-        // afficher le courriel de l'usager connecté
-        echo '<li>' . $_SESSION['usager'] . '</li>';
-
-        // Options du menu dépendant du rôle de l'usager
-        if ($_SESSION['role'] == 'admin') {
-            echo '<li><a href="viewsfilms/admin.php" class="waves-effect waves-light red-text">Options d\'administation</a></li>';
-        } else {
-            echo '<li><a href="viewsfilms/panier.php" class="waves-effect waves-light" type="submit">Panier</a></li>';
-        }
-
-        echo '<li><a href="viewsfilms/deconnexion.php" class="waves-effect waves-light red">'
-            . '<i class="material-icons left">exit_to_app</i>Se déconnecter</a></li>';
-
-    } else {            // Si non connecté, afficher l'option pour se connecter
-        ?>
-        <!--Trigger du modal pour saisir courriel et mot de passe-->
-        <li><a href="viewsfilms/formulaires/formAjoutMembre.php">
-                <i class="material-icons left">person_add</i>
-                Devenir membre</a></li>
-        <li><a class="waves-effect waves-light modal-trigger" href="#modalConnexion" type="submit">
-                <i class="material-icons left">vpn_key</i>Connexion</a></li>
-        <?php
-    } ?>
 </ul>
 
 <!--Emplacement pour afficher des messages temporaires-->
@@ -168,17 +142,14 @@ include 'films/Film.php';
     </table>
 </div>
 
-<!--Emplacement où s'affiche le formulaire pour ajouter un nouveau film ou le modifier-->
+<!--Emplacement où s'affiche le formulaire pour supprimer, ajouter un nouveau film ou le modifier-->
 <div id="divFormulaire" class="cache">
     <h5 id="titreFormulaire" class="white-text center"></h5>
 
-    <img id="previewUpload" class="imagePreview">
+    <img src="" id="previewUpload" class="imagePreview" alt="Aperçu de l'image">
 
     <div class="row margin50">
-        <!--TODO form-->
-        <!--<form class="col s6 offset-s3" id="formulaire" enctype="multipart/form-data"
-              action="viewsfilms/fonctionsSQL/fonctionsAdmin.inc.php" method="POST" onsubmit="return valider()">-->
-        <!--TODO: valider-->
+        <!--TODO: onsubmit="return valider()" valider-->
         <form class="col s6 offset-s3" id="formulaire">
             <div class="row">
                 <div class="input-field col s3">
@@ -245,7 +216,6 @@ include 'films/Film.php';
             </div>
             <div class="row">
                 <button id="formBouton" class="btn waves-effect red darken-4">
-                    <!--TODO: <button id="formBouton" class="btn waves-effect red darken-4" type="submit" name="action">-->
                     <i class="material-icons right">send</i>
                 </button>
             </div>

@@ -74,7 +74,7 @@ const listerCategorie = function (categorie) {
         success: function (reponse) {
             vue(reponse);
         },
-        fail: function (err) {
+        fail: function (erreur) {
             message(MSG_ERREUR);
         }
     });

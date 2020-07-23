@@ -1,5 +1,6 @@
 <?php
 require_once("../includes/modele.inc.php");
+/*TODO: include 'Film.php';*/
 $resultats = array();
 
 /**
@@ -36,6 +37,8 @@ function enregistrer()
     global $resultats;
     $resultats['route'] = "enregistrer";
 
+    //$film = new Film();
+
     $titre = $_POST['formTitre'];
     $sortie = $_POST['formSortie'];
     $realisateur = $_POST['formPrenom'] . ' ' . $_POST['formNom'];
@@ -49,6 +52,17 @@ function enregistrer()
     try {
         // Instance de Modele pour téléverser l'image
         $modele = new Modele();
+
+        // TODO: c'est ici qu'on pourrait mettre l'image dans le Film
+        /*$image = $modele->televerserImage("avatar.jpg", $film->getTitre());
+        $requete = "INSERT INTO films VALUES(0,?,?,?,?,?,?,?,?)";
+
+        // Nouvelle instance de Modele pour insérer dans la base de données
+        // TODO: deux lignes
+        // TODO: peut-être des fonctions toArray dans la classe Film?
+        $modele = new Modele($requete, array($film->getTitre(), $film->getRealisateur(), $film->getCategorie(), $film->getDuree(), $film->getPrix(), $image, $film->getYoutube(), $film->getSortie()));
+        $modele->executer();*/
+
         $image = $modele->televerserImage("avatar.jpg", $titre);
         $requete = "INSERT INTO films VALUES(0,?,?,?,?,?,?,?,?)";
 
