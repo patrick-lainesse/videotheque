@@ -3,7 +3,7 @@ Nom: Patrick Lainesse
 Matricule: 740302
 Date: 13/07/2020
 
-Fonctions JavaScript responsables de l'affichage de code HTML.
+Fonctions JavaScript responsables de l'affichage de code HTML pour les éléments Film.
 */
 
 /** Fonction principale, qui vérifie la route désirée par la réponse de la requête et redirige vers la fonction
@@ -13,7 +13,6 @@ Fonctions JavaScript responsables de l'affichage de code HTML.
  * @param {{listeFilms:json}} reponse  Liste de films retournée par le serveur
  * */
 const vue = function (reponse) {
-    //const route = reponse.route;
     const route = reponse.route;
     switch (route) {
         case "enregistrer" :
@@ -22,7 +21,6 @@ const vue = function (reponse) {
             message(reponse.message);
             break;
         case "lister" :
-            alert('test');
             afficherCatalogue(reponse.listeFilms);
             break;
         case "listerCategorie" :
@@ -31,7 +29,8 @@ const vue = function (reponse) {
         case "listerAdmin" :
             tableauAdmin(reponse.listeFilms);
             break;
-        default://TODO: afficher message dans zone d'affichage
+        default:
+            message("Nous éprouvons présentement des problèmes, veuillez réessayer plus tard.");
     }
 };
 
@@ -68,7 +67,7 @@ const afficherCatalogue = function (listeJSON) {
         imgElement.dataset.target = "modal1";
         imgElement.classList.add("modal-trigger");
         imgElement.onclick = function () {
-            chargerModal2(filmCourant);
+            chargerModal(filmCourant);
         }
         mapImg.set(idImg, imgElement);
 
@@ -203,7 +202,6 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
             formulaire.submit(function () {
                 modifier();
-                // TODO: return false, c'est sketch
                 return false;
             });
             break;
@@ -214,12 +212,10 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
             formulaire.submit(function () {
                 supprimer();
-                // TODO: return false, c'est sketch
                 return false;
             });
             break;
         default:
-            // TODO: mettre en constante
             message("Un problème est survenu. Veuillez réessayer plus tard.");
     }
 

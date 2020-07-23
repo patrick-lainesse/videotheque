@@ -8,8 +8,8 @@ les fonctions désirées par l'utilisateur.
 -->
 
 <?php
-include 'films/Film.php';
 // Tableau des catégories de films, utilisé pour générer du code html
+const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Horreur", "Romance", "Science-fiction");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -52,7 +52,7 @@ include 'films/Film.php';
      plus loin dans le code. -->
 <ul id="dropdown1" class="dropdown-content black">
     <?php
-    foreach (Film::TABLEAU_CATEGORIES as $cat) {
+    foreach (TABLEAU_CATEGORIES as $cat) {
         echo '<li><a class="white-text" onclick="listerCategorie(\'' . $cat . '\')">' . $cat . '</a></li>';
     }
     ?>
@@ -126,7 +126,7 @@ include 'films/Film.php';
     </div>
     <table class="centered">
         <thead>
-        <tr><!--TODO: tableau constantes-->
+        <tr>
             <th>Affiche</th>
             <th>Film</th>
             <th>Réalisateur</th>
@@ -180,7 +180,7 @@ include 'films/Film.php';
                 <div class="input-field col s4 grey darken-4">
                     <select id="formCategorie" name="formCategorie">
                         <?php
-                        foreach (Film::TABLEAU_CATEGORIES as $cat) {
+                        foreach (TABLEAU_CATEGORIES as $cat) {
                             echo '<option value="' . $cat . '">' . $cat . '</option>';
                         }
                         ?>
@@ -211,7 +211,6 @@ include 'films/Film.php';
                 <div class="input-field col s6">
                     <input id="formHashYT" name="formHashYT" type="text" class="validate">
                     <label for="formHashYT">Hash YouTube</label>
-                    <!--TODO: un hint avec hover de souris pour infos sur ce qu'est le hash YouTube-->
                 </div>
             </div>
             <div class="row">
@@ -222,9 +221,6 @@ include 'films/Film.php';
         </form>
     </div>
 </div>
-
-<!--TODO: changer classes et style -->
-<div id="contenu" style="position:absolute;top:25%;left:20%;"></div>
 
 </body>
 </html>

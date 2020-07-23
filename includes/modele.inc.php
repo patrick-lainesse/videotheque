@@ -54,20 +54,14 @@ class Modele
      */
     function televerserImage($ancienneImage, $imageTeleversee)
     {
-        // TODO: remplacer par images ou String constant
         $cheminDossier = "../images/";
         $nomGenere = sha1($imageTeleversee . time());
         $nouvelleImage = "avatar.jpg";
 
-        // Par défaut, on associe le film à avatar.jpg
-        // TODO: aussi constante: avatar.jpg
-        //$affiche = "avatar.jpg";
-
         // Si un fichier a été téléversé, remplacer l'image associée au film par celle téléversée
         if ($_FILES["formImage"]['tmp_name'] !== "") {
-            //if ($_FILES[$ancienneImage]['tmp_name'] !== "") {
+
             // Téléverser temporairement la nouvelle image
-            // TODO: s'arranger pour que "formImage" reste lié au form par variable constante
             $tmp = $_FILES["formImage"]['tmp_name'];
             $fichierVerse = $_FILES["formImage"]['name'];
             $extension = strrchr($fichierVerse, '.');
@@ -77,7 +71,6 @@ class Modele
             @unlink($tmp); //effacer le fichier temporaire
 
             //Enlever l'ancienne affiche dans le cas de la fonction modifier()
-            // TODO: mettre un if?
             $this->supprimerImage($ancienneImage);
             $nouvelleImage = $nomGenere . $extension;
         }
@@ -86,12 +79,11 @@ class Modele
 
     /**
      * Parcourt le dossier images/ du serveur pour éliminer l'ancienne image associée à un film.
-     * @param $ancienneImage      Nom du fichier de l'ancienne image à supprimer.
+     * @param String $ancienneImage      Nom du fichier de l'ancienne image à supprimer.
      */
     function supprimerImage($ancienneImage)
     {
         if ($ancienneImage != "avatar.jpg") {
-            // TODO: mettre le dossier "images" en constante String?
             $rmPoc = '../images/' . $ancienneImage;
             $tableauImages = glob('../images/*');
 

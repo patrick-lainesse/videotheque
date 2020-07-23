@@ -1,7 +1,8 @@
 <?php
 require_once("../includes/modele.inc.php");
-/*TODO: include 'Film.php';*/
 $resultats = array();
+
+const MESSAGE_ERREUR = 'Désolé, un problème côté serveur a empêché votre requête de se compléter. Veuillez réessayer plus tard.';
 
 /**
  * Fonction principale du contrôleur, qui redirige vers la fonction appropriée selon le type de requête.
@@ -28,16 +29,12 @@ switch ($route) {
         break;
 }
 
-// TODO: utiliser JSON object p
 /**
  * Récupère les données transmises par AJAX et ajoute un nouveau film à la base de données.
  */
 function enregistrer()
 {
     global $resultats;
-    $resultats['route'] = "enregistrer";
-
-    //$film = new Film();
 
     $titre = $_POST['formTitre'];
     $sortie = $_POST['formSortie'];
@@ -45,33 +42,22 @@ function enregistrer()
     $categorie = $_POST['formCategorie'];
     $duree = $_POST['formDuree'];
     $prix = $_POST['formPrix'];
-    // Todo: image nécessaire?
-    //$image = $_POST['formImage'];
     $youtube = $_POST['formHashYT'];
 
     try {
         // Instance de Modele pour téléverser l'image
         $modele = new Modele();
 
-        // TODO: c'est ici qu'on pourrait mettre l'image dans le Film
-        /*$image = $modele->televerserImage("avatar.jpg", $film->getTitre());
-        $requete = "INSERT INTO films VALUES(0,?,?,?,?,?,?,?,?)";
-
-        // Nouvelle instance de Modele pour insérer dans la base de données
-        // TODO: deux lignes
-        // TODO: peut-être des fonctions toArray dans la classe Film?
-        $modele = new Modele($requete, array($film->getTitre(), $film->getRealisateur(), $film->getCategorie(), $film->getDuree(), $film->getPrix(), $image, $film->getYoutube(), $film->getSortie()));
-        $modele->executer();*/
-
         $image = $modele->televerserImage("avatar.jpg", $titre);
         $requete = "INSERT INTO films VALUES(0,?,?,?,?,?,?,?,?)";
 
         // Nouvelle instance de Modele pour insérer dans la base de données
         $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie));
-        $stmt = $modele->executer();
-        $resultats['message'] = "Film bien enregistré."; //TODO: dans exception, message d'erreur
+        $modele->executer();
+        $resultats['message'] = "Film bien enregistré.";
+        $resultats['route'] = "enregistrer";
     } catch (Exception $e) {
-        // TODO message erreur enregistrer
+        $resultats['message'] = MESSAGE_ERREUR;
     } finally {
         unset($modele);
     }
@@ -82,20 +68,19 @@ function enregistrer()
  */
 function lister()
 {
-    // TODO: test
     global $resultats;
-    $resultats['route'] = "lister";
     $requete = "SELECT * FROM films";
     try {
         $modele = new Modele($requete, array());
         $stmt = $modele->executer();
         $resultats['listeFilms'] = array();
         while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $resultats['listeFilms'][] = $ligne;
             // La case vide signifie ajouter à la fin du tableau.
+            $resultats['listeFilms'][] = $ligne;
         }
+        $resultats['route'] = "lister";
     } catch (Exception $e) {
-        // TODO
+        $resultats['message'] = MESSAGE_ERREUR;
     } finally {
         unset($modele);
     }
@@ -107,7 +92,6 @@ function lister()
 function listerCategorie()
 {
     global $resultats;
-    $resultats['route'] = "listerCategorie";
     $categorie = $_POST['categorie'];
 
     try {
@@ -116,24 +100,23 @@ function listerCategorie()
         $stmt = $modele->executer();
         $resultats['listeFilms'] = array();
         while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $resultats['listeFilms'][] = $ligne;
             // La case vide signifie ajouter à la fin du tableau.
+            $resultats['listeFilms'][] = $ligne;
         }
+        $resultats['route'] = "listerCategorie";
     } catch (Exception $e) {
-        // TODO
+        $resultats['message'] = MESSAGE_ERREUR;
     } finally {
         unset($modele);
     }
 }
 
-// TODO: pareil que lister()!
 /**
  * Effectue une requête SQL pour obtenir la liste de tous les films et retourne la réponse en tableau JSON.
  */
 function listerAdmin()
 {
     global $resultats;
-    $resultats['route'] = "listerAdmin";
 
     try {
         $requete = 'SELECT id, titre, realisateur, categorie, duree, prix, image, youtube, sortie from films';
@@ -144,19 +127,20 @@ function listerAdmin()
             // La case vide signifie ajouter à la fin du tableau.
             $resultats['listeFilms'][] = $ligne;
         }
+        $resultats['route'] = "listerAdmin";
     } catch (Exception $e) {
-        // TODO message erreur admin
+        $resultats['message'] = MESSAGE_ERREUR;
     } finally {
         unset($modele);
     }
 }
 
+// TODO: semble avoir un problème avec le nom d'image, remplacé par avatar même si non souhaité
 /**
  * Récupère les données transmises par AJAX et modifie le film correspondant dans la base de données.
  */
 function modifier()
 {
-    // TODO: Utiliser classe pour récupérer plus facilment
     global $resultats;
     $idFilm = $_POST['formIdFilm'];
     $titre = $_POST['formTitre'];
@@ -180,10 +164,9 @@ function modifier()
         $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie, $idFilm));
         $modele->executer();
         $resultats['route'] = "modifier";
-        //TODO: section messages
         $resultats['message'] = $titre . " bien modifié.";
     } catch (Exception $e) {
-        // TODO msg erreur
+        $resultats['message'] = MESSAGE_ERREUR;
     } finally {
         unset($modele);
     }
@@ -198,22 +181,15 @@ function supprimer()
         $requete = "SELECT * FROM films WHERE id=?";
         $modele = new Modele($requete, array($idFilm));
         $stmt = $modele->executer();
-        //if ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
         $ligne = $stmt->fetch(PDO::FETCH_OBJ);
         $modele->supprimerImage($ligne->image);
         $requete = 'DELETE FROM films WHERE id=?';
         $modele = new Modele($requete, array($idFilm));
         $modele->executer();
-        // TODO: la route utilisée au retour??
         $resultats['route'] = "supprimer";
         $resultats['message'] = $ligne->titre . ' bien supprimé de la base de données.';
-        /*} else {
-            // TODO constante message erreur
-            $resultats['message'] = "Un problème est survenu lors de l'exécution de la requête.";
-        }*/
     } catch (Exception $e) {
-        // TODO: gestion messages d'erreur
-        $resultats['message'] = 'Une erreur est survenue lors de la requête.';
+        $resultats['message'] = MESSAGE_ERREUR;
     } finally {
         unset($modele);
     }

@@ -3,12 +3,14 @@ Nom: Patrick Lainesse
 Matricule: 740302
 Date: 22/06/2020
 
-Sources:
-    - Fonction readURL (upload d'images): https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+Fonctions JavaScript générales responsables de l'affichage de code HTML.
 */
 
-// Insère les liens vers les vidéos YouTube dans la liste des films
-const chargerModal2 = function (film) {
+/** Vérifie que le courriel entré est valide
+ * Source: https://www.wired.com/2008/08/four-regular-expressions-to-check-email-addresses/
+ * @return true ou false pour empêcher le formulaire d'envoyer la requête
+ */
+const chargerModal = function (film) {
 
     const modal = $("#modalHeader");
     const titre = film.titre;
@@ -17,18 +19,6 @@ const chargerModal2 = function (film) {
     $("#iframeYT").attr('src', "https://www.youtube.com/embed/" + youtube);
     $('#modal1').modal();
 }
-
-// TODO: éliminer si le 2 fonctionne
-// Insère les liens vers les vidéos YouTube dans la liste des films
-/*const chargerModal = function () {
-
-    const modal = $("#modalHeader");
-    const titre = $(this).attr('titre');
-    const hashYT = $(this).attr('hashYT');
-    modal.html(titre);
-    $("#iframeYT").attr('src', "https://www.youtube.com/embed/" + hashYT);
-    $('#modal1').modal();
-}*/
 
 /*************************************************************************************
  *               FONCTIONS DE VALIDATION DES FORMULAIRES
@@ -42,7 +32,7 @@ const chargerModal2 = function (film) {
  * Le prénom n'est pas validé non plus pour les cas de noms d'artistes particuliers.
  * Image non validée car on pourrait ajouter un film sans image (avatar.jpg serait alors utilisé).
  *
- * @returns true ou false pour empêcher le formulaire d'envoyer la requête
+ * @return true ou false pour empêcher le formulaire d'envoyer la requête
  */
 function valider() {
 
@@ -59,10 +49,9 @@ function valider() {
     }
 }
 
-/* Vérifie que le courriel entré est valide
+/** Vérifie que le courriel entré est valide
  * Source: https://www.wired.com/2008/08/four-regular-expressions-to-check-email-addresses/
- *
- * @returns true ou false pour empêcher le formulaire d'envoyer la requête
+ * @return true ou false pour empêcher le formulaire d'envoyer la requête
  */
 function validerMail() {
 
@@ -76,17 +65,11 @@ function validerMail() {
  *               FONCTIONS RELIÉES AUX ÉLÉMENTS GRAPHIQUES DES PAGES
  *************************************************************************************/
 
-// Affichage des preview des images lorsque téléchargées par l'administrateur dans les formulaires
-// TODO: Éliminer si fonctionne sans
-/*function myReadUrl(ref) {
-    document.getElementById('previewUpload').src = window.URL.createObjectURL(ref.files[0]);
-}*/
-
-// Charger le menu sidenav pour visionner le site en mobile
+/** Charge le menu sidenav pour visionner le site en mobile
+ * Source: https://www.wired.com/2008/08/four-regular-expressions-to-check-email-addresses/
+ */
 document.addEventListener('DOMContentLoaded', function () {
     const elems = document.querySelectorAll('.sidenav');
-    // TODO: tester sans et éliminer
-    const instances = M.Sidenav.init(elems);
 });
 
 // Initialisation des styles éléments importés par MaterializeCSS

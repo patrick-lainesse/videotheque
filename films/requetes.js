@@ -8,9 +8,6 @@ Utilisent FormData pour récupérer les données du formulaire de la page index,
 informer le contrôleur PHP du type de requête qui est envoyé.
 Au retour de la réponse, redirige vers vue.js pour afficher les résultats à l'utilisateur. */
 
-// TODO: plutôt utiliser le message qui provient du contrôleur
-const MSG_ERREUR = "Désolé, un problème côté serveur a empêché votre requête de se compléter. Veuillez réessayer plus tard.";
-
 /**
  * Effectue une requête pour ajouter un nouveau film à la base de données.
  */
@@ -29,7 +26,7 @@ const enregistrer = function () {
             vue(reponse);
         },
         fail: function (erreur) {
-            message(MSG_ERREUR);
+            message(erreur.message);
         }
     });
 }
@@ -51,7 +48,7 @@ const lister = function () {
             vue(reponse);
         },
         fail: function (erreur) {
-            message(MSG_ERREUR);
+            message(erreur.message);
         }
     });
 }
@@ -75,12 +72,11 @@ const listerCategorie = function (categorie) {
             vue(reponse);
         },
         fail: function (erreur) {
-            message(MSG_ERREUR);
+            message(erreur.message);
         }
     });
 }
 
-// TODO: pourrait être lister tout court...
 /**
  * Effectue une requête pour obtenir la liste de tous les films de la base de données et les faire afficher
  * avec des options d'administration (ajouter, supprimer, modifier).
@@ -99,7 +95,7 @@ const listerAdmin = function () {
             vue(reponse);
         },
         fail: function (erreur) {
-            message(MSG_ERREUR);
+            message(erreur.message);
         }
     });
 }
@@ -122,7 +118,7 @@ const modifier = function () {
             vue(reponse);
         },
         fail: function (erreur) {
-            message(MSG_ERREUR);
+            message(erreur.message);
         }
     });
 }
@@ -146,7 +142,7 @@ const supprimer = function () {
             vue(reponse);
         },
         fail: function (erreur) {
-            message(MSG_ERREUR);
+            message(erreur.message);
         }
     });
 }
