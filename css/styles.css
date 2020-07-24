@@ -93,14 +93,6 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-.marginNeg {
-    margin-top: -15px;
-}
-
-.marginTop10 {
-    margin-top: 10px;
-}
-
 .marginTop30 {
     margin-top: 30px;
 }

@@ -13,6 +13,15 @@ générer la vue associée à la réponse.
 require_once("../includes/modele.inc.php");
 $resultats = array();
 
+$idFilm = 0;
+$titre = "";
+$sortie = "";
+$realisateur = "";
+$categorie = "";
+$duree = 0;
+$prix = 0;
+$youtube ="";
+
 const MESSAGE_ERREUR = 'Désolé, un problème côté serveur a empêché votre requête de se compléter. Veuillez réessayer plus tard.';
 
 /**
@@ -49,24 +58,17 @@ switch ($route) {
 function enregistrer()
 {
     global $resultats;
-
-    $titre = $_POST['formTitre'];
-    $sortie = $_POST['formSortie'];
-    $realisateur = $_POST['formPrenom'] . ' ' . $_POST['formNom'];
-    $categorie = $_POST['formCategorie'];
-    $duree = $_POST['formDuree'];
-    $prix = $_POST['formPrix'];
-    $youtube = $_POST['formHashYT'];
+    recupererForm();
 
     try {
         // Instance de Modele pour téléverser l'image
         $modele = new Modele();
 
-        $image = $modele->televerserImage("avatar.jpg", $titre);
+        $image = $modele->televerserImage("avatar.jpg", $GLOBALS['titre']);
         $requete = "INSERT INTO films VALUES(0,?,?,?,?,?,?,?,?)";
 
         // Nouvelle instance de Modele pour insérer dans la base de données
-        $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie));
+        $modele = new Modele($requete, array($GLOBALS['titre'], $GLOBALS['realisateur'], $GLOBALS['categorie'], $GLOBALS['duree'], $GLOBALS['prix'], $image, $GLOBALS['youtube'], $GLOBALS['sortie']));
         $modele->executer();
         $resultats['message'] = "Film bien enregistré.";
         $resultats['route'] = "enregistrer";
@@ -178,30 +180,23 @@ function listerNouveautes()
 function modifier()
 {
     global $resultats;
-    $idFilm = $_POST['formIdFilm'];
-    $titre = $_POST['formTitre'];
-    $sortie = $_POST['formSortie'];
-    $realisateur = $_POST['formPrenom'] . ' ' . $_POST['formNom'];
-    $categorie = $_POST['formCategorie'];
-    $duree = $_POST['formDuree'];
-    $prix = $_POST['formPrix'];
-    $youtube = $_POST['formHashYT'];
+    recupererForm();
 
     try {
         // Remplacer l'ancienne image sur le serveur
         $requete = "SELECT image FROM films WHERE id=?";
-        $modele = new Modele($requete, array($idFilm));
+        $modele = new Modele($requete, array($GLOBALS['idFilm']));
         $stmt = $modele->executer();
         $ligne = $stmt->fetch(PDO::FETCH_OBJ);
         $ancienneImage = $ligne->image;
-        $nouvelleImage = $modele->televerserImage($ancienneImage, $titre);
+        $nouvelleImage = $modele->televerserImage($ancienneImage, $GLOBALS['titre']);
 
         $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=?, sortie=? WHERE id=?';
-        $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $nouvelleImage, $youtube, $sortie, $idFilm));
+        $modele = new Modele($requete, array($GLOBALS['titre'], $GLOBALS['realisateur'], $GLOBALS['categorie'], $GLOBALS['duree'], $GLOBALS['prix'], $nouvelleImage, $GLOBALS['youtube'], $GLOBALS['sortie'], $GLOBALS['idFilm']));
         $modele->executer();
 
         $resultats['route'] = "modifier";
-        $resultats['message'] = $titre . " bien modifié.";
+        $resultats['message'] = $GLOBALS['titre'] . " bien modifié.";
     } catch (Exception $e) {
         $resultats['message'] = MESSAGE_ERREUR;
     } finally {
@@ -230,6 +225,28 @@ function supprimer()
     } finally {
         unset($modele);
     }
+}
+
+function recupererForm() {
+
+    global $idFilm;
+    if (isset($_POST['formIdFilm'])) {
+        $idFilm = $_POST['formIdFilm'];
+    }
+    global $titre;
+    $titre = $_POST['formTitre'];
+    global $sortie;
+    $sortie = $_POST['formSortie'];
+    global $realisateur;
+    $realisateur = $_POST['formPrenom'] . ' ' . $_POST['formNom'];
+    global $categorie;
+    $categorie = $_POST['formCategorie'];
+    global $duree;
+    $duree = $_POST['formDuree'];
+    global $prix;
+    $prix = $_POST['formPrix'];
+    global $youtube;
+    $youtube = $_POST['formHashYT'];
 }
 
 echo json_encode($resultats);

@@ -9,6 +9,8 @@ class Modele
 
     /**
      * Constructeur avec valeurs par défaut à null
+     * @param String $requete        Requête SQL à faire exécuter au serveur de base de données
+     * @param [] $params             Tableau de paramètres à injecter dans la requête SQL
      */
     function __construct($requete = null, $params = null)
     {
