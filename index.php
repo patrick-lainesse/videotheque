@@ -26,7 +26,7 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
     <base href="http://localhost/videotheque/"/>
 
     <!--... TODO: à changer pour ceci sur le site de la DESI
-    <base href="http://www-desi.iro.umontreal.ca/~lainessp/ift1147/videotheque/" />-->
+    <base href="http://www-desi.iro.umontreal.ca/~lainessp/ift1147/videotheque2/" />-->
 
     <!--Importe materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
@@ -40,7 +40,6 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
     <!--Nécessaire de précharger ces scripts pour certains éléments graphiques du framework-->
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script>
     <script type="text/javascript" src="films/Film.js"></script>
     <script type="text/javascript" src="films/requetes.js"></script>
     <script type="text/javascript" src="films/vue.js"></script>

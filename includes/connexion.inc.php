@@ -30,7 +30,6 @@ class Connexion
             );
             $this->connexion = new PDO($dns, $this->usager, $this->motPasse, $options);
         } catch (Exception $e) {
-            //echo $e->getMessage();
             echo "Problème de connexion au serveur MySQL: " . $e->getMessage();
             exit();
         }

@@ -150,6 +150,7 @@ function modifier()
     $duree = $_POST['formDuree'];
     $prix = $_POST['formPrix'];
     $youtube = $_POST['formHashYT'];
+    $image = $_POST['formImage'];
 
     try {
         // Remplacer l'ancienne image sur le serveur
@@ -158,7 +159,6 @@ function modifier()
         $stmt = $modele->executer();
         $ligne = $stmt->fetch(PDO::FETCH_OBJ);
         $ancienneImage = $ligne->image;
-        $image = $modele->televerserImage($ancienneImage, $titre);
 
         $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=?, sortie=? WHERE id=?';
         $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie, $idFilm));

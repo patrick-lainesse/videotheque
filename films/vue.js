@@ -141,14 +141,14 @@ const tableauAdmin = function (listeJSON) {
 
         // Création des boutons modifier et supprimer, puis ajout au map
         let boutonModifier = document.createElement('button');
-        boutonModifier.classList.add("btn-small", "waves-effect", "waves-light", "darken-4", "green");
+        boutonModifier.classList.add("btn-small", "waves-effect", "waves-light", "darken-4", "green", "block");
         boutonModifier.innerHTML = 'Modifier<i class="material-icons right">create</i>';
         boutonModifier.onclick = function () {
             afficherFormulaire('Modifier', filmCourant);
         }
 
         let boutonSupprimer = document.createElement('button');
-        boutonSupprimer.classList.add("btn-small", "waves-effect", "waves-light", "marginTop10", "darken-4", "red");
+        boutonSupprimer.classList.add("btn-small", "waves-effect", "waves-light", "marginTop10", "darken-4", "red", "block");
         boutonSupprimer.innerHTML = 'Supprimer<i class="material-icons right">delete</i>';
         boutonSupprimer.onclick = function () {
             afficherFormulaire('Supprimer', filmCourant);
@@ -159,6 +159,9 @@ const tableauAdmin = function (listeJSON) {
 
     // Ajouter le code du tableau à la page, puis insérer les boutons modifier et supprimer aux lignes correspondantes
     $('#tableauAdmin').html(tableauFilms);
+
+    let br = document.createElement('p');
+    br.appendChild(document.createTextNode('<br>'));
 
     for (let [cle, valeur] of mapBoutons) {
         let td = document.getElementById(cle);
@@ -292,3 +295,64 @@ const cacherTout = function () {
     $('#divFormulaire').hide();
     $('#zoneMessage').hide();
 }
+
+
+/** Vérifie que le courriel entré est valide
+ * Source: https://www.wired.com/2008/08/four-regular-expressions-to-check-email-addresses/
+ * @return true ou false pour empêcher le formulaire d'envoyer la requête
+ */
+const chargerModal = function (film) {
+
+    const modal = $("#modalHeader");
+    const titre = film.titre;
+    const youtube = film.youtube;
+    modal.html(titre);
+    $("#iframeYT").attr('src', "https://www.youtube.com/embed/" + youtube);
+    $('#modal1').modal();
+}
+
+/*************************************************************************************
+ *               FONCTIONS DE VALIDATION DES FORMULAIRES
+ *               (source: exemples sur Studium)
+ *               La plupart des validations sont fournies par le framework Materialize
+ *************************************************************************************/
+
+/**
+ * Vérifie que toutes les entrées des formulaires sont bien remplies.
+ * Pas nécessaire de valider le idFilm ou la catégorie car ils sont inaccesibles à l'utilisateur.
+ * Le prénom n'est pas validé non plus pour les cas de noms d'artistes particuliers.
+ * Image non validée car on pourrait ajouter un film sans image (avatar.jpg serait alors utilisé).
+ *
+ * @return true ou false pour empêcher le formulaire d'envoyer la requête
+ */
+function valider() {
+
+    let titre = document.getElementById('titre').value;
+    let nom = document.getElementById('nom').value;
+    let duree = document.getElementById('duree').value;
+    let prix = document.getElementById('prix').value;
+
+    if (titre !== "" && nom !== "" && duree !== "" && prix !== "") {
+        return true;
+    } else {
+        alert("Veuillez remplir convenablement tous les champs");
+        return false;
+    }
+}
+
+/*************************************************************************************
+ *               FONCTIONS RELIÉES AUX ÉLÉMENTS GRAPHIQUES DES PAGES
+ *************************************************************************************/
+
+/** Charge le menu sidenav pour visionner le site en mobile
+ * Source: https://www.wired.com/2008/08/four-regular-expressions-to-check-email-addresses/
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    const elems = document.querySelectorAll('.sidenav');
+});
+
+// Initialisation des styles éléments importés par MaterializeCSS
+$(function () {
+    $(".dropdown-trigger").dropdown({hover: false});
+    $('.sidenav').sidenav();
+})
