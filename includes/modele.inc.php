@@ -58,6 +58,7 @@ class Modele
     {
         $cheminDossier = "../images/";
         $nomGenere = sha1($titreFilm . time());
+
         $nouvelleImage = "avatar.jpg";
 
         // Si un fichier a été téléversé, remplacer l'image associée au film par celle téléversée

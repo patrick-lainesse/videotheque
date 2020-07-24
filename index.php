@@ -82,10 +82,6 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
     <li><a href="" class="waves-effect waves-light white-text">ACCUEIL</a></li>
     <li><a class="waves-effect waves-light white-text" onclick="lister()">Nos films</a></li>
     <li><a class="waves-effect waves-light white-text" onclick="listerNouveautes()">Nouveautés</a></li>
-    <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown1">
-            Catégories<i class="material-icons white-text right">arrow_drop_down</i>
-        </a>
-    </li>
     <li><a class="waves-effect waves-light red-text" onclick="listerAdmin()">Options d'administation</a></li>
 </ul>
 

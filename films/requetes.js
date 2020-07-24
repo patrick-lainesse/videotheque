@@ -17,7 +17,7 @@ const enregistrer = function () {
     formFilm.append('route', 'enregistrer');
     $.ajax({
         type: 'POST',
-        url: 'films/controleur.php',
+        url: 'films/gestionFilms.php',
         data: formFilm,
         processData: false,
         contentType: false,
@@ -39,7 +39,7 @@ const lister = function () {
     formFilm.append('route', 'lister');
     $.ajax({
         type: 'POST',
-        url: 'films/controleur.php',
+        url: 'films/gestionFilms.php',
         data: formFilm,
         processData: false,
         contentType: false,
@@ -63,7 +63,7 @@ const listerCategorie = function (categorie) {
     formFilm.append('categorie', categorie);
     $.ajax({
         type: 'POST',
-        url: 'films/controleur.php',
+        url: 'films/gestionFilms.php',
         data: formFilm,
         processData: false,
         contentType: false,
@@ -86,7 +86,7 @@ const listerAdmin = function () {
     formFilm.append('route', 'listerAdmin');
     $.ajax({
         type: 'POST',
-        url: 'films/controleur.php',
+        url: 'films/gestionFilms.php',
         data: formFilm,
         processData: false,
         contentType: false,
@@ -108,7 +108,7 @@ const listerNouveautes = function () {
     formFilm.append('route', 'listerNouveautes');
     $.ajax({
         type: 'POST',
-        url: 'films/controleur.php',
+        url: 'films/gestionFilms.php',
         data: formFilm,
         processData: false,
         contentType: false,
@@ -126,12 +126,13 @@ const listerNouveautes = function () {
  * Effectue une requête pour modifier un film dans la base de données.
  */
 const modifier = function () {
+
     let formulaire = document.getElementById('formulaire');
     let formFilm = new FormData(formulaire);
     formFilm.append('route', 'modifier');
     $.ajax({
         type: 'POST',
-        url: 'films/controleur.php',
+        url: 'films/gestionFilms.php',
         data: formFilm,
         processData: false,
         contentType: false,
@@ -155,7 +156,7 @@ const supprimer = function () {
     formFilm.append('route', 'supprimer');
     $.ajax({
         type: 'POST',
-        url: 'films/controleur.php',
+        url: 'films/gestionFilms.php',
         data: formFilm,
         processData: false,
         contentType: false,
