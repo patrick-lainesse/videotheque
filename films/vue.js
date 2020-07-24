@@ -255,6 +255,7 @@ const preremplirFormulaire = function (unFilm) {
     $('#formTitre').attr("value", unFilm.titre);
     $('#formSortie').attr("value", unFilm.sortie);
 
+    // Séparer le nom et le prénom du réalisateur et les afficher dans les cases correspondantes
     let realisateur = unFilm.realisateur;
     let posEsapce = realisateur.indexOf(" ");
     let prenom = realisateur.substring(0, posEsapce);
@@ -266,6 +267,7 @@ const preremplirFormulaire = function (unFilm) {
     $('#formDuree').attr("value", unFilm.duree);
     $('#formPrix').attr("value", unFilm.prix);
     $('#filePathWrapper').attr("value", unFilm.image);
+    /*$('#formImage').attr("value", unFilm.image);*/
     $('#formHashYT').attr("value", unFilm.youtube);
 }
 
@@ -287,8 +289,8 @@ const message = function (texte) {
 
     setTimeout(function () {
         zoneMessage.html("");
-        // Reload pour éviter des problèmes avec le cache des images dans l'affichage des listes
-        location.reload();
+        // 'Hard' reload pour éviter des problèmes avec le cache des images dans l'affichage des listes
+        location.reload(true);
     }, 5000);
 }
 

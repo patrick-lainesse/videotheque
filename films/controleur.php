@@ -1,4 +1,15 @@
 <?php
+/*
+Nom: Patrick Lainesse
+Matricule: 740302
+Date: 13/07/2020
+
+Code PHP du serveur qui reçoit les requêtes côté client, effectue des requêtes SQL à la base de données et retourne
+en format JSON la réponse. Le code reçu contient une variable "route" dans POST qui permet d'identifier la requête
+souhaitée. La réponse retournée par le serveur retourne également cette variable "route" pour que la réponse sache comment
+générer la vue associée à la réponse.
+*/
+
 require_once("../includes/modele.inc.php");
 $resultats = array();
 
@@ -20,6 +31,9 @@ switch ($route) {
         break;
     case "listerAdmin":
         listerAdmin();
+        break;
+    case "listerNouveautes":
+        listerNouveautes();
         break;
     case "modifier" :
         modifier();
@@ -135,7 +149,29 @@ function listerAdmin()
     }
 }
 
-// TODO: semble avoir un problème avec le nom d'image, remplacé par avatar même si non souhaité
+/**
+ * Effectue une requête SQL pour obtenir la liste des films en ordre décroissant de date de sortie.
+ */
+function listerNouveautes()
+{
+    global $resultats;
+    $requete = "SELECT * FROM films ORDER BY sortie DESC ";
+    try {
+        $modele = new Modele($requete, array());
+        $stmt = $modele->executer();
+        $resultats['listeFilms'] = array();
+        while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+            // La case vide signifie ajouter à la fin du tableau.
+            $resultats['listeFilms'][] = $ligne;
+        }
+        $resultats['route'] = "lister";
+    } catch (Exception $e) {
+        $resultats['message'] = MESSAGE_ERREUR;
+    } finally {
+        unset($modele);
+    }
+}
+
 /**
  * Récupère les données transmises par AJAX et modifie le film correspondant dans la base de données.
  */
@@ -150,7 +186,6 @@ function modifier()
     $duree = $_POST['formDuree'];
     $prix = $_POST['formPrix'];
     $youtube = $_POST['formHashYT'];
-    $image = $_POST['formImage'];
 
     try {
         // Remplacer l'ancienne image sur le serveur
@@ -159,10 +194,12 @@ function modifier()
         $stmt = $modele->executer();
         $ligne = $stmt->fetch(PDO::FETCH_OBJ);
         $ancienneImage = $ligne->image;
+        $nouvelleImage = $modele->televerserImage($ancienneImage, $titre);
 
         $requete = 'UPDATE films SET titre=?, realisateur=?, categorie=?, duree=?, prix=?, image=?, youtube=?, sortie=? WHERE id=?';
-        $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $image, $youtube, $sortie, $idFilm));
+        $modele = new Modele($requete, array($titre, $realisateur, $categorie, $duree, $prix, $nouvelleImage, $youtube, $sortie, $idFilm));
         $modele->executer();
+
         $resultats['route'] = "modifier";
         $resultats['message'] = $titre . " bien modifié.";
     } catch (Exception $e) {

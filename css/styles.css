@@ -8,7 +8,7 @@ img {
 }
 
 .videotheque {
-    font-family: 'Montserrat Subrayada', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     text-align: center;
     margin-top: 100px;
 }
@@ -37,9 +37,9 @@ img {
 }
 
 .film {
-    height: 600px;
+    height: 650px;
     top: -100px;
-    margin-top: -200px;
+    margin-top: -75px;
 }
 
 .imagePreview {

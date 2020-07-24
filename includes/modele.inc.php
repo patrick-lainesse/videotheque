@@ -49,13 +49,13 @@ class Modele
      * Renomme le fichier image téléversé par l'utilisateur et le déplace dans le dossier serveur. Fait appel à
      * supprimerImage si une affiche était déjà associée à ce film.
      * @param String $ancienneImage        Nom du fichier de l'ancienne image à supprimer
-     * @param String $imageTeleversee      Nom du fichier téléversé par l'utilisateur
+     * @param String $titreFilm            Titre du film du fichier téléversé par l'utilisateur
      * @return String $nouvelleImage       Nom généré pour la nouvelle image
      */
-    function televerserImage($ancienneImage, $imageTeleversee)
+    function televerserImage($ancienneImage, $titreFilm)
     {
         $cheminDossier = "../images/";
-        $nomGenere = sha1($imageTeleversee . time());
+        $nomGenere = sha1($titreFilm . time());
         $nouvelleImage = "avatar.jpg";
 
         // Si un fichier a été téléversé, remplacer l'image associée au film par celle téléversée
@@ -70,7 +70,7 @@ class Modele
             // Enlever le fichier temporaire chargé
             @unlink($tmp); //effacer le fichier temporaire
 
-            //Enlever l'ancienne affiche dans le cas de la fonction modifier()
+            // Enlever l'ancienne affiche dans le cas de la fonction modifier()
             $this->supprimerImage($ancienneImage);
             $nouvelleImage = $nomGenere . $extension;
         }

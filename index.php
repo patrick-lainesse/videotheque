@@ -20,7 +20,7 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
     <!--Importe Icônes Google-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Importe la police pour le titre de l'accueil-->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
     <!--Base de références pour les liens lorsqu'en développement pour les différents liens des pages, pour faciliser une arborescence relative...-->
     <base href="http://localhost/videotheque/"/>
@@ -63,8 +63,7 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
         <ul class="left hide-on-small-and-down black">
             <li><a href="" class="waves-effect waves-light">ACCUEIL</a></li>
             <li><a class="waves-effect waves-light" onclick="lister()">Nos films</a></li>
-            <!--TODO lister nouveautés + sur page d'accueil-->
-            <li><a class="waves-effect waves-light" onclick="message('test')">Nouveautés</a></li>
+            <li><a class="waves-effect waves-light" onclick="listerNouveautes()">Nouveautés</a></li>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">
                     Catégories<i class="material-icons right">arrow_drop_down</i>
                 </a>
@@ -78,10 +77,16 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
     </div>
 </nav>
 
-<!--TODO: Menu qui remplace la navbar en mode mobile-->
-<ul class="sidenav" id="mobile-demo">
-    <li><a href="" class="waves-effect waves-light">ACCUEIL</a></li>
-    <li><a class="waves-effect waves-light" onclick="lister()">Nos films</a></li>
+<!--Menu qui remplace la navbar en mode mobile-->
+<ul class="sidenav darken-4 grey" id="mobile-demo">
+    <li><a href="" class="waves-effect waves-light white-text">ACCUEIL</a></li>
+    <li><a class="waves-effect waves-light white-text" onclick="lister()">Nos films</a></li>
+    <li><a class="waves-effect waves-light white-text" onclick="listerNouveautes()">Nouveautés</a></li>
+    <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown1">
+            Catégories<i class="material-icons white-text right">arrow_drop_down</i>
+        </a>
+    </li>
+    <li><a class="waves-effect waves-light red-text" onclick="listerAdmin()">Options d'administation</a></li>
 </ul>
 
 <!--Emplacement pour afficher des messages temporaires-->
@@ -93,9 +98,8 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
     <h4 class="center">LE contrepoids aux Netflix, Disney<br>et autres géants de ce monde.</h4>
 
     <div class="row center-align marginTop30">
-        <a href="viewsfilms/formulaires/formAjoutMembre.php" class="waves-effect waves-light btn darken-4 red">Devenir
-            membre</a>
-        <a href="viewsfilms/lister.php" class="waves-effect waves-light btn darken-4 red">Parcourir notre catalogue</a>
+        <a class="waves-effect waves-light btn darken-4 red" onclick="listerNouveautes()">Voir les nouveautés</a>
+        <a class="waves-effect waves-light btn darken-4 red" onclick="lister()">Parcourir notre catalogue</a>
     </div>
 </div>
 
@@ -119,7 +123,8 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
         <h3 class="center-align">Options d'administration</h3>
     </div>
     <div class="row">
-        <a class="btn-small right waves-effect waves-light darken-4 green" onclick="afficherFormulaire('Enregistrer', null)">
+        <a class="btn-small right waves-effect waves-light darken-4 green"
+           onclick="afficherFormulaire('Enregistrer', null)">
             Ajouter un film<i class="material-icons left">movie_filter</i>
         </a>
     </div>
