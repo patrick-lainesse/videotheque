@@ -34,6 +34,7 @@ const vue = function (reponse) {
     }
 };
 
+// TODO: Pas beau sur Chrome
 /**
  * Affiche un tableau contenant l'information de tous les films et des boutons pour modifier ou supprimer.
  * @param listeJSON        Liste des films obtenus par la requête au serveur, en format JSON
@@ -78,7 +79,7 @@ const afficherCatalogue = function (listeJSON) {
         carteFilm += '</div>';
         carteFilm += '<div class="card-content">';
         carteFilm += '<p class="gras">' + filmCourant.titre + '</p>'
-            + filmCourant.sortie.substring(0,4) + '<br>'
+            + filmCourant.sortie.substring(0, 4) + '<br>'
             + filmCourant.realisateur + '<br>'
             + filmCourant.categorie + '<br>'
             + filmCourant.prix + '$';
@@ -190,10 +191,12 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             titre.html('Ajouter un nouveau film à la base de données');
             bouton.html(typeRequete + '<i class="material-icons right">send</i>');
 
-            // TODO: valider, ici ou dans requête
-            // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
+            /* Vérifie que les champs sont bien remplis, puis envoie la requête par AJAX et retourne false pour empêcher
+            le bouton d'effectuer un submit du formulaire. */
             formulaire.submit(function () {
-                enregistrer();
+                if (valider()) {
+                    enregistrer();
+                }
                 return false;
             })
             break;
@@ -202,9 +205,12 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             preremplirFormulaire(unFilm);
             bouton.html(typeRequete + '<i class="material-icons right">create</i>');
 
-            // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
+            /* Vérifie que les champs sont bien remplis, puis envoie la requête par AJAX et retourne false pour empêcher
+            le bouton d'effectuer un submit du formulaire */
             formulaire.submit(function () {
-                modifier();
+                if (valider()) {
+                    modifier();
+                }
                 return false;
             });
             break;
@@ -212,6 +218,7 @@ const afficherFormulaire = function (typeRequete, unFilm) {
             titre.html('Supprimer le film ' + unFilm.id + ' ?');
             preremplirFormulaire(unFilm);
             bouton.html(typeRequete + '<i class="material-icons right">delete</i>');
+
             // Envoie la requête par AJAX et retourne false pour empêcher le bouton d'effectuer un submit du formulaire
             formulaire.submit(function () {
                 supprimer();
@@ -327,10 +334,10 @@ const chargerModal = function (film) {
  */
 function valider() {
 
-    let titre = document.getElementById('titre').value;
-    let nom = document.getElementById('nom').value;
-    let duree = document.getElementById('duree').value;
-    let prix = document.getElementById('prix').value;
+    let titre = document.getElementById('formTitre').value;
+    let nom = document.getElementById('formNom').value;
+    let duree = document.getElementById('formDuree').value;
+    let prix = document.getElementById('formPrix').value;
 
     if (titre !== "" && nom !== "" && duree !== "" && prix !== "") {
         return true;

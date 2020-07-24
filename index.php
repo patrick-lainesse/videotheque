@@ -148,7 +148,6 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
     <img src="" id="previewUpload" class="imagePreview" alt="Aperçu de l'image">
 
     <div class="row margin50">
-        <!--TODO: onsubmit="return valider()" valider-->
         <form class="col s6 offset-s3" id="formulaire">
             <div class="row">
                 <div class="input-field col s3">
