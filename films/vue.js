@@ -34,7 +34,6 @@ const vue = function (reponse) {
     }
 };
 
-// TODO: Pas beau sur Chrome
 /**
  * Affiche un tableau contenant l'information de tous les films et des boutons pour modifier ou supprimer.
  * @param listeJSON        Liste des films obtenus par la requête au serveur, en format JSON

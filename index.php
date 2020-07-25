@@ -26,7 +26,7 @@ const TABLEAU_CATEGORIES = array("Action", "Animation", "Comédie", "Drame", "Ho
     <base href="http://localhost/videotheque/"/>
 
     <!--... TODO: à changer pour ceci sur le site de la DESI
-    <base href="http://www-desi.iro.umontreal.ca/~lainessp/ift1147/videotheque2/" />-->
+    <base href="http://www-desi.iro.umontreal.ca/~lainessp/ift1147/videotheque/" />-->
 
     <!--Importe materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
