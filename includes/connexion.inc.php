@@ -24,7 +24,7 @@ class Connexion
     function connecter()
     {
         try {
-            $dns = "mysql:host=$this->serveur;dbname=$this->baseDonnees";
+            $dns = "mysql:host=$this->serveur;dbname=$this->baseDonnees;charset=utf8mb4";
             $options = array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             );

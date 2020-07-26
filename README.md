@@ -15,6 +15,7 @@ Single page application d'achat de films implémentant le CRUD, écrit en PHP
 
 ## Installation
 - Créer une base de données 'bdfilms' dans MySQL (CREATE DATABASE bdfilms;)
+- S'assurer que l'encodage de la base de données soit bien "utf8mb4"
 - Importer le fichier bd/bdfilms.sql (mysql -u nom_utilisateur -p bdfilms < bdfilms.sql)
 - Vérifier et redéfinir si nécessaire les constantes dans le fichier includes/connexion.inc.php
 - Vérifier et corriger si nécessaire le base href dans l'en-tête html du fichier index.php
