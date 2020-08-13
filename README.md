@@ -56,4 +56,4 @@ Single page application d'achat de films implémentant le CRUD, écrit en PHP
 
 ## J'aurais aimé...
 - Implémenter le YouTube API, pour automatiquement ajouter le preview des films sans avoir à stocker l'URL des vidéos
-- Régler un problème d'accès à la base de données sur MySQL. Fonctionne convenablement avec MariaDB, plus de tests sont nécessaires pour déceler ce problème.
+- Implémenter les fonctions de membre (ajout/visionnement du panier, calcul de factures, etc.)
