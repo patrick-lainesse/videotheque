@@ -1,6 +1,5 @@
 <!--
 Nom: Patrick Lainesse
-Matricule: 740302
 Date: 13/07/2020
 
 Code HTML de la Single Page Application. La plupart des éléments sont cachés pour être dévoilés par JavaScript selon
